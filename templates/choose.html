@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- tailwind css cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+    <link rel="stylesheet" href="static/css/flutech.css">
+    <title>Choose Functionality</title>
+</head>
+
+<body>
+    <div class="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
+        <div class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs min-width-phone min-height-phone">
+            <h1 class="text-lg text-gray-700"> Flutech ERP </h1>
+            <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
+            <p class="text-xs text-gray-600 mt-4"> Choose Functionality </p>
+            <form>
+                <button
+                    class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full"
+                    type="button" onclick="addproject();">Project Tracker</button>
+                <button
+                    class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full"
+                    type="button" onclick="toggleModal('modal-id')">Complaint Tracker</button>
+                <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+                    id="modal-id">
+                    <div class="relative w-auto my-6 mx-auto max-w-3xl">
+                        <!--content-->
+                        <div
+                            class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                            <!--header-->
+                            <div
+                                class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                                <h3 class="text-3xl font-semibold">
+                                    Coming Soon
+                                </h3>
+                                <button
+                                    class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                                    onclick="toggleModal('modal-id')">
+                                    <span
+                                        class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                                        ×
+                                    </span>
+                                </button>
+                            </div>
+                            <!--body-->
+                            <div class="relative p-6 flex-auto">
+                                <p class="my-4 text-blueGray-500 text-lg leading-relaxed">
+                                    This Functionality is still under development. Please check back later.
+                                </p>
+                            </div>
+                            <!--footer-->
+                            <div
+                                class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                                <button
+                                    class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button" onclick="toggleModal('modal-id')">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+                <script type="text/javascript">
+                    function toggleModal(modalID) {
+                        document.getElementById(modalID).classList.toggle("hidden");
+                        document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+                        document.getElementById(modalID).classList.toggle("flex");
+                        document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+                    }
+                    function addproject() {
+                        window.location.href = "/project-tracker";
+                    }
+                </script>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
