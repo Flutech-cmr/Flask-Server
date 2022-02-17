@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- tailwind css cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+    <link rel="stylesheet" href="static/css/flutech.css">
+    <!-- import webcamjs -->
+    <script src="static/js/webcam.js"></script>
+    <title>Attendance</title>
+</head>
+
+<body>
+    <div class="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
+        <div
+            class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs min-width-phone min-height-phone">
+            <h1 class="text-lg text-gray-700"> Attendance </h1>
+            <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
+            <p class="text-xs text-gray-400 mt-4"> Capture image to take Attendance </p>
+            <!-- end of section -->
+            <div id="my_camera" class="py-2" style="width:238px; height: 133px;"></div>
+            <div id="my_result" class="py-2" style="width:238px; height: 170px;"></div>
+            <script language="JavaScript">
+                Webcam.set('constraints', {
+                    facingMode: "environment"
+                });
+                Webcam.attach('#my_camera');
+
+                function PostBase64Image(data_uri) {
+                    const payload = {
+                        "image": data_uri
+                    }
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "http://localhost:5000/recieve-face", true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+                    xhr.send(JSON.stringify(payload));
+
+                }
+
+                function take_snapshot() {
+                    Webcam.snap(function (data_uri) {
+                        document.getElementById('my_result').innerHTML = '<img src="' + data_uri + '" style="object-fit: cover;"/>';
+                        console.log(data_uri);
+                        PostBase64Image(data_uri);
+                    });
+                }
+            </script>
+            <a href="javascript:void(take_snapshot())"
+                class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full">Take
+                Snapshot</a>
+            <form action="/choose-function">
+                <button
+                    class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full">Continue</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
