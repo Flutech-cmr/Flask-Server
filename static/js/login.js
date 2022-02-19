@@ -91,3 +91,4 @@ var posttoserver = function (credentials) {
             alert('Request failed.  Returned status of ' + xhr.status)
         }
     }
+}

@@ -27,7 +27,7 @@ def login():
 
 
 @app.route('/checklogin', methods=['GET', 'POST'])
-def login():
+def checklogin():
     print(request.data)
     return render_template('login.html')
 
@@ -65,6 +65,20 @@ def add_nav():
 @app.route('/face-attendance')
 def faceattandance():
     return render_template('face-attendance.html')
+
+# This route opens the faceattandance page to capture the image
+
+
+@app.route('/addemployee')
+def addemployee():
+    return render_template('addemployee.html')
+
+# This route opens the ERP project Tracker
+
+
+@app.route('/master')
+def master():
+    return render_template('master.html')
 
 # This route serves the favicon
 
