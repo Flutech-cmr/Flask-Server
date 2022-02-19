@@ -8,10 +8,11 @@
     <!-- tailwind css cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
     <link rel="stylesheet" href="static/css/flutech.css">
+    <script src="static/js/add-project.js"></script>
     <title>Project Tracker</title>
 </head>
 
-<body>
+<body onload="ClearFields();">
     <div class="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
         <div
             class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs  min-width-phone min-height-phone">
@@ -20,24 +21,27 @@
             <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
             <p class="text-s text-gray-400 mt-4">Register a new project</p>
             <!-- rounded div with shadow -->
-            
+
             <form action="/project-tracker">
                 <div class="space-y-4 mt-6">
-                    <div class="w-full">
-                        <input type="text" placeholder="Project Name" class="px-4 py-2 bg-gray-50" />
+                    <div class="w-full" id="projectnamediv">
+                        <label class="block text-gray-700 text-sm font-bold mb-2 text-left" for="projectname">Project Name</label>
+                        <input type="text" placeholder="Project Name" class="px-4 py-2 bg-gray-50" id='projectname' oninput="OnType('projectname');"/>
                     </div>
-                    <div class="w-full">
-                        <input type="text" placeholder="Site Location" class="px-4 py-2 bg-gray-50" />
+                    <div class="w-full" id="sitelocationdiv">
+                        <label class="block text-gray-700 text-sm font-bold mb-2 text-left" for="sitelocation">Site Location</label>
+                        <input type="text" placeholder="Site Location" class="px-4 py-2 bg-gray-50" id='sitelocation' oninput="OnType('sitelocation');"/>
                     </div>
-                    <div class="w-full">
-                        <input type="text" placeholder="City" class="px-4 py-2 bg-gray-50" />
+                    <div class="w-full" id="citydiv">
+                        <label class="block text-gray-700 text-sm font-bold mb-2 text-left" for="city">City</label>
+                        <input type="text" placeholder="City" class="px-4 py-2 bg-gray-50" id='city' oninput="OnType('city');"/>
                     </div>
                     <!-- <div class="w-full">
                         <input type="text" placeholder="password" class="px-4 py-2 bg-gray-50" />
                     </div> -->
                 </div>
-                <button
-                    class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight">Register</button>
+                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+                    type="button" onclick="Register();">Register</button>
             </form>
         </div>
     </div>

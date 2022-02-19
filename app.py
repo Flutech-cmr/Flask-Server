@@ -80,6 +80,13 @@ def addemployee():
 def master():
     return render_template('master.html')
 
+# This route opens the ComingSoon Page
+
+
+@app.route('/comingsoon')
+def comingsoon():
+    return render_template('comingsoon.html')
+
 # This route serves the favicon
 
 
