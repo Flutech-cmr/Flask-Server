@@ -1,6 +1,7 @@
 import os
 from flask import *
 from modules import *
+from bot import *
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -80,6 +81,15 @@ def addemployee():
 def master():
     return render_template('master.html')
 
+# This route opens the Feedback page
+
+
+@app.route('/feedback')
+def feedback():
+    return render_template('feedback.html')
+
+
+
 # This route opens the ComingSoon Page
 
 
@@ -133,6 +143,15 @@ def home_index():
 @app.route('/recieve-face', methods=['POST'])
 def recieve_face():
     get_base64_from_request(request)
+    return {'success': True}
+
+# This route recieves the face data captured by the webcam and sends it to the backend
+
+
+@app.route('/botmessage', methods=['POST'])
+def botmessage():
+    print(request.data)
+    sendtelegrammessage(request.data)
     return {'success': True}
 
 # This route recieves the screen size data from the client and stores it in a csv file

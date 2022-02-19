@@ -66,6 +66,7 @@ var OnType = function (field) {
     }
 }
 
+
 var Register = function () {
     const credentials = GetInputFields();
     if (credentials != null) { }
