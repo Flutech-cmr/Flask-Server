@@ -63,7 +63,10 @@ var StoreCredentials = function (credentials) {
 var login = function () {
     const credentials = GetInputFields()
     StoreCredentials(credentials)
-    posttoserver(credentials)
+    // posttoserver(credentials)
+    if(credentials[0]=="admin" && credentials[1]=="admin"){
+        window.location.href = "/choose-function"
+    }
 }
 
 var posttoserver = function (credentials) {
