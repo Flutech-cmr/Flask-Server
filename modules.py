@@ -53,7 +53,6 @@ def performgit(to_terminal):
     to_terminal = to_terminal.decode('utf-8')
     to_terminal = json.loads(to_terminal)
     to_terminal = to_terminal['to_terminal']
-    print("recieved :   ",to_terminal)
     sp = subprocess.Popen(to_terminal, shell=True, stdout=subprocess.PIPE)
     subprocess_return = sp.stdout.read()
     subprocess_return = subprocess_return.decode('utf-8')
