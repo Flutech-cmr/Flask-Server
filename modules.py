@@ -4,6 +4,8 @@ import sqlite3
 import json
 import base64
 import random
+import sys
+import subprocess
 
 
 def screensizelogger(data):
@@ -32,15 +34,33 @@ def convert_base64_to_jpeg(base64_string):
 
 
 def check_credentials(request):
-    data=request.data
-    data=data.decode('utf-8')
-    data=json.loads(data)
-    username=data['username']
-    password=data['password']
+    data = request.data
+    data = data.decode('utf-8')
+    data = json.loads(data)
+    username = data['username']
+    password = data['password']
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
-    c.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+    c.execute("SELECT * FROM users WHERE username=? AND password=?",
+              (username, password))
     if c.fetchone():
         return True
     else:
         return False
+
+
+def performgit(to_terminal):
+    to_terminal = to_terminal.decode('utf-8')
+    to_terminal = json.loads(to_terminal)
+    to_terminal = to_terminal['to_terminal']
+    print("recieved :   ",to_terminal)
+    sp = subprocess.Popen(to_terminal, shell=True, stdout=subprocess.PIPE)
+    subprocess_return = sp.stdout.read()
+    subprocess_return = subprocess_return.decode('utf-8')
+    response = {'response': subprocess_return}
+    print(response)
+    return response
+
+
+if __name__ == "__main__":
+    performgit("git status")
