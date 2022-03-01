@@ -1,10 +1,13 @@
 import os
+from werkzeug.utils import secure_filename
 from flask import *
 from modules import *
 from bot import *
 
 
 app = Flask(__name__, static_url_path='/static')
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 # ----------------------------------------------------------------------------------------------------------------------
 # HTML Page Routes are defined Below
@@ -172,6 +175,19 @@ def up():
 def pull():
     response = performgit(request.data)
     return response
+
+@app.route('/runonterminal', methods=['GET', 'POST'])
+def runonterminalroute():
+    response = runonterminal(request.data)
+    return response
+
+
+@app.route('/uploader', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        f = request.files['file']
+        f.save(secure_filename(f.filename))
+        return 'file uploaded successfully'
 
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -14,7 +14,7 @@ def screensizelogger(data):
     screen_width = data['screen_width']
     screen_height = data['screen_height']
     with open('screen_sizes.csv', 'a+') as f:
-        f.write(f'{screen_width},{screen_height}\n')
+        f.write(f'{screen_width},{screen_height} \n')
 
 
 def get_base64_from_request(request):
@@ -64,6 +64,20 @@ def performgit(to_terminal):
         subprocess_return = subprocess_return.decode('utf-8')
         response = {'response': subprocess_return}
         return response
+
+
+def runonterminal(to_terminal):
+    to_terminal = to_terminal.decode('utf-8')
+    to_terminal = json.loads(to_terminal)
+    try:
+        to_terminal = to_terminal['to_terminal']
+    except:
+        return {'response': "Please address the command to the key 'to_terminal'"}
+    sp = subprocess.Popen(to_terminal, shell=True, stdout=subprocess.PIPE)
+    subprocess_return = sp.stdout.read()
+    subprocess_return = subprocess_return.decode('utf-8')
+    response = {'response': subprocess_return}
+    return response
 
 
 if __name__ == "__main__":
