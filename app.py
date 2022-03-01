@@ -2,7 +2,7 @@ import os
 from flask import *
 from modules import *
 from bot import *
-import sys
+
 
 app = Flask(__name__, static_url_path='/static')
 
