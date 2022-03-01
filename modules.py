@@ -52,13 +52,18 @@ def check_credentials(request):
 def performgit(to_terminal):
     to_terminal = to_terminal.decode('utf-8')
     to_terminal = json.loads(to_terminal)
-    to_terminal = to_terminal['to_terminal']
-    sp = subprocess.Popen(to_terminal, shell=True, stdout=subprocess.PIPE)
-    subprocess_return = sp.stdout.read()
-    subprocess_return = subprocess_return.decode('utf-8')
-    response = {'response': subprocess_return}
-    print(response)
-    return response
+    try:
+        to_terminal = to_terminal['to_terminal']
+    except:
+        return {'response': "Please address the command to the key 'to_terminal'"}
+    if(not to_terminal.startswith('git')):
+        return {'response': "Only git based commands are supported via this route"}
+    else:
+        sp = subprocess.Popen(to_terminal, shell=True, stdout=subprocess.PIPE)
+        subprocess_return = sp.stdout.read()
+        subprocess_return = subprocess_return.decode('utf-8')
+        response = {'response': subprocess_return}
+        return response
 
 
 if __name__ == "__main__":
