@@ -1,0 +1,35 @@
+{% from "components.html" import navbar%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- tailwind css cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+    <link rel="stylesheet" href="static/css/flutech.css">
+    <title>Enroll Employee</title>
+</head>
+<body>
+    <section>
+        {{ navbar() }}
+    </section>
+    <div class="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
+        <div
+            class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs  min-width-phone min-height-phone">
+            <!-- <img class="mb-3 w-32 h-32 rounded-full shadow-lg mx-auto" src="/static/img/flutech-logo.jpg" alt="logo"> -->
+            <h1 class="text-lg text-gray-700">Update Employee Details</h1>
+            <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
+            <p class="text-s text-gray-400 mt-4">Download the Excel Template, fill the Employee details and upload it back to the portal</p>
+            <!-- rounded div with shadow -->
+            <div>
+                <p class="mt-6 bg-white p-6 rounded-md text-gray-500 shadow-lg"><a href="/images/myw3schoolsimage.jpg" download>Download the excel Sheet</a></p>
+            </div>
+            <form action="/add-project">
+                <button
+                    class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full"></button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
