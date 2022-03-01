@@ -1,3 +1,4 @@
+{% from "components.html" import navbar%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,9 @@
     <title>Project Tracker</title>
 </head>
 <body>
+    <section>
+        {{ navbar() }}
+    </section>
     <div class="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
         <div
             class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs  min-width-phone min-height-phone">
