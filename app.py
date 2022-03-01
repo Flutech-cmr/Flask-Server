@@ -2,6 +2,7 @@ import os
 from flask import *
 from modules import *
 from bot import *
+import sys
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -89,7 +90,6 @@ def feedback():
     return render_template('feedback.html')
 
 
-
 # This route opens the ComingSoon Page
 
 
@@ -167,6 +167,13 @@ def screen_sizes():
 def up():
     return {'success': True}
 
+
+@app.route('/git', methods=['GET', 'POST'])
+def pull():
+    response = performgit(request.data)
+    return response
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Error Handlers are defined below
 # ----------------------------------------------------------------------------------------------------------------------
@@ -180,4 +187,4 @@ def not_found(e):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True,port=5050)
+    app.run(host='0.0.0.0', debug=True, port=5050)
