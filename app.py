@@ -181,6 +181,11 @@ def runonterminalroute():
     response = runonterminal(request.data)
     return response
 
+@app.route('/uploadcredentials', methods=['GET', 'POST'])
+def uploadcredentials():
+    response = createcredentials(request.data)
+    return response
+
 
 @app.route('/uploader', methods=['GET', 'POST'])
 def upload_file():

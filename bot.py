@@ -20,3 +20,12 @@ def sendfileontelegram(file):
         chat_id = data['Chat_ID']
         bot = telebot.TeleBot(token)
         bot.send_document(chat_id, file)
+
+
+def createcredentials(credentials):
+    credentials=json.loads(credentials)
+    filename=credentials['file']
+    credentials=credentials['credentials']
+    with open(filename, 'w+') as outfile:
+        json.dump(credentials, outfile)
+    return {'success': True}
