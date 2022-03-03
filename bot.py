@@ -1,6 +1,7 @@
 import json
 import telebot
 
+#testing sending this file through wget
 
 def sendtelegrammessage(message):
     message = json.loads(message)
