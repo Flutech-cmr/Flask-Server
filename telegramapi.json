@@ -1,0 +1,147 @@
+{
+    "ok": true,
+    "result": [
+        {
+            "update_id": 9493453,
+            "my_chat_member": {
+                "chat": {
+                    "id": -1001736321985,
+                    "title": "FlutechCMR",
+                    "type": "supergroup"
+                },
+                "from": {
+                    "id": 812104361,
+                    "is_bot": false,
+                    "first_name": "Anand",
+                    "last_name": "Mahesh",
+                    "username": "manand881"
+                },
+                "date": 1646303803,
+                "old_chat_member": {
+                    "user": {
+                        "id": 5148728498,
+                        "is_bot": true,
+                        "first_name": "FlutechBot",
+                        "username": "Flutech_bot"
+                    },
+                    "status": "member"
+                },
+                "new_chat_member": {
+                    "user": {
+                        "id": 5148728498,
+                        "is_bot": true,
+                        "first_name": "FlutechBot",
+                        "username": "Flutech_bot"
+                    },
+                    "status": "left"
+                }
+            }
+        },
+        {
+            "update_id": 9493454,
+            "message": {
+                "message_id": 18,
+                "from": {
+                    "id": 812104361,
+                    "is_bot": false,
+                    "first_name": "Anand",
+                    "last_name": "Mahesh",
+                    "username": "manand881"
+                },
+                "chat": {
+                    "id": -1001736321985,
+                    "title": "FlutechCMR",
+                    "type": "supergroup"
+                },
+                "date": 1646303803,
+                "left_chat_participant": {
+                    "id": 5148728498,
+                    "is_bot": true,
+                    "first_name": "FlutechBot",
+                    "username": "Flutech_bot"
+                },
+                "left_chat_member": {
+                    "id": 5148728498,
+                    "is_bot": true,
+                    "first_name": "FlutechBot",
+                    "username": "Flutech_bot"
+                }
+            }
+        },
+        {
+            "update_id": 9493455,
+            "my_chat_member": {
+                "chat": {
+                    "id": -1001736321985,
+                    "title": "FlutechCMR",
+                    "type": "supergroup"
+                },
+                "from": {
+                    "id": 812104361,
+                    "is_bot": false,
+                    "first_name": "Anand",
+                    "last_name": "Mahesh",
+                    "username": "manand881"
+                },
+                "date": 1646303831,
+                "old_chat_member": {
+                    "user": {
+                        "id": 5148728498,
+                        "is_bot": true,
+                        "first_name": "FlutechBot",
+                        "username": "Flutech_bot"
+                    },
+                    "status": "left"
+                },
+                "new_chat_member": {
+                    "user": {
+                        "id": 5148728498,
+                        "is_bot": true,
+                        "first_name": "FlutechBot",
+                        "username": "Flutech_bot"
+                    },
+                    "status": "member"
+                }
+            }
+        },
+        {
+            "update_id": 9493456,
+            "message": {
+                "message_id": 19,
+                "from": {
+                    "id": 812104361,
+                    "is_bot": false,
+                    "first_name": "Anand",
+                    "last_name": "Mahesh",
+                    "username": "manand881"
+                },
+                "chat": {
+                    "id": -1001736321985,
+                    "title": "FlutechCMR",
+                    "type": "supergroup"
+                },
+                "date": 1646303831,
+                "new_chat_participant": {
+                    "id": 5148728498,
+                    "is_bot": true,
+                    "first_name": "FlutechBot",
+                    "username": "Flutech_bot"
+                },
+                "new_chat_member": {
+                    "id": 5148728498,
+                    "is_bot": true,
+                    "first_name": "FlutechBot",
+                    "username": "Flutech_bot"
+                },
+                "new_chat_members": [
+                    {
+                        "id": 5148728498,
+                        "is_bot": true,
+                        "first_name": "FlutechBot",
+                        "username": "Flutech_bot"
+                    }
+                ]
+            }
+        }
+    ]
+}

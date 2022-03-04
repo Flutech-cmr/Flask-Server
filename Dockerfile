@@ -24,6 +24,7 @@ RUN pip3 install flask-sqlalchemy
 RUN pip3 install numpy
 RUN pip3 install opencv-python
 RUN pip3 install pyTelegramBotAPI
+RUN pip3 install pymongo
 
 # Handing opencv dependencies
 
