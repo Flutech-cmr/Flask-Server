@@ -50,4 +50,4 @@ def getchatid(data):
 
 def getfromtelegram():
     prefix = 'https://api.telegram.org/bot'
-    APIkey = 
+    APIkey = ''
