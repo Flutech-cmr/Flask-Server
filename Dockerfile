@@ -39,6 +39,7 @@ RUN apt-get clean -y
 
 WORKDIR /home/Flutech_ERP
 RUN git clone https://github.com/Flutech-cmr/Flask-Server.git
+RUN git pull
 WORKDIR /home/Flutech_ERP/Flask-Server
 
 EXPOSE 5050
