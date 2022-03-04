@@ -1,7 +1,4 @@
-{% macro hello() %}
-<h1>hello world</h1>
-{% endmacro %}
-
+<!-- This section contains the navbar component -->
 {% macro navbar() %}
 <!-- Navbar goes here -->
 <nav class="bg-yellow-400 shadow-lg sticky top-0">
@@ -17,9 +14,9 @@
                 </div>
                 <!-- Primary Navbar items -->
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="/" class="py-4 px-2  font-bold hover:text-gray-800 transition duration-300">Home</a>
-                    <a href="/master" class="py-4 px-2  font-bold hover:text-gray-800 transition duration-300">Admin
-                        Panel</a>
+                    <!-- <a href="/" class="py-4 px-2  font-bold hover:text-gray-800 transition duration-300">Home</a> -->
+                    <!-- <a href="/master" class="py-4 px-2  font-bold hover:text-gray-800 transition duration-300">Admin
+                        Panel</a> -->
                     <a href="/face-attendance"
                         class="py-4 px-2  font-bold hover:text-gray-800 transition duration-300">Face-attendance</a>
                     <a href="/feedback"
@@ -41,10 +38,10 @@
     <!-- mobile menu -->
     <div class="hidden mobile-menu">
         <ul class="">
-            <li class="active"><a href="index.html"
-                    class="block text-base px-2 py-4 text-white bg-yellow-600 font-semibold">Home</a></li>
-            <li><a href="/master" class="block text-base px-2 py-4 hover:bg-yellow-600 transition duration-300">Admin
-                    Panel</a></li>
+            <!-- <li class="active"><a href="index.html"
+                    class="block text-base px-2 py-4 text-white bg-yellow-600 font-semibold">Home</a></li> -->
+            <!-- <li><a href="/master" class="block text-base px-2 py-4 hover:bg-yellow-600 transition duration-300">Admin
+                    Panel</a></li> -->
             <li><a href="/face-attendance"
                     class="block text-base px-2 py-4 hover:bg-yellow-600 transition duration-300">Face-attendance</a>
             </li>
@@ -63,18 +60,18 @@
     </script>
 </nav>
 {% endmacro %}
-
+<!-- this section contains the footer component -->
 {% macro footer() %}
 <!-- component -->
 <!-- MDI Icons -->
 <link rel="stylesheet" href="https://cdn.materialdesignicons.com/6.5.95/css/materialdesignicons.min.css">
 <!-- <div class="w-full max-w-md px-7 py-10 mx-auto bg-white rounded-2xl shadow-xl"> -->
 <!-- Navigation Bar -->
-<div class="px-5 pt-3 bg-white shadow-lg rounded-2xl items-center  w-full  bottom-0 fixed inset-x-0">
+<div class="px-5 pt-3 bg-white shadow-lg rounded-t-lg items-center  w-full  bottom-0 fixed inset-x-0">
     <div class="flex flex-row justify-between">
         <!-- Item #1 -->
         <div class="flex group">
-            <a href="#" class="p-3 text-gray-400 hover:text-yellow-500">
+            <a href="/" class="p-3 text-gray-400 hover:text-yellow-500">
                 <span class="flex flex-col items-center">
                     <!-- Icon -->
                     <i class="mdi mdi-home-outline mdi-24px mx-1 text-gray-500 group-hover:text-gray-700
@@ -142,7 +139,7 @@
         </div>
         <!-- Item #5 -->
         <div class="flex group">
-            <a href="#" class="p-3 text-gray-400 hover:text-yellow-500">
+            <a href="\master" class="p-3 text-gray-400 hover:text-yellow-500">
                 <span class="flex flex-col items-center">
                     <!-- Icon -->
                     <i class="mdi mdi-account-circle-outline mdi-24px mx-1 text-gray-500 group-hover:text-gray-700
