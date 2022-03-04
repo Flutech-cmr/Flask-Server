@@ -116,16 +116,6 @@ def status():
     return{'System Status': 'OK'}
 
 
-@app.route('/Topmenu')
-def Topmenu():
-    return render_template('Topmenu.html')
-
-
-@app.route('/trial')
-def trial():
-    return render_template('trial.html')
-
-
 # ----------------------------------------------------------------------------------------------------------------------
 # Redirects are defined below
 # ----------------------------------------------------------------------------------------------------------------------
@@ -176,10 +166,12 @@ def pull():
     response = performgit(request.data)
     return response
 
+
 @app.route('/runonterminal', methods=['GET', 'POST'])
 def runonterminalroute():
     response = runonterminal(request.data)
     return response
+
 
 @app.route('/uploadcredentials', methods=['GET', 'POST'])
 def uploadcredentials():
@@ -191,8 +183,10 @@ def uploadcredentials():
 def upload_file():
     if request.method == 'POST':
         f = request.files['file']
-        f.save(secure_filename(f.filename))
-        sendfileontelegram(f)
+        f.save(r"static\\files\\recieved\\"+secure_filename(f.filename))
+        # sendfileontelegram(f.filename)
+        sendtelegrammessage(
+            str({"message": f.filename+" uploaded successfully"}))
         return 'file uploaded successfully'
 
 
