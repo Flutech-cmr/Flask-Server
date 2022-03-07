@@ -10,4 +10,4 @@ os.system(f'git commit -m "{commit_message}"')
 os.system(f'git push')
 time.sleep(10)
 
-r=requests.post('http://164.52.221.158:5050/git',json=payload)
+r=requests.post('http://localhost:5050/git',json=payload)
