@@ -8,28 +8,27 @@
     <!-- tailwind css cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
     <link rel="stylesheet" href="static/css/flutech.css">
-    <title>Welcome</title>
+    <title>Explore</title>
 </head>
 <body>
     <section>
         {{ navbar() }}
     </section>
     <div class="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
-        <div class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs min-width-phone min-height-phone">
-            <img class="mb-3 w-32 h-32 rounded-full shadow-lg mx-auto" src="/static/img/flutech-logo.jpg" alt="logo">
-            <h1 class="text-lg text-gray-700"> Flutech ERP </h1>
+        <div
+            class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs  min-width-phone min-height-phone">
+            <!-- <img class="mb-3 w-32 h-32 rounded-full shadow-lg mx-auto" src="/static/img/flutech-logo.jpg" alt="logo"> -->
+            <h1 class="text-lg text-gray-700">Explore</h1>
             <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
-            <p class="text-xs text-gray-400 mt-4"> This application is the ERP for Flutech PVT LTD </p>
-            <form action="/login">
-                <button
-                    class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full">Continue</button>
-            </form>
-            
+            <p class="text-s text-gray-400 mt-4">View in pages that are work in progress</p>
+            <!-- rounded div with shadow -->
+            <div>
+                <p class="mt-6 bg-red-400 p-6 rounded-md text-white shadow-lg" onclick="window.location='/face-attendance'"> Sample Project 2</p>
+            </div>
         </div>
     </div>
     <section>
         {{ footer() }}
     </section>
-    
 </body>
 </html>

@@ -1,7 +1,6 @@
 {% from "components.html" import footer%}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +10,6 @@
     <link rel="stylesheet" href="static/css/flutech.css">
     <title>404</title>
 </head>
-
 <body>
     <div class="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
         <div
@@ -30,8 +28,6 @@
     <section>
         {{ footer() }}
     </section>
-
-
     <script>
         // post screen size
         let screen_width = window.innerWidth;
@@ -50,15 +46,12 @@
             console.log("screen size posted");
         }
         window.onload = post_screen_size();
-
     </script>
     <!-- </div> -->
-
 </body>
 <script defer>
     setTimeout(function () {
         window.location.href = "/";
     }, 10000);
 </script>
-
 </html>

@@ -5,6 +5,12 @@ import telebot
 # testing sending this file through wget
 
 
+def readjsonfiles(filename):
+    with open(filename) as json_file:
+        data = json.load(json_file)
+        return data
+
+
 def sendtelegrammessage(message):
     message = json.loads(message)
     message = message['message']
@@ -37,15 +43,21 @@ def createcredentials(credentials):
 
 
 def getchatid(data):
-    with open('telegramapi.json') as json_file:
-        data = json.load(json_file)
-        if(data['ok'] == True):
-            result = data['result']
-            my_chat_member = result[0]['my_chat_member']
-            chat = my_chat_member['chat']
-            if(chat['title'] == 'FlutechCMR'):
-                chat_id = chat['id']
-                print(chat_id)
+    data = readjsonfiles('telegramapi.json')
+    if(data['ok'] == True):
+        result = data['result']
+        my_chat_member = result[0]['my_chat_member']
+        chat = my_chat_member['chat']
+        if(chat['title'] == 'FlutechCMR'):
+            chat_id = chat['id']
+            return chat_id
+
+
+def telegramdebug():
+    data = readjsonfiles('message.json')
+    if(data['message'] == True):
+        sendtelegrammessage(
+            '{"message": "Flask Server was either started or restarted on the cloud"}')
 
 
 def getfromtelegram():

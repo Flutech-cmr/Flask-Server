@@ -39,8 +39,8 @@ RUN apt-get clean -y
 
 WORKDIR /home/Flutech_ERP
 RUN git clone https://github.com/Flutech-cmr/Flask-Server.git
-RUN git pull
 WORKDIR /home/Flutech_ERP/Flask-Server
+RUN git pull
 
 EXPOSE 5050
 CMD ["python3", "app.py"]

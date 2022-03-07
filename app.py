@@ -166,6 +166,10 @@ def pull():
     response = performgit(request.data)
     return response
 
+@app.route('/explore')
+def explore():
+    return render_template('explore.html')
+
 
 @app.route('/runonterminal', methods=['GET', 'POST'])
 def runonterminalroute():
@@ -203,4 +207,5 @@ def not_found(e):
 
 
 if __name__ == '__main__':
+    telegramdebug()
     app.run(host='0.0.0.0', debug=True, port=5050)

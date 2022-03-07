@@ -5,6 +5,7 @@ import json
 import base64
 import random
 import sys
+import platform
 import subprocess
 
 
@@ -80,5 +81,11 @@ def runonterminal(to_terminal):
     return response
 
 
+def get_os_and_version():
+    current_os=platform.system()
+    current_os_version=platform.release()
+    print(current_os, current_os_version)
+
+
 if __name__ == "__main__":
-    performgit("git status")
+    get_os_and_version()

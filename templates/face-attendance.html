@@ -1,7 +1,6 @@
 {% from "components.html" import footer, navbar %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     
     <meta charset="UTF-8">
@@ -14,7 +13,6 @@
     <script src="static/js/webcam.js"></script>
     <title>Attendance</title>
 </head>
-
 <body>
     <section>
         {{ navbar() }}
@@ -33,7 +31,6 @@
                     facingMode: "environment"
                 });
                 Webcam.attach('#my_camera');
-
                 function PostBase64Image(data_uri) {
                     const payload = {
                         "image": data_uri
@@ -43,9 +40,7 @@
                     xhr.setRequestHeader("Content-Type", "application/json");
                     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
                     xhr.send(JSON.stringify(payload));
-
                 }
-
                 function take_snapshot() {
                     Webcam.snap(function (data_uri) {
                         document.getElementById('my_result').innerHTML = '<img src="' + data_uri + '" style="object-fit: cover;"/>';
@@ -67,5 +62,4 @@
         {{ footer() }}
     </section>
 </body>
-
 </html>
