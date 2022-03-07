@@ -2,6 +2,7 @@ FROM ubuntu:focal
 
 # installing software packages
 
+RUN apt-get update
 RUN apt-get install python3-pip -y
 RUN apt-get install -y git
 RUN apt-get install -y wget 
