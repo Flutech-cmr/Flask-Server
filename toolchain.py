@@ -25,3 +25,5 @@ if r.status_code == 200:
     r = requests.post('http://localhost:5050/git', json=payload)
 else:
     print("\n[INFO] Server is not running. Exiting\n")
+
+time.sleep(10)

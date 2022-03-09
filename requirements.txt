@@ -1,6 +1,6 @@
 pymongo==3.11.4
 Flask==1.1.2
-opencv_python==4.5.5.62
 requests==2.26.0
+opencv_python==4.5.5.62
 Werkzeug==1.0.1
 pyTelegramBotAPI==4.4.0

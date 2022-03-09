@@ -19,7 +19,7 @@ def post_to_mongo(data, to_collection, to_db):
     db = cluster[to_db]
     collection = db[to_collection]
     results = collection.insert_one(data)
-    print(results)
+    return results.inserted_id
 
 
 def delete_many_from_mongo(data, to_collection, to_db):

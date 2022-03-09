@@ -19,6 +19,11 @@ function post_screen_size() {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.send(JSON.stringify(payload));
-    console.log("screen size posted");
+    // display response
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(xhr.responseText);
+        }
+    }
 }
 window.onload = post_screen_size();

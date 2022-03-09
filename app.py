@@ -155,8 +155,9 @@ def botmessage():
 
 @app.route('/screen-sizes', methods=['POST', 'GET'])
 def screen_sizes():
-    screensizelogger(request.data)
-    return {'success': True}
+    atlas_id=screensizelogger(request.data)
+    print(atlas_id,"atlas_id")
+    return {'Success': True, 'atlas_id': str(atlas_id)}
 
 
 @app.route('/up', methods=['GET'])
