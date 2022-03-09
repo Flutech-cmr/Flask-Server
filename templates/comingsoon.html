@@ -8,6 +8,7 @@
     <!-- tailwind css cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
     <link rel="stylesheet" href="static/css/flutech.css">
+
     <title>Coming Soon</title>
 </head>
 <body>
@@ -125,26 +126,6 @@
     <section>
         {{ footer() }}
     </section>
-    <script>
-        // post screen size
-        let screen_width = window.innerWidth;
-        let screen_height = window.innerHeight;
-        let payload = {
-            "screen_width": screen_width,
-            "screen_height": screen_height
-        };
-        function post_screen_size() {
-            // avoid cors
-            let url = "/screen-sizes";
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", url, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(JSON.stringify(payload));
-            console.log("screen size posted");
-        }
-        window.onload = post_screen_size();
-    </script>
-    <!-- </div> -->
 </body>
 <script defer>
     setTimeout(function () {

@@ -3,7 +3,11 @@ import sys
 import time
 import requests
 
-commit_message = sys.argv[1]
+try:
+    commit_message = sys.argv[1]
+except:
+    print("This script requires a commit message as an argument. No commit message was provided.")
+    sys.exit(1)
 payload = {"to_terminal": "git pull"}
 
 print("[INFO} generating requirements")

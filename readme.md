@@ -18,3 +18,6 @@ This is a flask based backend for the FLutech ERP system. Documentation is comin
 * convert image assets to webp for faster loading.
 * reduce unused css to increase content loading times.
 * create an LLD and a HLD.
+* ~~Redirect not working need to fix properly.~~
+* ~~Get explore page up and running.~~
+* Store Credentials In LocalStorage.

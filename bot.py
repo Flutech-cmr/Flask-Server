@@ -1,6 +1,6 @@
 import json
-import requests
 import telebot
+from modules import get_os_and_version
 
 # testing sending this file through wget
 
@@ -14,7 +14,7 @@ def readjsonfiles(filename):
 def sendtelegrammessage(message):
     message = json.loads(message)
     message = message['message']
-    with open('bot.json') as json_file:
+    with open('parameters.json') as json_file:
         data = json.load(json_file)
         token = data['API_KEY']
         chat_id = data['Chat_ID']
@@ -23,7 +23,7 @@ def sendtelegrammessage(message):
 
 
 def sendfileontelegram(file):
-    with open('bot.json') as json_file:
+    with open('parameters.json') as json_file:
         data = json.load(json_file)
         token = data['API_KEY']
         chat_id = data['Chat_ID']
@@ -43,7 +43,7 @@ def createcredentials(credentials):
 
 
 def getchatid(data):
-    data = readjsonfiles('telegramapi.json')
+    data = readjsonfiles('parameters.json')
     if(data['ok'] == True):
         result = data['result']
         my_chat_member = result[0]['my_chat_member']
@@ -52,12 +52,18 @@ def getchatid(data):
             chat_id = chat['id']
             return chat_id
 
+# This function has been written with the intention of sending a mesage on the telegram channel everytime the debugger restarts the application
+
 
 def telegramdebug():
-    data = readjsonfiles('message.json')
-    if(data['message'] == True):
-        sendtelegrammessage(
-            '{"message": "Flask Server was either started or restarted on the cloud"}')
+    data = readjsonfiles('parameters.json')
+    platformdata = get_os_and_version()
+    if(platformdata[0] != 'Windows'):
+        if(data['message'] == True):
+            sendtelegrammessage(
+                '{"message": "Flask Server was either started or restarted on the cloud"}')
+
+# This function has been written to find the chat id from the telegram api since the chat id can change on the basis of wether the group is a normal group or a super group
 
 
 def getfromtelegram():

@@ -57,12 +57,7 @@ def project_tracker():
 def add_project():
     return render_template('add-project.html')
 
-# This route server the navbar
 
-
-@app.route('/navbar')
-def add_nav():
-    return render_template('navbar.html')
 
 # This route opens the faceattandance page to capture the image
 
@@ -124,7 +119,7 @@ def status():
 @app.route('/index')
 @app.route('/home')
 def home_index():
-    return redirect(url_for('/'))
+    return redirect("/", code=302)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # API Routes are defined below
