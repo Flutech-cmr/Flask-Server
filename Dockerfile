@@ -44,5 +44,5 @@ WORKDIR /home/Flutech_ERP/Flask-Server
 RUN git pull
 COPY parameters.json .
 
-EXPOSE 80
+EXPOSE 5050
 CMD ["python3", "app.py"]
