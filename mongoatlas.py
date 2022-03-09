@@ -18,5 +18,3 @@ def post_to_mongo(data, to_collection, to_db):
     collection = db[to_collection]
     results = collection.insert_one(data)
     print(results)
-
-post_to_mongo({"name": "John", "age": 30}, "Screen SIzes", "FlutechERP")
