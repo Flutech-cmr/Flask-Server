@@ -17,14 +17,9 @@ RUN apt-get install -y libjpeg-dev
 # installing python packages
 
 RUN pip3 install --upgrade pip
-RUN pip3 install flask
 RUN pip3 install flask-restful
-RUN pip3 install requests
 RUN pip3 install flask-sqlalchemy
 RUN pip3 install numpy
-RUN pip3 install opencv-python
-RUN pip3 install pyTelegramBotAPI
-RUN pip3 install pymongo
 RUN pip3 install dnspython
 
 # Handing opencv dependencies
@@ -43,6 +38,7 @@ RUN git clone https://github.com/Flutech-cmr/Flask-Server.git
 WORKDIR /home/Flutech_ERP/Flask-Server
 RUN git pull
 COPY parameters.json .
+RUN pip3 install -r requirements.txt
 
 EXPOSE 5050
 CMD ["python3", "app.py"]

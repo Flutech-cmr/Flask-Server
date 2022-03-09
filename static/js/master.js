@@ -22,7 +22,7 @@ var login = function () {
     const password = credentials[1]
     if(username=="Flutechhr"){
         if(password=="Flutechcmr"){
-            window.location.href = "/addemployee"
+            window.location.href = "/masterpanel"
         }
     }
 }

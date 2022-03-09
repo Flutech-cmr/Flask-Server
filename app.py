@@ -58,7 +58,6 @@ def add_project():
     return render_template('add-project.html')
 
 
-
 # This route opens the faceattandance page to capture the image
 
 
@@ -73,12 +72,21 @@ def faceattandance():
 def addemployee():
     return render_template('addemployee.html')
 
+@app.route('/employee-details')
+def employee_details():
+    return render_template('employeedetails.html')
+
 # This route opens the ERP project Tracker
 
 
 @app.route('/master')
 def master():
     return render_template('master.html')
+
+
+@app.route('/masterpanel')
+def masterpanel():
+    return render_template('masterpanel.html')
 
 # This route opens the Feedback page
 
@@ -160,6 +168,7 @@ def up():
 def pull():
     response = performgit(request.data)
     return response
+
 
 @app.route('/explore')
 def explore():
