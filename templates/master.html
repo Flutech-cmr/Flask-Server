@@ -8,11 +8,11 @@
     <!-- tailwind css cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
     <link rel="stylesheet" href="static/css/flutech.css">
-    <script src="static/js/master.js"></script>
+    <!-- <script src="static/js/master.js"></script> -->
     <script src="static/js/loginutils.js"></script>
     <title>Project Tracker</title>
 </head>
-<body onload="ClearFields(['MasterID','AuthID']);">
+<body onload="SetGlobalFieldnames(['MasterID','AuthID']);ClearFields();">
     <section>
         {{ navbar() }}
     </section>
@@ -27,17 +27,17 @@
             
             <form>
                 <div class="space-y-4 mt-6">
-                    <div class="w-full" id="usernamediv">
+                    <div class="w-full" id="DivMasterID">
                         <label class="block text-gray-700 text-sm font-bold mb-2 text-left" for="MasterID">Master Login</label>
-                        <input type="text" placeholder="Master Login" class="px-4 py-2 bg-gray-50 rounded-lg" id="MasterID" oninput="OnType('username')"/>
+                        <input type="text" placeholder="Master Login" class="px-4 py-2 bg-gray-50 rounded-lg" id="MasterID" oninput="OnType('MasterID')"/>
                     </div>
-                    <div class="w-full" id="passworddiv">
+                    <div class="w-full" id="DivAuthID">
                         <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="AuthID">AuthID</label>
-                        <input type="password" placeholder="AuthID" class="px-4 py-2 bg-gray-50 rounded-lg" id="AuthID" oninput="OnType('password')"/>
+                        <input type="password" placeholder="AuthID" class="px-4 py-2 bg-gray-50 rounded-lg" id="AuthID" oninput="OnType('AuthID')"/>
                     </div>
                 </div>
                 <button
-                    class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="login();">Login</button>
+                    class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="login(['MasterID','AuthID']);">Login</button>
             </form>
         </div>
     </div>
