@@ -19,7 +19,7 @@ os.system(f'git push')
 print("\n[INFO] sleeping for 10 seconds\n")
 time.sleep(10)
 print("\n[INFO] Checking If Server is running\n")
-r=requests.get("http://localhost:5000/up")
+r=requests.get("http://localhost:5060/up")
 if r.status_code == 200:
     print("\n[INFO] performing git pull on server\n")
     r = requests.post('http://localhost:5050/git', json=payload)
