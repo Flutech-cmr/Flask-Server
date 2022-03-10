@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
     <link rel="stylesheet" href="static/css/flutech.css">
     <script src="static/js/master.js"></script>
+    <script src="static/js/loginutils.js"></script>
     <title>Project Tracker</title>
 </head>
-<body onload="ClearFields();">
+<body onload="ClearFields(['MasterID','AuthID']);">
     <section>
         {{ navbar() }}
     </section>
