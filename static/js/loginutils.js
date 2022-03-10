@@ -14,8 +14,20 @@ var ClearFields = function () {
 }
 
 // returning the inner html for the promt that asks the user to enter their credentials
-var PleaseEnterParagraph = function (field) {
-    return '<p class="text-red text-xs italic text-left" id="' + field + 'Please Enter your username.</p>'
+var PleaseEnterParagraph = function (FieldID) {
+    let FieldToEnter = null
+    if (FieldID.includes(GlobalFieldnames[0])) {
+        FieldToEnter = GlobalFieldnames[0]
+    }
+    else {
+        FieldToEnter = GlobalFieldnames[1]
+    }
+    prefix = '<p class="text-red text-xs italic text-left" id="'
+    suffix = '"> Please Enter your '+FieldToEnter+'.</p>'
+    html = prefix + FieldID + suffix
+    console.log(html)
+    return html
+
 }
 
 // removes prompt fields on type
@@ -27,7 +39,6 @@ var OnType = function (field) {
 
 // generates an html prompt for the user to enter their credentials if they havent already
 var PleaseEnter = function (field) {
-    console.log(field, "was empty")
     if (!!document.getElementById("PleaseEnter" + field) == false) {
         document.getElementById("Div" + field).innerHTML += PleaseEnterParagraph("PleaseEnter" + field)
         document.getElementById(field).focus()
@@ -48,14 +59,18 @@ var GetInputFields = function (fieldnames) {
             PleaseEnter(fieldnames[1])
         }
     } else {
-        ClearFields(['MasterID', 'AuthID']);
+        ClearFields();
         return [username, password];
     }
 }
 
+var CheckLoginFromDB = function (LoginCredentials) {
+console.log("idle")
+}
+
 // this is the login utility for the login page
-var login = function (fieldnames) {
-    const credentials = GetInputFields(fieldnames)
+var login = function () {
+    const credentials = GetInputFields(GlobalFieldnames)
     const username = credentials[0]
     const password = credentials[1]
     if (username == "Flutechhr") {
