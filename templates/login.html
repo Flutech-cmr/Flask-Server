@@ -1,6 +1,7 @@
 {% from "components.html" import footer, navbar %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +9,12 @@
     <!-- tailwind css cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
     <link rel="stylesheet" href="static/css/flutech.css">
-    <script src="static/js/login.js"></script>
-    <title>Project Tracker</title>
+    <!-- <script src="static/js/login.js"></script> -->
+    <script src="static/js/loginutils.js"></script>
+    <title>Login</title>
 </head>
-<body onload="ClearFields();">
+
+<body onload="SetGlobalFieldnames(['Username','Password']);ClearFields();">
     <section>
         {{ navbar() }}
     </section>
@@ -23,20 +26,26 @@
             <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
             <p class="text-s text-gray-400 mt-4">Enter your credentials to login</p>
             <!-- rounded div with shadow -->
-            
+
             <form>
                 <div class="space-y-4 mt-6">
-                    <div class="w-full" id="usernamediv">
-                        <label class="block text-gray-700 text-sm font-bold mb-2 text-left" for="username">Username</label>
-                        <input type="text" placeholder="Email ID" class="px-4 py-2 bg-gray-50 rounded-lg" id="username" oninput="OnType('username')"/>
+                    <div class="w-full" id="DivUsername">
+                        <label class="block text-gray-700 text-sm font-bold mb-2 text-left"
+                            for="Username">Username</label>
+                        <input type="text" placeholder="Emp ID" class="px-4 py-2 bg-gray-50 rounded-lg" id="Username"
+                            oninput="OnType('Username')" />
                     </div>
-                    <div class="w-full" id="passworddiv">
-                        <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="password">Password</label>
-                        <input type="password" placeholder="Password" class="px-4 py-2 bg-gray-50 rounded-lg" id="password" oninput="OnType('password')"/>
+                    <div class="w-full" id="DivPassword">
+                        <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                            for="Password">Password</label>
+                        <input type="password" placeholder="Password" class="px-4 py-2 bg-gray-50 rounded-lg"
+                            id="Password" oninput="OnType('Password')" />
                     </div>
                 </div>
-                <button
-                    class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="login();">Login</button>
+                <div id="DivButton">
+                    <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+                        type="button" onclick="login();">Login</button>
+                </div>
             </form>
         </div>
     </div>
@@ -44,4 +53,5 @@
         {{ footer() }}
     </section>
 </body>
+
 </html>

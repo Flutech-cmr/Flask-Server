@@ -1,6 +1,7 @@
 {% from "components.html" import footer, navbar %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,8 +11,9 @@
     <link rel="stylesheet" href="static/css/flutech.css">
     <!-- <script src="static/js/master.js"></script> -->
     <script src="static/js/loginutils.js"></script>
-    <title>Project Tracker</title>
+    <title>Master Login</title>
 </head>
+
 <body onload="SetGlobalFieldnames(['MasterID','AuthID']);ClearFields();">
     <section>
         {{ navbar() }}
@@ -24,20 +26,25 @@
             <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
             <p class="text-s text-gray-400 mt-4">Enter Master Credentials</p>
             <!-- rounded div with shadow -->
-            
+
             <form>
                 <div class="space-y-4 mt-6">
                     <div class="w-full" id="DivMasterID">
-                        <label class="block text-gray-700 text-sm font-bold mb-2 text-left" for="MasterID">Master Login</label>
-                        <input type="text" placeholder="Master Login" class="px-4 py-2 bg-gray-50 rounded-lg" id="MasterID" oninput="OnType('MasterID')"/>
+                        <label class="block text-gray-700 text-sm font-bold mb-2 text-left" for="MasterID">Master
+                            Login</label>
+                        <input type="text" placeholder="Master Login" class="px-4 py-2 bg-gray-50 rounded-lg"
+                            id="MasterID" oninput="OnType('MasterID')" />
                     </div>
                     <div class="w-full" id="DivAuthID">
                         <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="AuthID">AuthID</label>
-                        <input type="password" placeholder="AuthID" class="px-4 py-2 bg-gray-50 rounded-lg" id="AuthID" oninput="OnType('AuthID')"/>
+                        <input type="password" placeholder="AuthID" class="px-4 py-2 bg-gray-50 rounded-lg" id="AuthID"
+                            oninput="OnType('AuthID')" />
                     </div>
                 </div>
-                <button
-                    class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="login();">Login</button>
+                <div id="DivButton">
+                    <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+                        type="button" onclick="login();">Login</button>
+                </div>
             </form>
         </div>
     </div>
@@ -45,4 +52,5 @@
         {{ footer() }}
     </section>
 </body>
+
 </html>

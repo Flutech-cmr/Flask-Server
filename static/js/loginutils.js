@@ -23,17 +23,29 @@ var PleaseEnterParagraph = function (FieldID) {
         FieldToEnter = GlobalFieldnames[1]
     }
     prefix = '<p class="text-red text-xs italic text-left" id="'
-    suffix = '"> Please Enter your '+FieldToEnter+'.</p>'
+    suffix = '"> Please Enter your ' + FieldToEnter + '.</p>'
     html = prefix + FieldID + suffix
     console.log(html)
     return html
 
 }
 
+var InvalidLogin = function (prompt) {
+    if (!!document.getElementById("InvalidCredentials") == false) {
+        InvalidLoginPrompt = '<p class="text-xs ext-gray-700 mt-4" id="InvalidCredentials">'+prompt+'</p>'
+        ButtonDiv = document.getElementById("DivButton")
+        ButtonInnerHTML = ButtonDiv.innerHTML
+        ButtonDiv.innerHTML = InvalidLoginPrompt + ButtonInnerHTML
+    }
+}
+
 // removes prompt fields on type
 var OnType = function (field) {
     if (!!document.getElementById("PleaseEnter" + field) == true) {
         document.getElementById("PleaseEnter" + field).remove()
+    }
+    if(!!document.getElementById("InvalidCredentials") == true){
+        document.getElementById("InvalidCredentials").remove()
     }
 }
 
@@ -65,17 +77,35 @@ var GetInputFields = function (fieldnames) {
 }
 
 var CheckLoginFromDB = function (LoginCredentials) {
-console.log("idle")
+    PostCredentials = {
+        "username": LoginCredentials[0],
+        "password": LoginCredentials[1],
+        "currentpage": window.location.href
+    }
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/checklogin", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+    xhr.send(JSON.stringify(PostCredentials));
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const response = JSON.parse(xhr.responseText);
+            if (response.status == "success") {
+                window.location.href = "/"+response.redirect
+            }
+            else if(response.status == "notauthorized"){
+                InvalidLogin("You are not authorized to access this page.")
+            }
+            else {
+                InvalidLogin("Invalid Credentials. Please try again.")
+            }
+        }
+    }
+
 }
 
 // this is the login utility for the login page
 var login = function () {
     const credentials = GetInputFields(GlobalFieldnames)
-    const username = credentials[0]
-    const password = credentials[1]
-    if (username == "Flutechhr") {
-        if (password == "Flutechcmr") {
-            window.location.href = "/masterpanel"
-        }
-    }
+    CheckLoginFromDB(credentials)
 }

@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 from flask import *
 from modules import *
 from bot import *
+from mongoatlas import *
 
 
 app = Flask(__name__, static_url_path='/static')
@@ -23,9 +24,8 @@ def home():
 # This route is for the Login Page
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login')
 def login():
-    print(request.data)
     return render_template('login.html')
 
 # This route is for the Login Page
@@ -33,8 +33,8 @@ def login():
 
 @app.route('/checklogin', methods=['GET', 'POST'])
 def checklogin():
-    print(request.data)
-    return render_template('login.html')
+    if request.method == 'POST': 
+        return validate_user(request.data)
 
 # This route is for the ERP Function Page
 
