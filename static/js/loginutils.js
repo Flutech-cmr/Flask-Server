@@ -90,6 +90,7 @@ var CheckLoginFromDB = function (LoginCredentials) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             const response = JSON.parse(xhr.responseText);
+            console.log(response)
             if (response.status == "success") {
                 window.location.href = "/"+response.redirect
             }
