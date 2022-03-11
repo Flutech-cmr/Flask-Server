@@ -1,10 +1,14 @@
 import os
-from werkzeug.utils import secure_filename
-from flask import *
-from modules import *
-from bot import *
-from mongoatlas import *
-from flask_cors import CORS, cross_origin
+try:
+    from werkzeug.utils import secure_filename
+    from flask import *
+    from modules import *
+    from bot import *
+    from mongoatlas import *
+    from flask_cors import CORS, cross_origin
+except:
+    print("\n[INFO] One or more modules are missing.\n")
+    os.system("pip install -r requirements.txt")
 
 
 app = Flask(__name__, static_url_path='/static')

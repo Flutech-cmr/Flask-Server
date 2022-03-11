@@ -21,6 +21,7 @@ RUN pip3 install flask-restful
 RUN pip3 install flask-sqlalchemy
 RUN pip3 install numpy
 RUN pip3 install dnspython
+RUN pip3 install itsdangerous==2.0.1
 
 # Handing opencv dependencies
 

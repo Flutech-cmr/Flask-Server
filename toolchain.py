@@ -23,6 +23,8 @@ r=requests.get(server_url+"/up")
 if r.status_code == 200:
     print("\n[INFO] performing git pull on server\n")
     r = requests.post(server_url+'/git', json=payload)
+    if r.status_code == 200:
+        print("\n[INFO] git pull successful\n")
 else:
     print("\n[INFO] Server is not running. Exiting\n")
 
