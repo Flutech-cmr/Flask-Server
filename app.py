@@ -4,11 +4,14 @@ from flask import *
 from modules import *
 from bot import *
 from mongoatlas import *
+from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__, static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type' 
 
 # ----------------------------------------------------------------------------------------------------------------------
 # HTML Page Routes are defined Below
@@ -32,6 +35,7 @@ def login():
 
 
 @app.route('/checklogin', methods=['GET', 'POST'])
+@cross_origin()
 def checklogin():
     if request.method == 'POST': 
         return validate_user(request.data)
