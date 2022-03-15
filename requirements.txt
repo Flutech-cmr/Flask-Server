@@ -1,8 +1,8 @@
 requests==2.26.0
-opencv_python==4.5.5.62
 pymongo==3.11.4
-Flask_Cors==3.0.10
-Werkzeug==1.0.1
 Flask==1.1.2
+opencv_python==4.5.5.62
+Werkzeug==1.0.1
+Flask_Cors==3.0.10
 pyOpenSSL==22.0.0
 pyTelegramBotAPI==4.4.0

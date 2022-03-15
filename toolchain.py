@@ -9,7 +9,7 @@ except:
     print("\n[INFO] This script requires a commit message as an argument. No commit message was provided.\n")
     sys.exit(1)
 payload = {"to_terminal": "git pull"}
-server_url="http://164.52.221.158:5050/"
+server_url="https://comfytronics.in/"
 print("\n[INFO] generating requirements\n")
 os.system("pipreqs  --force")
 print("\n[INFO] performing git push\n")
