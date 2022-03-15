@@ -5,6 +5,7 @@ try:
     from modules import *
     from bot import *
     from mongoatlas import *
+    from OpenSSL import SSL
     from flask_cors import CORS, cross_origin
 except:
     print("\n[INFO] One or more modules are missing.\n")
@@ -221,4 +222,7 @@ def not_found(e):
 
 if __name__ == '__main__':
     telegramdebug()
+    context = SSL.Context(SSL.PROTOCOL_TLSv1_2)
+    context.use_privatekey_file('server.key')
+    context.use_certificate_file('server.crt')
     app.run(host='0.0.0.0', debug=True, port=5050)

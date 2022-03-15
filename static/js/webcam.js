@@ -37,7 +37,7 @@
         version: '1.0.26',
         
         // globals
-        protocol: location.protocol.match(/https/i) ? 'http' : 'http',
+        protocol: location.protocol.match(/https/i) ? 'https' : 'http',
         loaded: false,   // true when webcam movie finishes loading
         live: false,     // true when webcam is initialized and ready to snap
         userMedia: true, // true when getUserMedia is supported natively

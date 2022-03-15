@@ -3,3 +3,5 @@ trialfolder
 recieved
 parameters.json
 Employee Details.csv
+*.cer
+*.key

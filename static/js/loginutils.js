@@ -71,7 +71,6 @@ var GetInputFields = function (fieldnames) {
             PleaseEnter(fieldnames[1])
         }
     } else {
-        ClearFields();
         return [username, password];
     }
 }
@@ -100,6 +99,7 @@ var CheckLoginFromDB = function (LoginCredentials) {
             else {
                 InvalidLogin("Invalid Credentials. Please try again.")
             }
+            ClearFields();
         }
     }
 

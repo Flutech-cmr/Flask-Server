@@ -66,7 +66,7 @@ def add_employee(data):
     results = collection.insert_one(data)
     return results.inserted_id
 
-
+# This function is used to fetch distinct values from the database
 def get_distict_values(data, to_collection, to_db):
     cluster = return_cluster()
     db = cluster[to_db]
@@ -74,7 +74,7 @@ def get_distict_values(data, to_collection, to_db):
     results = collection.distinct(data)
     return results
 
-
+# This function is used to validate the user credentials upon entry to the application
 def validate_user(data):
     print("[INFO] Requesting User Validation")
     data = data.decode('utf-8')

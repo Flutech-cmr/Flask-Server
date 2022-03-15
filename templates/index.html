@@ -1,6 +1,7 @@
 {% from "components.html" import footer, navbar %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,14 +9,17 @@
     <!-- tailwind css cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
     <link rel="stylesheet" href="static/css/flutech.css">
+    <!-- Hotjar Tracking Code for https://comfytronics.in/ -->
     <title>Welcome</title>
 </head>
+
 <body>
     <section>
         {{ navbar() }}
     </section>
     <div class="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
-        <div class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs min-width-phone min-height-phone">
+        <div
+            class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs min-width-phone min-height-phone">
             <img class="mb-3 w-32 h-32 rounded-full shadow-lg mx-auto" src="/static/img/flutech-logo.jpg" alt="logo">
             <h1 class="text-lg text-gray-700"> Flutech ERP </h1>
             <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
@@ -24,7 +28,7 @@
                 <button
                     class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full">Continue</button>
             </form>
-            
+
         </div>
     </div>
     <section>
@@ -32,4 +36,5 @@
     </section>
     <script src="/static/js/screensize.js"></script>
 </body>
+
 </html>
