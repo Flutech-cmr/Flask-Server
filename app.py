@@ -58,6 +58,10 @@ def choose_function():
 def project_tracker():
     return render_template('project-tracker.html')
 
+@app.route('/cards')
+def cards():
+    return render_template('cards.html')
+
 # This route helps add projects
 
 

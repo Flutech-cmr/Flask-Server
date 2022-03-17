@@ -82,6 +82,7 @@ var PostSiteDetails = function (credentials) {
             const response = JSON.parse(xhr.responseText)
             if (response.status == "success") {
                 console.log(response.message)
+                window.location.href = "/project-tracker"
             }
         }
     }
