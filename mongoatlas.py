@@ -129,3 +129,13 @@ def load_projects():
     print(all_projects)
     return all_projects
     
+def add_project_site(data):
+    data=data.decode('utf-8')
+    data=json.loads(data)
+    cluster = return_cluster()
+    db = cluster["FlutechERP"]
+    collection = db["ProjectDetails"]
+    results = collection.insert_one(data)
+    print(type(results.inserted_id))
+    # return results.inserted_id
+    return {"message": "received", "status": "success"}

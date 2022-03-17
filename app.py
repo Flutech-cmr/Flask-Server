@@ -96,6 +96,10 @@ def master():
 def masterpanel():
     return render_template('masterpanel.html')
 
+@app.route('/workeronboarding')
+def onboardworker():
+    return render_template('workeronboarding.html')
+
 # This route opens the Feedback page
 
 
@@ -174,10 +178,17 @@ def screen_sizes():
 def up():
     return {'success': True}
 
-
 @app.route('/git', methods=['GET', 'POST'])
 def pull():
     response = performgit(request.data)
+    return response
+
+
+@app.route('/addsite', methods=['GET', 'POST'])
+@cross_origin()
+def addsite():
+    print("request to add site")
+    response = add_project_site(request.data)
     return response
 
 @app.route('/loadprojects', methods=['GET'])

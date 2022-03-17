@@ -44,7 +44,7 @@ var GetInputFields = function () {
         }
     } else {
         ClearFields()
-        return [username, password];
+        return [ProjectName, SiteLocation, City];
     }
 }
 
@@ -66,9 +66,32 @@ var OnType = function (field) {
     }
 }
 
+var PostSiteDetails = function (credentials) {
+    const payload = {
+        "projectname": credentials[0],
+        "sitelocation": credentials[1],
+        "city": credentials[2]
+    }
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/addsite");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Allow-Control-Allow-Origin", "*");
+    xhr.send(JSON.stringify(payload));
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const response = JSON.parse(xhr.responseText)
+            if (response.status == "success") {
+                console.log(response.message)
+            }
+        }
+    }
+}
+
 
 var Register = function () {
     const credentials = GetInputFields();
-    if (credentials != null) { }
+    if (credentials != null) {
+        PostSiteDetails(credentials);
+    }
 
 }
