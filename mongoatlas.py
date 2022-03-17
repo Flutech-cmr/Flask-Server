@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from bson import ObjectId
 import json
 
 
@@ -67,6 +68,8 @@ def add_employee(data):
     return results.inserted_id
 
 # This function is used to fetch distinct values from the database
+
+
 def get_distict_values(data, to_collection, to_db):
     cluster = return_cluster()
     db = cluster[to_db]
@@ -75,6 +78,8 @@ def get_distict_values(data, to_collection, to_db):
     return results
 
 # This function is used to validate the user credentials upon entry to the application
+
+
 def validate_user(data):
     print("[INFO] Requesting User Validation")
     data = data.decode('utf-8')
@@ -95,14 +100,32 @@ def validate_user(data):
         access_level = x["App Privileges"]
         if(login_requesting_page == "login" and access_level >= 0):
             print("[INFO] User Validated for login page")
-            return {"message": "received", "status": "success", "redirect": "choose-function"}
+            return {"message": "received", "status": "success", "redirect": "choose-function", "access_level": access_level}
         elif(login_requesting_page == "master"):
             if (access_level == 1):
                 print("[INFO] User Validated for master page")
-                return {"message": "received", "status": "success", "redirect": "masterpanel"}
+                return {"message": "received", "status": "success", "redirect": "masterpanel", "access_level": access_level}
             else:
                 print("[INFO] User not authorized for master page")
                 return {"message": "received", "status": "notauthorized"}
         else:
             print("[INFO] Something is broken")
             return {"message": "received", "status": "failed"}
+
+
+def load_projects():
+    print("retriving all projects")
+    cluster = return_cluster()
+    db = cluster["FlutechERP"]
+    collection = db["ProjectDetails"]
+    results = collection.find({})
+    all_projects={}
+    iter=0
+    for x in results:
+        # use bson to conver objectid to string
+        x["_id"] = str(x["_id"])
+        all_projects[iter]=x
+        iter+=1
+    print(all_projects)
+    return all_projects
+    

@@ -75,6 +75,11 @@ var GetInputFields = function (fieldnames) {
     }
 }
 
+var StoreCredentials = function (response,EMP_ID) {
+    localStorage.setItem("Flutech_Access_Level", response.access_level)
+    localStorage.setItem("Flutech_EMP_ID", EMP_ID)
+}
+
 var CheckLoginFromDB = function (LoginCredentials) {
     PostCredentials = {
         "username": LoginCredentials[0],
@@ -92,6 +97,7 @@ var CheckLoginFromDB = function (LoginCredentials) {
             console.log(response)
             if (response.status == "success") {
                 window.location.href = "/"+response.redirect
+                StoreCredentials(response,LoginCredentials[0])
             }
             else if(response.status == "notauthorized"){
                 InvalidLogin("You are not authorized to access this page.")

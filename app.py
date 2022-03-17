@@ -5,9 +5,8 @@ try:
     from modules import *
     from bot import *
     from mongoatlas import *
-    from OpenSSL import SSL
     from flask_cors import CORS, cross_origin
-except:
+except ImportError:
     print("\n[INFO] One or more modules are missing.\n")
     os.system("pip install -r requirements.txt")
 
@@ -145,9 +144,11 @@ def home_index():
 # This route recieves the face data captured by the webcam and sends it to the backend
 
 
-@app.route('/recieve-face', methods=['POST'])
+@app.route('/recieve-face', methods=['POST', 'GET'])
+@cross_origin()
 def recieve_face():
     get_base64_from_request(request)
+    print("recieved")
     return {'success': True}
 
 # This route recieves the face data captured by the webcam and sends it to the backend
@@ -177,6 +178,13 @@ def up():
 @app.route('/git', methods=['GET', 'POST'])
 def pull():
     response = performgit(request.data)
+    return response
+
+@app.route('/loadprojects', methods=['GET'])
+@cross_origin()
+def loadprojects():
+    print("here")
+    response = load_projects()
     return response
 
 
@@ -222,7 +230,4 @@ def not_found(e):
 
 if __name__ == '__main__':
     telegramdebug()
-    context = SSL.Context(SSL.PROTOCOL_TLSv1_2)
-    context.use_privatekey_file('server.key')
-    context.use_certificate_file('server.crt')
     app.run(host='0.0.0.0', debug=True, port=5050)

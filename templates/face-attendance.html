@@ -24,27 +24,40 @@
             <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
             <p class="text-xs text-gray-400 mt-4"> Capture image to take Attendance </p>
             <!-- end of section -->
-            <div id="my_camera" class="py-2" style="width:238px; height: 133px;"></div>
-            <div id="my_result" class="py-2" style="width:238px; height: 170px;"></div>
+            <div id="my_camera" class="py-2" style="width: 238px; height: 238px;"></div>
+            <div id="my_result" class="py-2" ></div>
             <script language="JavaScript">
+                // set webcam camera to face the environment
                 Webcam.set('constraints', {
-                    facingMode: "environment"
+                    facingMode: "environment",
+                    width:1920,
+                    height:1080,
+                    dest_width:1920,
+                    dest_height:1080
+
                 });
+                
                 Webcam.attach('#my_camera');
+                // function to post the captured image
                 function PostBase64Image(data_uri) {
                     const payload = {
                         "image": data_uri
                     }
                     var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "http://localhost:5000/recieve-face", true);
+                    xhr.open("POST", "/recieve-face", true);
                     xhr.setRequestHeader("Content-Type", "application/json");
                     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
                     xhr.send(JSON.stringify(payload));
                 }
+                // function to play camera capture sound
+                function PlayShutterSound(){
+                    var audio=document.getElementById("audio");
+                    audio.play();
+                }
                 function take_snapshot() {
                     Webcam.snap(function (data_uri) {
                         document.getElementById('my_result').innerHTML = '<img src="' + data_uri + '" style="object-fit: cover;"/>';
-                        console.log(data_uri);
+                        PlayShutterSound();
                         PostBase64Image(data_uri);
                     });
                 }
@@ -52,6 +65,7 @@
             <a href="javascript:void(take_snapshot())"
                 class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full">Take
                 Snapshot</a>
+                <audio id="audio" src="static/audio/Shutter.mp3"></audio>
             <form action="/choose-function">
                 <button
                     class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full">Continue</button>

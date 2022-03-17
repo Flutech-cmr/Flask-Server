@@ -1,4 +1,3 @@
-import cv2
 import sqlite3
 import json
 import base64
@@ -24,7 +23,6 @@ def get_base64_from_request(request):
 
 # This function converts base64 image to jpeg for storage
 def convert_base64_to_jpeg(base64_string):
-    print(base64_string)
     base64_string = base64_string.split(',')[1]
     randomstring = str(random.randint(0, 100000))
     with open(f'{randomstring}.jpeg', 'wb') as f:
