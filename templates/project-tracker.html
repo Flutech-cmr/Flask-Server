@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="static/css/flutech.css">
     <script src="static/js/projects.js" type="application/javascript"></script>
     <script src="static/js/CheckLocalStorage.js" type="application/javascript"></script>
+    <script src="static/js/commonpageutils.js" type="application/javascript"></script>
     <title>Project Tracker</title>
 </head>
 
-<body onload="LoadProjects();">
+<body onload="LoadProjects();RefreshPage(30000);">
     <section>
         {{ navbar() }}
     </section>
@@ -43,7 +44,7 @@
             </div>
             <form action="/add-project" id="add-project">
                 <button
-                    class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full"
+                    class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
                     id>Add Project</button>
             </form>
         </div>

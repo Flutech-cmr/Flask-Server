@@ -15,7 +15,7 @@ app = Flask(__name__, static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type' 
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # HTML Page Routes are defined Below
@@ -41,7 +41,7 @@ def login():
 @app.route('/checklogin', methods=['GET', 'POST'])
 @cross_origin()
 def checklogin():
-    if request.method == 'POST': 
+    if request.method == 'POST':
         return validate_user(request.data)
 
 # This route is for the ERP Function Page
@@ -58,9 +58,6 @@ def choose_function():
 def project_tracker():
     return render_template('project-tracker.html')
 
-@app.route('/cards')
-def cards():
-    return render_template('cards.html')
 
 # This route helps add projects
 
@@ -84,6 +81,7 @@ def faceattandance():
 def addemployee():
     return render_template('addemployee.html')
 
+
 @app.route('/employee-details')
 def employee_details():
     return render_template('employeedetails.html')
@@ -99,6 +97,7 @@ def master():
 @app.route('/masterpanel')
 def masterpanel():
     return render_template('masterpanel.html')
+
 
 @app.route('/workeronboarding')
 def onboardworker():
@@ -173,14 +172,21 @@ def botmessage():
 
 @app.route('/screen-sizes', methods=['POST', 'GET'])
 def screen_sizes():
-    atlas_id=screensizelogger(request.data)
-    print(atlas_id,"atlas_id")
+    atlas_id = screensizelogger(request.data)
+    print(atlas_id, "atlas_id")
     return {'Success': True, 'atlas_id': str(atlas_id)}
+
+
+@app.route('/recieveworkerdata', methods=['POST', 'GET'])
+@cross_origin()
+def recieveworkerdata():
+    return add_workers_to_db(request.data)
 
 
 @app.route('/up', methods=['GET'])
 def up():
     return {'success': True}
+
 
 @app.route('/git', methods=['GET', 'POST'])
 def pull():
@@ -194,6 +200,7 @@ def addsite():
     print("request to add site")
     response = add_project_site(request.data)
     return response
+
 
 @app.route('/loadprojects', methods=['GET'])
 @cross_origin()

@@ -119,19 +119,19 @@ def load_projects():
     db = cluster["FlutechERP"]
     collection = db["ProjectDetails"]
     results = collection.find({})
-    all_projects={}
-    iter=0
+    all_projects = {}
+    iter = 0
     for x in results:
         # use bson to conver objectid to string
         x["_id"] = str(x["_id"])
-        all_projects[iter]=x
-        iter+=1
-    print(all_projects)
+        all_projects[iter] = x
+        iter += 1
     return all_projects
-    
+
+
 def add_project_site(data):
-    data=data.decode('utf-8')
-    data=json.loads(data)
+    data = data.decode('utf-8')
+    data = json.loads(data)
     cluster = return_cluster()
     db = cluster["FlutechERP"]
     collection = db["ProjectDetails"]
@@ -139,3 +139,14 @@ def add_project_site(data):
     print(type(results.inserted_id))
     # return results.inserted_id
     return {"message": "received", "status": "success"}
+
+
+def add_workers_to_db(data):
+    data = data.decode('utf-8')
+    data = json.loads(data)
+    print("[INFO] Adding workers to database")
+    cluster = return_cluster()
+    db = cluster["FlutechERP"]
+    collection = db["WorkerDetails"]
+    results = collection.insert_one(data)
+    return str(results.inserted_id)

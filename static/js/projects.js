@@ -26,18 +26,19 @@ var PopulateProjects = function () {
     let iter = 0;
     for (const [key, value] of Object.entries(GlobalProjectDetails)) {
         let project = value;
-        console.log(project);
-        projectdiv.innerHTML += TemplateHTML;
-        let Projectname = document.getElementsByClassName("template-projectname")[iter];
-        let ProjectLocation = document.getElementsByClassName("template-sitelocation")[iter];
-        let ProjectCity = document.getElementsByClassName("template-city")[iter];
-        let templateparent = document.getElementsByClassName("template-parent")[iter];
-        Projectname.innerHTML = project.projectname;
-        ProjectLocation.innerHTML = project.sitelocation;
-        ProjectCity.innerHTML = project.city;
-        templateparent.id = project._id;
-        iter++;
+        if (project["Project Name"] != undefined && project["Site Location"] != undefined && project["City"] != undefined) {
+            projectdiv.innerHTML += TemplateHTML;
+            let Projectname = document.getElementsByClassName("template-projectname")[iter];
+            let ProjectLocation = document.getElementsByClassName("template-sitelocation")[iter];
+            let ProjectCity = document.getElementsByClassName("template-city")[iter];
+            let templateparent = document.getElementsByClassName("template-parent")[iter];
+            Projectname.innerHTML = project["Project Name"];
+            ProjectLocation.innerHTML = project["Site Location"];
+            ProjectCity.innerHTML = project["City"];
+            templateparent.id = project._id;
+            iter++;
 
+        }
     }
 }
 var LoadProjects = function () {

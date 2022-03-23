@@ -68,9 +68,9 @@ var OnType = function (field) {
 
 var PostSiteDetails = function (credentials) {
     const payload = {
-        "projectname": credentials[0],
-        "sitelocation": credentials[1],
-        "city": credentials[2]
+        "Project Name": credentials[0],
+        "Site Location": credentials[1],
+        "City": credentials[2]
     }
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/addsite");
