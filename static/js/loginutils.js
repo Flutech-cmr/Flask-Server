@@ -32,7 +32,7 @@ var PleaseEnterParagraph = function (FieldID) {
 
 var InvalidLogin = function (prompt) {
     if (!!document.getElementById("InvalidCredentials") == false) {
-        InvalidLoginPrompt = '<p class="text-xs ext-gray-700 mt-4" id="InvalidCredentials">'+prompt+'</p>'
+        InvalidLoginPrompt = '<p class="text-xs ext-gray-700 mt-4" id="InvalidCredentials">' + prompt + '</p>'
         ButtonDiv = document.getElementById("DivButton")
         ButtonInnerHTML = ButtonDiv.innerHTML
         ButtonDiv.innerHTML = InvalidLoginPrompt + ButtonInnerHTML
@@ -44,7 +44,7 @@ var OnType = function (field) {
     if (!!document.getElementById("PleaseEnter" + field) == true) {
         document.getElementById("PleaseEnter" + field).remove()
     }
-    if(!!document.getElementById("InvalidCredentials") == true){
+    if (!!document.getElementById("InvalidCredentials") == true) {
         document.getElementById("InvalidCredentials").remove()
     }
 }
@@ -75,9 +75,15 @@ var GetInputFields = function (fieldnames) {
     }
 }
 
-var StoreCredentials = function (response,EMP_ID) {
+var StoreCredentials = function (response, EMP_ID) {
     localStorage.setItem("Flutech_Access_Level", response.access_level)
     localStorage.setItem("Flutech_EMP_ID", EMP_ID)
+}
+
+var FetchCredentials = function () {
+    const IsAccessAvailable = localStorage.getItem("Flutech_Access_Level")
+    const IsEmpIDAvailable = localStorage.getItem("Flutech_EMP_ID")
+    return [IsAccessAvailable, IsEmpIDAvailable]
 }
 
 var CheckLoginFromDB = function (LoginCredentials) {
@@ -96,10 +102,10 @@ var CheckLoginFromDB = function (LoginCredentials) {
             const response = JSON.parse(xhr.responseText);
             console.log(response)
             if (response.status == "success") {
-                window.location.href = "/"+response.redirect
-                StoreCredentials(response,LoginCredentials[0])
+                window.location.href = "/" + response.redirect
+                StoreCredentials(response, LoginCredentials[0])
             }
-            else if(response.status == "notauthorized"){
+            else if (response.status == "notauthorized") {
                 InvalidLogin("You are not authorized to access this page.")
             }
             else {
@@ -111,8 +117,31 @@ var CheckLoginFromDB = function (LoginCredentials) {
 
 }
 
+var PreviousLoginExists = function (payload) {
+    const xhr=new XMLHttpRequest()
+    xhr.open("POST","/checklogin",true)
+    xhr.setRequestHeader("Content-Type","application/json")
+    xhr.setRequestHeader("Access-Control-Allow-Origin","*")
+    xhr.send(JSON.stringify(payload))
+    xhr.onreadystatechange=function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            const response=JSON.parse(xhr.responseText)
+            console.log(response)
+        }
+    }
+
+}
+
 // this is the login utility for the login page
 var login = function () {
-    const credentials = GetInputFields(GlobalFieldnames)
-    CheckLoginFromDB(credentials)
+    const AskForLogin = true
+    const FetchedCredentials = FetchCredentials()
+    if (FetchedCredentials[0] == "null" || FetchedCredentials[1] == "null") {
+        const credentials = GetInputFields(GlobalFieldnames)
+        CheckLoginFromDB(credentials)
+    }
+    else {
+        PreviousLoginExists(FetchedCredentials)
+    }
+
 }

@@ -30,7 +30,8 @@
             <div class="max-h-80 overflow-auto" id="ProjectLists">
                 <!-- <p class="mt-6 bg-red-400 p-6 rounded-md text-white shadow-lg"> Sample Project 1</p> -->
                 <template>
-                    <div class="bg-white p-3 rounded-xl shadow-xl flex items-center justify-between mt-4 template-parent">
+                    <div
+                        class="bg-white p-3 rounded-xl shadow-xl flex items-center justify-between mt-4 template-parent">
                         <div class="flex space-x-6 items-center text-left">
                             <img src="/static/img/flutech-logo.jpg" class="w-auto h-14 rounded-lg" />
                             <div>
@@ -43,9 +44,10 @@
                 </template>
             </div>
             <form action="/add-project" id="add-project">
-                <button
-                    class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
-                    id>Add Project</button>
+                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" id>Add
+                    Project</button>
+                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+                    type="button" onclick="window.history.go(-1)">Go Back</button>
             </form>
         </div>
     </div>

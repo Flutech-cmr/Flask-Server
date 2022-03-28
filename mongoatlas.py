@@ -113,6 +113,13 @@ def validate_user(data):
             return {"message": "received", "status": "failed"}
 
 
+def previous_login_exists(data):
+    print("[INFO] Checking for previous login")
+    data = data.decode('utf-8')
+    data = json.loads(data)
+    print(data)
+
+
 def load_projects():
     print("retriving all projects")
     cluster = return_cluster()
