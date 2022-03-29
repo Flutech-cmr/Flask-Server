@@ -13,10 +13,8 @@ def iterateversion():
     print("[INFO] Iterating Version")
     f=open("version","r")
     lines=f.readlines()
-    print(type (lines[0]))
     lines=float(lines[0])
     lines+=0.1
-    print(lines)
     f.close()
     f=open("version","r+")
     f.write(str(lines))

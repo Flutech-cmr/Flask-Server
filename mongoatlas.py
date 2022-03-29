@@ -188,6 +188,21 @@ def add_workers_to_db(data):
     results = collection.insert_one(data)
     return str(results.inserted_id)
 
+def get_workers_from_db(data):
+    print("retriving all workers")
+    cluster = return_cluster()
+    db = cluster["FlutechERP"]
+    collection = db["WorkerDetails"]
+    results = collection.find({})
+    all_workers = {}
+    iter = 0
+    for x in results:
+        # use bson to conver objectid to string
+        x["_id"] = str(x["_id"])
+        all_workers[iter] = x
+        iter += 1
+    return all_workers
+
 
 if __name__ == "__main__":
     print("[INFO] This script is being loaded on Python Version {}".format(sys.version))

@@ -104,6 +104,10 @@ def masterpanel():
 def onboardworker():
     return render_template('workeronboarding.html')
 
+@app.route('/alreadyonboardedworkers')
+def alreadyonboardedworkers():
+    return render_template('alreadyonboardedworkers.html')
+
 # This route opens the Feedback page
 
 
@@ -182,6 +186,13 @@ def screen_sizes():
 @cross_origin()
 def recieveworkerdata():
     return add_workers_to_db(request.data)
+
+@app.route('/getallemployees', methods=['POST', 'GET'])
+@cross_origin()
+def getallemployees():
+    return get_workers_from_db(request.data)
+
+
 
 
 @app.route('/up', methods=['GET'])

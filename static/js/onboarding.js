@@ -43,19 +43,20 @@ var PleaseEnter = function (field) {
             document.getElementById("Div" + field).innerHTML += PleaseEnterParagraph("PleaseEnter" + field)
             document.getElementById(field).focus()
         }
-    }
-    catch (err) {
-        console.log("field",field)
-        console.log("error",err)
+    } catch (err) {
+        console.log("field", field)
+        console.log("error", err)
     }
 }
 
 var ConvertHTMLFileInputToBase64 = function (file) {
-    let FileName=null
-    try{
-    FileName = file.name}
-    catch(err){
-        return{"Error":"File Not Uploaded"}
+    let FileName = null
+    try {
+        FileName = file.name
+    } catch (err) {
+        return {
+            "Error": "File Not Uploaded"
+        }
     }
     var Base64Img = {}
     if (FileName.includes(".jpg") || FileName.includes(".png") || FileName.includes(".jpeg") || FileName.includes(".webp") || FileName.includes(".bmp") || FileName.includes(".tiff") || FileName.includes(".tif") || FileName.includes(".svg")) {
@@ -65,9 +66,10 @@ var ConvertHTMLFileInputToBase64 = function (file) {
         reader.onload = function () {
             Base64Img["Data"] = reader.result.split(',')[1]
         }
-    }
-    else {
-        return { "Error": "File type not supported" }
+    } else {
+        return {
+            "Error": "File type not supported"
+        }
     }
     return Base64Img
 }
@@ -76,19 +78,18 @@ var GetInputFields = function () {
     let Fieldarray = new Array(GlobalFieldnames.length)
     let FileUploadFields = []
     let data = {}
-    let emptyfields=false
+    let emptyfields = false
     for (x in GlobalFieldnames) {
         if (GlobalFieldnames[x].includes("Photo")) {
             FileUploadFields.push(document.getElementById(GlobalFieldnames[x]))
-        }
-        else {
+        } else {
             Fieldarray[x] = document.getElementById(GlobalFieldnames[x])
         }
     }
     for (x in Fieldarray) {
         data[Fieldarray[x].id] = Fieldarray[x].value
-        if(data[Fieldarray[x].id]==""){
-            emptyfields=true
+        if (data[Fieldarray[x].id] == "") {
+            emptyfields = true
             PleaseEnter(Fieldarray[x].id)
         }
     }
@@ -97,11 +98,11 @@ var GetInputFields = function () {
         const y = ConvertHTMLFileInputToBase64(FileUploadFields[x].files[0])
         data[PhotoFieldName] = y
     }
-    if(emptyfields){
+    if (emptyfields) {
         return "empty"
+    } else {
+        return data
     }
-    else{
-    return data}
 
 }
 
@@ -123,7 +124,34 @@ var PostEmployeeDetails = function (data) {
 
 var register = function () {
     let Fieldarray = GetInputFields()
-    if(Fieldarray !="empty"){
-    PostEmployeeDetails(Fieldarray)}
+    if (Fieldarray != "empty") {
+        PostEmployeeDetails(Fieldarray)
+    }
 }
 
+var GetTemplate=function(){
+    var template=document.getElementsByTagName("template")[0]
+    document.getElementById("all_workers").innerHTML+=template.innerHTML
+    return template
+}
+
+var GetAllEmployees = function () {
+    const xhr = new XMLHttpRequest()
+    xhr.open("GET", "/getallemployees", true)
+    xhr.setRequestHeader("Content-Type", "application/json")
+    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+    xhr.send()
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const ResponseTextAllWorkers = JSON.parse(xhr.responseText)
+            for (const [key, value] of Object.entries(ResponseTextAllWorkers)) {
+                const Workers = value
+                for (const [key, value] of Object.entries(Workers)) {
+                }
+            }
+            console.log(GetTemplate())
+        }
+    }
+}
+
+GetAllEmployees()
