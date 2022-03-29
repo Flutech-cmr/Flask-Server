@@ -18,9 +18,9 @@ def iterateversion():
     lines+=0.1
     print(lines)
     f.close()
-    # f=open("version","r+")
-    # f.writelines(lines)
-    # f.close()
+    f=open("version","r+")
+    f.write(str(lines))
+    f.close()
 
 payload = {"to_terminal": "git pull"}
 server_url="https://comfytronics.in/"
