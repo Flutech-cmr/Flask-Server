@@ -1,6 +1,13 @@
-from pymongo import MongoClient
-from bson import ObjectId
-import json
+import os
+import sys
+print("[INFO] Loading Mongo Atlas Modules")
+try:
+    from pymongo import MongoClient
+    from bson import ObjectId
+    import json
+except ImportError:
+    print("\n[INFO] One or more modules are missing.\n")
+    os.system("pip3 install -r requirements.txt")
 
 
 # (data, "Screen SIzes", "FlutechERP") for screensizes
@@ -13,7 +20,11 @@ def readjsonfiles(filename):
 
 
 def get_mongopass():
-    data = readjsonfiles('parameters.json')
+    try:
+        data = readjsonfiles('parameters.json')
+    except:
+        print("[ERROR] Unable to read parameters.json. File not found.")
+        sys.exit()
     return data["mongo_atlas"]
 
 
@@ -84,40 +95,59 @@ def validate_user(data):
     print("[INFO] Requesting User Validation")
     data = data.decode('utf-8')
     data = json.loads(data)
-    empid = data["username"]
-    password = data["password"]
-    login_requesting_page = data["currentpage"]
-    login_requesting_page = login_requesting_page.split("/")[-1]
-    login_requesting_page = login_requesting_page.replace("?", "")
-    data_to_find = {"Employee ID": empid, "Password": password}
+    print(data)
+    if(data["status"] == "PreviousLogin"):
+        return previous_login_exists(data)
+    else:
+        del data["status"]
+        print(data)
+        empid = data["username"]
+        password = data["password"]
+        login_requesting_page = data["currentpage"]
+        login_requesting_page = login_requesting_page.split("/")[-1]
+        login_requesting_page = login_requesting_page.replace("?", "")
+        data_to_find = {"Employee ID": empid, "Password": password}
+        results_of_find = find_in_mongo(
+            data_to_find, "EmployeeDetails", "FlutechERP")
+        print("[INFO] Results Count {}".format(results_of_find.count()))
+        if(results_of_find.count() == 0):
+            print("[INFO] Invalid Creditentials")
+            return {"message": "received", "status": "failed"}
+        for x in results_of_find:
+            access_level = x["App Privileges"]
+            if(login_requesting_page == "login" and access_level >= 0):
+                print("[INFO] User Validated for login page")
+                return {"message": "received", "status": "success", "redirect": "choose-function", "access_level": access_level}
+            elif(login_requesting_page == "master"):
+                if (access_level == 1):
+                    print("[INFO] User Validated for master page")
+                    return {"message": "received", "status": "success", "redirect": "masterpanel", "access_level": access_level}
+                else:
+                    print("[INFO] User not authorized for master page")
+                    return {"message": "received", "status": "notauthorized"}
+            else:
+                print("[INFO] Something is broken")
+                return {"message": "received", "status": "failed"}
+
+
+def previous_login_exists(data):
+    print("[INFO] Checking for previous login")
+    current_page = data["currentpage"]
+    del data["status"]
+    print(data)
     results_of_find = find_in_mongo(
-        data_to_find, "EmployeeDetails", "FlutechERP")
-    print("[INFO] Results Count {}".format(results_of_find.count()))
+        {"Employee ID": data["username"], "App Privileges": int(data["access_level"])}, "EmployeeDetails", "FlutechERP")
     if(results_of_find.count() == 0):
         print("[INFO] Invalid Creditentials")
         return {"message": "received", "status": "failed"}
     for x in results_of_find:
         access_level = x["App Privileges"]
-        if(login_requesting_page == "login" and access_level >= 0):
+        if(access_level >= 0):
             print("[INFO] User Validated for login page")
             return {"message": "received", "status": "success", "redirect": "choose-function", "access_level": access_level}
-        elif(login_requesting_page == "master"):
-            if (access_level == 1):
-                print("[INFO] User Validated for master page")
-                return {"message": "received", "status": "success", "redirect": "masterpanel", "access_level": access_level}
-            else:
-                print("[INFO] User not authorized for master page")
-                return {"message": "received", "status": "notauthorized"}
         else:
-            print("[INFO] Something is broken")
-            return {"message": "received", "status": "failed"}
-
-
-def previous_login_exists(data):
-    print("[INFO] Checking for previous login")
-    data = data.decode('utf-8')
-    data = json.loads(data)
-    print(data)
+            print("[INFO] User not authorized for login page")
+            return {"message": "received", "status": "notauthorized"}
 
 
 def load_projects():
@@ -157,3 +187,9 @@ def add_workers_to_db(data):
     collection = db["WorkerDetails"]
     results = collection.insert_one(data)
     return str(results.inserted_id)
+
+
+if __name__ == "__main__":
+    print("[INFO] This script is being loaded on Python Version {}".format(sys.version))
+    print(post_to_mongo({"Employee ID": "123",
+          "Password": "123"}, "test connection", "testing"))

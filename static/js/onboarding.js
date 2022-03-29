@@ -51,7 +51,11 @@ var PleaseEnter = function (field) {
 }
 
 var ConvertHTMLFileInputToBase64 = function (file) {
-    let FileName = file.name
+    try{
+    let FileName = file.name}
+    catch(err){
+        return{"Error":"File Not Uploaded"}
+    }
     var Base64Img = {}
     if (FileName.includes(".jpg") || FileName.includes(".png") || FileName.includes(".jpeg") || FileName.includes(".webp") || FileName.includes(".bmp") || FileName.includes(".tiff") || FileName.includes(".tif") || FileName.includes(".svg")) {
         const reader = new FileReader()

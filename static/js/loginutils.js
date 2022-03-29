@@ -18,8 +18,7 @@ var PleaseEnterParagraph = function (FieldID) {
     let FieldToEnter = null
     if (FieldID.includes(GlobalFieldnames[0])) {
         FieldToEnter = GlobalFieldnames[0]
-    }
-    else {
+    } else {
         FieldToEnter = GlobalFieldnames[1]
     }
     prefix = '<p class="text-red text-xs italic text-left" id="'
@@ -90,7 +89,8 @@ var CheckLoginFromDB = function (LoginCredentials) {
     PostCredentials = {
         "username": LoginCredentials[0],
         "password": LoginCredentials[1],
-        "currentpage": window.location.href
+        "currentpage": window.location.href,
+        "status": "NewLogin"
     }
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/checklogin", true);
@@ -104,11 +104,9 @@ var CheckLoginFromDB = function (LoginCredentials) {
             if (response.status == "success") {
                 window.location.href = "/" + response.redirect
                 StoreCredentials(response, LoginCredentials[0])
-            }
-            else if (response.status == "notauthorized") {
+            } else if (response.status == "notauthorized") {
                 InvalidLogin("You are not authorized to access this page.")
-            }
-            else {
+            } else {
                 InvalidLogin("Invalid Credentials. Please try again.")
             }
             ClearFields();
@@ -118,30 +116,47 @@ var CheckLoginFromDB = function (LoginCredentials) {
 }
 
 var PreviousLoginExists = function (payload) {
-    const xhr=new XMLHttpRequest()
-    xhr.open("POST","/checklogin",true)
-    xhr.setRequestHeader("Content-Type","application/json")
-    xhr.setRequestHeader("Access-Control-Allow-Origin","*")
+    const xhr = new XMLHttpRequest()
+    xhr.open("POST", "/checklogin", true)
+    xhr.setRequestHeader("Content-Type", "application/json")
+    xhr.setRequestHeader("Access-Control-Allow-Origin", "*")
     xhr.send(JSON.stringify(payload))
-    xhr.onreadystatechange=function(){
-        if(xhr.readyState==4 && xhr.status==200){
-            const response=JSON.parse(xhr.responseText)
-            console.log(response)
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const response = JSON.parse(xhr.responseText);
+            console.log(response);
+            if (response.status == "success") {
+                window.location.href = "/" + response.redirect
+            } else if (response.status == "notauthorized") {
+                InvalidLogin("You are not authorized to access this page.")
+            } else {
+                InvalidLogin("Invalid Credentials. Please try again.")
+            }
+            ClearFields();
         }
     }
-
 }
 
 // this is the login utility for the login page
-var login = function () {
-    const AskForLogin = true
+var AutoLoginOnPageLoad = function () {
     const FetchedCredentials = FetchCredentials()
-    if (FetchedCredentials[0] == "null" || FetchedCredentials[1] == "null") {
+    if (FetchedCredentials[0] == "null" || FetchedCredentials[1] == "null" || FetchedCredentials[0] == null || FetchedCredentials[1] == null) {
+        console.log("No previous login found")
         const credentials = GetInputFields(GlobalFieldnames)
         CheckLoginFromDB(credentials)
+    } else {
+        console.log("Previous login found")
+        const payload = {
+            "username": FetchedCredentials[1],
+            "access_level": FetchedCredentials[0],
+            "currentpage": window.location.href,
+            "status": "PreviousLogin"
+        }
+        PreviousLoginExists(payload)
     }
-    else {
-        PreviousLoginExists(FetchedCredentials)
-    }
+}
 
+var login = function () {
+    const credentials = GetInputFields(GlobalFieldnames)
+    CheckLoginFromDB(credentials)
 }
