@@ -8,9 +8,9 @@ var SetGlobalFieldnames = function (fieldnames) {
 
 // clearing input fields in html on load and on wrong input
 var ClearFields = function () {
-    // for (let i = 0; i < GlobalFieldnames.length; i++) {
-    //     document.getElementById(GlobalFieldnames[i]).value = ""
-    // }
+    for (let i = 0; i < GlobalFieldnames.length; i++) {
+        document.getElementById(GlobalFieldnames[i]).value = ""
+    }
 }
 
 // removes prompt fields on type
@@ -45,14 +45,15 @@ var PleaseEnter = function (field) {
         }
     }
     catch (err) {
-        console.log(field)
-        console.log(err)
+        console.log("field",field)
+        console.log("error",err)
     }
 }
 
 var ConvertHTMLFileInputToBase64 = function (file) {
+    let FileName=null
     try{
-    let FileName = file.name}
+    FileName = file.name}
     catch(err){
         return{"Error":"File Not Uploaded"}
     }
@@ -75,6 +76,7 @@ var GetInputFields = function () {
     let Fieldarray = new Array(GlobalFieldnames.length)
     let FileUploadFields = []
     let data = {}
+    let emptyfields=false
     for (x in GlobalFieldnames) {
         if (GlobalFieldnames[x].includes("Photo")) {
             FileUploadFields.push(document.getElementById(GlobalFieldnames[x]))
@@ -85,13 +87,21 @@ var GetInputFields = function () {
     }
     for (x in Fieldarray) {
         data[Fieldarray[x].id] = Fieldarray[x].value
+        if(data[Fieldarray[x].id]==""){
+            emptyfields=true
+            PleaseEnter(Fieldarray[x].id)
+        }
     }
     for (x in FileUploadFields) {
         const PhotoFieldName = FileUploadFields[x].id
         const y = ConvertHTMLFileInputToBase64(FileUploadFields[x].files[0])
         data[PhotoFieldName] = y
     }
-    return data
+    if(emptyfields){
+        return "empty"
+    }
+    else{
+    return data}
 
 }
 
@@ -106,12 +116,14 @@ var PostEmployeeDetails = function (data) {
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(xhr.responseText)
+            ClearFields();
         }
     }
 }
 
 var register = function () {
     let Fieldarray = GetInputFields()
-    PostEmployeeDetails(Fieldarray)
+    if(Fieldarray !="empty"){
+    PostEmployeeDetails(Fieldarray)}
 }
 
