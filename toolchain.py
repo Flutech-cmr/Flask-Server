@@ -16,6 +16,7 @@ def iterateversion():
     print(type (lines[0]))
     lines=float(lines[0])
     lines+=0.1
+    print(lines)
     f.close()
     # f=open("version","r+")
     # f.writelines(lines)
@@ -41,5 +42,3 @@ if r.status_code == 200:
         print("\n[INFO] git pull successful\n")
 else:
     print("\n[INFO] Server is not running. Exiting\n")
-
-time.sleep(10)
