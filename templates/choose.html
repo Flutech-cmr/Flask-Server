@@ -1,6 +1,7 @@
 {% from "components.html" import footer, navbar %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="static/css/flutech.css">
     <title>Choose Functionality</title>
 </head>
+
 <body>
     <section>
         {{ navbar() }}
@@ -20,29 +22,20 @@
             <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
             <p class="text-xs text-gray-600 mt-4"> Choose Functionality </p>
             <form>
-                <button
-                    class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full"
-                    type="button" onclick="addproject();">Project Tracker</button>
-                <button
-                    class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full"
-                    type="button" onclick="toggleModal('modal-id')">Complaint Tracker</button>
-                <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
-                    id="modal-id">
+                <button class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full" type="button" onclick="addproject();">Project Tracker</button>
+                <button class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full" type="button" onclick="toggleModal('modal-id')">Complaint Tracker</button>
+                <button class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full" type="button" onclick="">Logout</button>
+                <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="modal-id">
                     <div class="relative w-auto my-6 mx-auto max-w-3xl">
                         <!--content-->
-                        <div
-                            class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                             <!--header-->
-                            <div
-                                class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                            <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                                 <h3 class="text-3xl font-semibold">
                                     Coming Soon
                                 </h3>
-                                <button
-                                    class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                                    onclick="toggleModal('modal-id')">
-                                    <span
-                                        class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                                <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('modal-id')">
+                                    <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
                                         ×
                                     </span>
                                 </button>
@@ -54,11 +47,8 @@
                                 </p>
                             </div>
                             <!--footer-->
-                            <div
-                                class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                                <button
-                                    class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                    type="button" onclick="toggleModal('modal-id')">
+                            <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                                <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
                                     Close
                                 </button>
                             </div>
@@ -84,4 +74,5 @@
         {{ footer() }}
     </section>
 </body>
+
 </html>
