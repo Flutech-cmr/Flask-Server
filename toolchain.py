@@ -8,10 +8,24 @@ try:
 except:
     print("\n[INFO] This script requires a commit message as an argument. No commit message was provided.\n")
     sys.exit(1)
+
+def iterateversion():
+    print("[INFO] Iterating Version")
+    f=open("version","r")
+    lines=f.readlines()
+    print(type (lines[0]))
+    lines=float(lines[0])
+    lines+=0.1
+    f.close()
+    # f=open("version","r+")
+    # f.writelines(lines)
+    # f.close()
+
 payload = {"to_terminal": "git pull"}
 server_url="https://comfytronics.in/"
 print("\n[INFO] generating requirements\n")
 os.system("pipreqs  --force")
+iterateversion()
 print("\n[INFO] performing git push\n")
 os.system(f'git add --all')
 os.system(f'git commit -m "{commit_message}"')

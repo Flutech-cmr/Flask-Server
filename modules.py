@@ -80,3 +80,11 @@ def get_os_and_version():
     current_os=platform.system()
     current_os_version=platform.release()
     return [current_os, current_os_version]
+
+def App_version():
+    f=open("version","r")
+    lines=f.readlines()
+    lines=str(lines[0])
+    lines="v"+lines
+    print(lines)
+    return lines

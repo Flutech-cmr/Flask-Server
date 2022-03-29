@@ -26,7 +26,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    Get_version=App_version()
+    return render_template('index.html',version=Get_version)
 
 # This route is for the Login Page
 
