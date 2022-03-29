@@ -1,4 +1,4 @@
-{% from "components.html" import footer, navbar %}
+{% from "components.html" import footer, navbar, modal %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,12 +48,24 @@
                 </template>
             </div>
             <form action="/add-project" id="add-project">
-                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" id>Add
+                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="toggleModal('modal-id')">Add
                     Project</button>
                 <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="window.history.go(-1)">Go Back</button>
+
+                <section>
+                    {{ modal() }}
+                </section>
             </form>
         </div>
     </div>
+    <script type="text/javascript">
+        function toggleModal(modalID) {
+            document.getElementById(modalID).classList.toggle("hidden");
+            document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+            document.getElementById(modalID).classList.toggle("flex");
+            document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+        }
+    </script>
     <section>
         {{ footer() }}
     </section>
