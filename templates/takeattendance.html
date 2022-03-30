@@ -1,4 +1,4 @@
-{% from "components.html" import footer, navbar %}
+{% from "components.html" import footer, navbar,modal %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,24 +30,30 @@
             </div>
             <!-- worker cards -->
             <div class="max-h-80 overflow-y-auto text-left" id="all_workers">
-                <div class="flex justify-between items-center">
-                    <div class="flex r">
-                        <div class="mr-4 w-12 h-12 rounded shadow">
-                            <img class="w-full h-full overflow-hidden object-cover object-center rounded" src="/static/img/profilepicture.webp" alt="avatar" />
-                        </div>
-                        <div>
-                            <h3 class="mb-2 sm:mb-1 text-gray-800 text-base font-normal leading-4">Worker Name </h3>
-                            <p class="text-gray-600 text-xs leading-3 mt-2">Contractor Name </p>
-                            <p class="text-gray-600 text-xs leading-3 mt-2">Labour Type </p>
-                            <button class=" mt-4 bg-pink-600 text-white p-1 rounded-md font-medium tracking-tight">Mark In-Time</button>
-                            <button class=" mt-4 bg-pink-600 text-white p-1 rounded-md font-medium tracking-tight">Mark Out-Time</button>
+                <!-- Worker Cards -->
+                <template>
+                    <div class="flex justify-between items-center mt-4 workertemplate">
+                        <div class="flex ">
+                            <div class="mr-4 w-12 h-12 rounded shadow">
+                                <img class="w-full h-full overflow-hidden object-cover object-center rounded" src="/static/img/profilepicture.webp" alt="avatar" />
+                            </div>
+                            <div>
+                                <h3 class="mb-2 sm:mb-2 text-gray-800 text-base font-semibold leading-4">Worker Name</h3>
+                                <p class="text-pink-600 text-xs leading-3 mt-2 workername">Worker Name</p>
+                                <p class="text-gray-700 text-xs leading-3 mt-2 font-semibold ">Contractor Name</p>
+                                <p class="text-pink-600 text-xs leading-3 mt-2 contractorname">Contractor Name</p>
+                                <p class="text-gray-700 text-xs leading-3 mt-2 font-semibold">Labour Type</p>
+                                <p class="text-pink-600 text-xs leading-3 mt-2 LabourType">Labour Type</p>
+                                <button class=" mt-4 bg-pink-600 text-white p-1 rounded-md font-medium tracking-tight" onclick="toggleModal('modal-id')">Mark In-Time</button>
+                                <button class=" mt-4 bg-pink-600 text-white p-1 rounded-md font-medium tracking-tight" onclick="toggleModal('modal-id')">Mark Out-Time</button>
+                            </div>
                         </div>
                     </div>
-
-
-
-
-                </div>
+                </template>
+                <!-- End of Worker Cards -->
+                <section>
+                    {{ modal() }}
+                </section>
             </div>
             <div class="mt-6">
                 <h1 class="text-lg text-gray-700"></h1>
@@ -55,6 +61,14 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function toggleModal(modalID) {
+            document.getElementById(modalID).classList.toggle("hidden");
+            document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+            document.getElementById(modalID).classList.toggle("flex");
+            document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+        }
+    </script>
     <section>
         {{ footer() }}
     </section>
