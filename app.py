@@ -26,8 +26,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/')
 def home():
-    Get_version=App_version()
-    return render_template('index.html',version=Get_version)
+    Get_version = App_version()
+    return render_template('index.html', version=Get_version)
 
 # This route is for the Login Page
 
@@ -104,9 +104,14 @@ def masterpanel():
 def onboardworker():
     return render_template('workeronboarding.html')
 
+
 @app.route('/alreadyonboardedworkers')
 def alreadyonboardedworkers():
     return render_template('alreadyonboardedworkers.html')
+
+@app.route('/takeattendance')
+def takeattendance():
+    return render_template('takeattendance.html')
 
 # This route opens the Feedback page
 
@@ -187,12 +192,11 @@ def screen_sizes():
 def recieveworkerdata():
     return add_workers_to_db(request.data)
 
+
 @app.route('/getallemployees', methods=['POST', 'GET'])
 @cross_origin()
 def getallemployees():
     return get_workers_from_db(request.data)
-
-
 
 
 @app.route('/up', methods=['GET'])
