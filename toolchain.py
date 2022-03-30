@@ -15,6 +15,7 @@ def iterateversion():
     lines=f.readlines()
     lines=float(lines[0])
     lines+=0.1
+    lines=round(lines,3)
     f.close()
     f=open("version","r+")
     f.write(str(lines))

@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="static/css/flutech.css">
     <!-- <script src="static/js/login.js"></script> -->
     <script src="static/js/onboarding.js" type="application/javascript" defer></script>
-    <title>Worker Onboarding</title>
+    <title>All Workers</title>
 </head>
 
-<body onload="SetGlobalFieldnames(['Workername','CompanyID','SiteID','ContractorID','LabourType','DOB','BloodGroup','Gender','MobileNumber','AltMobileNumber','EmergencyMobileNumber','EmergencyMobileNumber2','NameFather','NameMother','AadharNumber','AadharPhoto','PANNumber','PANPhoto','PermanantAddress','CurrentAddress']);ClearFields();" ;>
+<body onload="GetAllEmployees()">
     <section>
         {{ navbar() }}
     </section>
@@ -27,31 +27,10 @@
             <!-- rounded div with shadow -->
             <div class="max-h-80 overflow-y-auto" id="ProjectLists">
                 <!-- Onboarding Form Starts here -->
-                
             </div>
             <!-- worker cards -->
             <div class="max-h-80 overflow-y-auto text-left" id="all_workers">
-                <template>
-                    <a href="#" class="w-full border-2 border-b-4 border-gray-200 rounded-xl ">
-                        <div class="grid grid-cols-6 p-5 gap-y-2 bg-gray-100">
-                            <!-- Profile Picture -->
-                            <div>
-                                <img src="https://picsum.photos/seed/2/200/200" class="max-w-16 max-h-16 rounded-full" />
-                            </div>
-                            <!-- Description -->
-                            <div class="col-span-5 md:col-span-4 ml-4">
-                                <!-- <p class="text-sky-500 font-bold text-xs"> 7+ SPOTS LEFT </p> -->
-                                <p class="text-gray-600 font-bold text-xs"> [Beginner] Light Discussion </p>
-                                <!-- <p class="text-gray-400"> Fri, Mar 11 . 8:00 - 9:30 AM </p>
-                            <p class="text-gray-400"> Beginner speakers </p> -->
-                            </div>
-                            <!-- Price -->
-                            <!-- <div class="flex col-start-2 ml-4 md:col-start-auto md:ml-0 md:justify-end">
-                            <p class="rounded-lg text-sky-500 font-bold bg-sky-100  py-1 px-3 text-sm w-fit h-fit"> FREE </p>
-                        </div> -->
-                        </div>
-                    </a>
-                </template>
+            
             </div>
             <div class="mt-6">
                 <h1 class="text-lg text-gray-700"></h1>

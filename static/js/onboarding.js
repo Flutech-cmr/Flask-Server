@@ -129,10 +129,33 @@ var register = function () {
     }
 }
 
-var GetTemplate=function(){
-    var template=document.getElementsByTagName("template")[0]
-    document.getElementById("all_workers").innerHTML+=template.innerHTML
+var GetTemplate = function () {
+    document.getElementById("all_workers").innerHTML += template.innerHTML
     return template
+}
+
+var PopulateWorkers = function (key, value) {
+    
+    const templateprefix0 = '<div class="templatediv"'
+    const templateprefix1 = '  <a href="#" class="w-full border-2 border-b-4 border-gray-200 rounded-xl ">\
+                        <div class="grid grid-cols-6 p-5 gap-y-2 bg-gray-100">\
+                            <!-- Description -->\
+                            <div class="col-span-5 md:col-span-4 ml-4 workercontainer">'
+    const attributesprefix = '<p class = "text-gray-600">'
+    const attributesuffix = '</p>'
+    const templatesuffix = '    </div>\
+                        </div>\
+                    </a>\
+                </div>'
+    let output = templateprefix0 + ' id=' + '"' + key + ' container' + '"' + '>' + templateprefix1
+    for (const [key1, value1] of Object.entries(value)) {
+        if(key1 == "AadharPhoto"||key1 == "PANPhoto"||key1 == "_id"){
+            continue
+        }
+        output += attributesprefix + key1 + ": " + value1 + attributesuffix
+    }
+    output += templatesuffix
+    document.getElementById("all_workers").innerHTML += output
 }
 
 var GetAllEmployees = function () {
@@ -145,13 +168,8 @@ var GetAllEmployees = function () {
         if (this.readyState == 4 && this.status == 200) {
             const ResponseTextAllWorkers = JSON.parse(xhr.responseText)
             for (const [key, value] of Object.entries(ResponseTextAllWorkers)) {
-                const Workers = value
-                for (const [key, value] of Object.entries(Workers)) {
-                }
+                PopulateWorkers(key, value)
             }
-            console.log(GetTemplate())
         }
     }
 }
-
-GetAllEmployees()
