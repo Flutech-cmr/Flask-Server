@@ -135,13 +135,13 @@ var GetTemplate = function () {
 }
 
 var PopulateWorkers = function (key, value) {
-    
+
     const templateprefix0 = '<div class="templatediv"'
     const templateprefix1 = '  <a href="#" class="w-full border-2 border-b-4 border-gray-200 rounded-xl ">\
                         <div class="grid grid-cols-6 p-5 gap-y-2 bg-gray-100">\
                             <!-- Description -->\
                             <div class="col-span-5 md:col-span-4 ml-4 workercontainer">'
-    const attributesprefix = '<p class = "text-gray-600">'
+    const attributesprefix = '<p class = "text-gray-600 text-xs mt-2">'
     const attributesuffix = '</p>'
     const templatesuffix = '    </div>\
                         </div>\
@@ -149,10 +149,10 @@ var PopulateWorkers = function (key, value) {
                 </div>'
     let output = templateprefix0 + ' id=' + '"' + key + ' container' + '"' + '>' + templateprefix1
     for (const [key1, value1] of Object.entries(value)) {
-        if(key1 == "AadharPhoto"||key1 == "PANPhoto"||key1 == "_id"){
+        if (key1 == "AadharPhoto" || key1 == "PANPhoto" || key1 == "_id") {
             continue
         }
-        output += attributesprefix + key1 + ": " + value1 + attributesuffix
+        output += attributesprefix + '<span class="text-red-500">' + key1 + '</span>' + ": " + value1 + attributesuffix
     }
     output += templatesuffix
     document.getElementById("all_workers").innerHTML += output
