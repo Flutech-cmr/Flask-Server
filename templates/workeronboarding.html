@@ -1,4 +1,4 @@
-{% from "components.html" import footer, navbar %}
+{% from "components.html" import footer, navbar,modal %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,12 +14,15 @@
     <title>Worker Onboarding</title>
 </head>
 
-<body onload="SetGlobalFieldnames(['Workername','CompanyID','SiteID','ContractorID','LabourType','DOB','BloodGroup','Gender','MobileNumber','AltMobileNumber','EmergencyMobileNumber','EmergencyMobileNumber2','NameFather','NameMother','AadharNumber','AadharPhoto','PANNumber','PANPhoto','PermanantAddress','CurrentAddress']);ClearFields();" ;>
+<body
+    onload="SetGlobalFieldnames(['Workername','CompanyID','SiteID','ContractorID','LabourType','DOB','BloodGroup','Gender','MobileNumber','AltMobileNumber','EmergencyMobileNumber','EmergencyMobileNumber2','NameFather','NameMother','AadharNumber','AadharPhoto','PANNumber','PANPhoto','PermanantAddress','CurrentAddress']);ClearFields();"
+    ;>
     <section>
         {{ navbar() }}
     </section>
     <div class="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
-        <div class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs  min-width-phone min-height-phone">
+        <div
+            class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs  min-width-phone min-height-phone">
             <!-- <img class="mb-3 w-32 h-32 rounded-full shadow-lg mx-auto" src="/static/img/flutech-logo.jpg" alt="logo"> -->
             <h1 class="text-lg text-gray-700">Worker Onboarding</h1>
             <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
@@ -32,36 +35,45 @@
                         <div class="w-full" id="DivWorkername">
                             <label class="block text-gray-700 text-sm font-bold mb-2 text-left" for="Workername">Worker
                                 Name</label>
-                            <input type="text" placeholder="Worker Name" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="Workername" oninput="OnType('Workername')" />
+                            <input type="text" placeholder="Worker Name" class="px-4 py-2 bg-gray-50 rounded-lg w-full"
+                                id="Workername" oninput="OnType('Workername')" />
                         </div>
                         <div class="w-full" id="DivCompanyID">
                             <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="CompanyID">Company
                                 ID</label>
-                            <input type="text" placeholder="Company ID" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="CompanyID" oninput="OnType('CompanyID')" />
+                            <input type="text" placeholder="Company ID" class="px-4 py-2 bg-gray-50 rounded-lg w-full"
+                                id="CompanyID" oninput="OnType('CompanyID')" />
                         </div>
                         <div class="w-full" id="DivSiteID">
                             <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="SiteID">Site
                                 ID</label>
-                            <input type="text" placeholder="Site ID" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="SiteID" oninput="OnType('SiteID')" />
+                            <input type="text" placeholder="Site ID" class="px-4 py-2 bg-gray-50 rounded-lg w-full"
+                                id="SiteID" oninput="OnType('SiteID')" />
                         </div>
                         <div class="w-full" id="DivContractorID">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="ContractorID">Contractor
+                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                                for="ContractorID">Contractor
                                 ID</label>
-                            <input type="text" placeholder="Contractor ID" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="ContractorID" oninput="OnType('ContractorID')" />
+                            <input type="text" placeholder="Contractor ID"
+                                class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="ContractorID"
+                                oninput="OnType('ContractorID')" />
                         </div>
                         <div class="w-full" id="DivLabourType">
                             <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="LabourType">Labour
                                 Type</label>
-                            <input type="text" placeholder="Labour Type" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="LabourType" oninput="OnType('LabourType')" />
+                            <input type="text" placeholder="Labour Type" class="px-4 py-2 bg-gray-50 rounded-lg w-full"
+                                id="LabourType" oninput="OnType('LabourType')" />
                         </div>
                         <div class="w-full" id="DivDOB">
                             <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="DOB">DOB</label>
-                            <input type="date" placeholder="DOB" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="DOB" oninput="OnType('DOB')" />
+                            <input type="date" placeholder="DOB" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="DOB"
+                                oninput="OnType('DOB')" />
                         </div>
                         <div class="w-full" id="DivBloodGroup">
                             <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="BloodGroup">Blood
                                 Group</label>
-                            <select name="BloodGroup" id="BloodGroup" class="px-4 py-2 bg-gray-50 rounded-lg w-full" oninput="OnType('BloodGroup')">
+                            <select name="BloodGroup" id="BloodGroup" class="px-4 py-2 bg-gray-50 rounded-lg w-full"
+                                oninput="OnType('BloodGroup')">
                                 <option value="A+ve">A+ve</option>
                                 <option value="A-ve">A-ve</option>
                                 <option value="B+ve">B+ve</option>
@@ -74,80 +86,129 @@
                             </select>
                         </div>
                         <div class="w-full" id="DivGender">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="Gender">Gender</label>
-                            <select name="Gender" id="Gender" class="px-4 py-2 bg-gray-50 rounded-lg w-full" oninput="OnType('Gender')">
+                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                                for="Gender">Gender</label>
+                            <select name="Gender" id="Gender" class="px-4 py-2 bg-gray-50 rounded-lg w-full"
+                                oninput="OnType('Gender')">
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Others">Others</option>
                             </select>
                         </div>
                         <div class="w-full" id="DivMobileNumber">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="MobileNumber">Mobile
+                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                                for="MobileNumber">Mobile
                                 Number</label>
-                            <input type="text" placeholder="Mobile Number" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="MobileNumber" oninput="OnType('MobileNumber')" />
+                            <input type="text" placeholder="Mobile Number"
+                                class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="MobileNumber"
+                                oninput="OnType('MobileNumber')" />
                         </div>
                         <div class="w-full" id="DivAltMobileNumber">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="AltMobileNumber">Alternate Mobile Number</label>
-                            <input type="text" placeholder="Alternate Mobile Number" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="AltMobileNumber" oninput="OnType('AltMobileNumber')" />
+                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                                for="AltMobileNumber">Alternate Mobile Number</label>
+                            <input type="text" placeholder="Alternate Mobile Number"
+                                class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="AltMobileNumber"
+                                oninput="OnType('AltMobileNumber')" />
                         </div>
                         <div class="w-full" id="DivEmergencyMobileNumber">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="EmergencyMobileNumber">Emergency Contact Number</label>
-                            <input type="text" placeholder="Emergency Contact Number" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="EmergencyMobileNumber" oninput="OnType('EmergencyMobileNumber')" />
+                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                                for="EmergencyMobileNumber">Emergency Contact Number</label>
+                            <input type="text" placeholder="Emergency Contact Number"
+                                class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="EmergencyMobileNumber"
+                                oninput="OnType('EmergencyMobileNumber')" />
                         </div>
                         <div class="w-full" id="DivEmergencyMobileNumber2">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="EmergencyMobileNumber2">Emergency Contact Number - 2</label>
-                            <input type="text" placeholder="Emergency Contact Number - 2" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="EmergencyMobileNumber2" oninput="OnType('EmergencyMobileNumber2')" />
+                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                                for="EmergencyMobileNumber2">Emergency Contact Number - 2</label>
+                            <input type="text" placeholder="Emergency Contact Number - 2"
+                                class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="EmergencyMobileNumber2"
+                                oninput="OnType('EmergencyMobileNumber2')" />
                         </div>
                         <div class="w-full" id="DivNameFather">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="NameFather">Father's
+                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                                for="NameFather">Father's
                                 Name</label>
-                            <input type="text" placeholder="Father's Name" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="NameFather" oninput="OnType('NameFather')" />
+                            <input type="text" placeholder="Father's Name"
+                                class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="NameFather"
+                                oninput="OnType('NameFather')" />
                         </div>
                         <div class="w-full" id="DivNameMother">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="NameMother">Mother's
+                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                                for="NameMother">Mother's
                                 Name</label>
-                            <input type="text" placeholder="Mother's Name" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="NameMother" oninput="OnType('NameMother')" />
+                            <input type="text" placeholder="Mother's Name"
+                                class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="NameMother"
+                                oninput="OnType('NameMother')" />
                         </div>
                         <div class="w-full" id="DivAadharNumber">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="AadharNumber">Aadhar
+                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                                for="AadharNumber">Aadhar
                                 Number</label>
-                            <input type="text" placeholder="Aadhar Number" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="AadharNumber" oninput="OnType('AadharNumber')" />
+                            <input type="text" placeholder="Aadhar Number"
+                                class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="AadharNumber"
+                                oninput="OnType('AadharNumber')" />
                         </div>
                         <div class="w-full" id="DivAadharPhoto">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="AadharPhoto">Aadhar
+                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                                for="AadharPhoto">Aadhar
                                 Photo</label>
-                            <input type="file" placeholder="Aadhar Photo" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="AadharPhoto" oninput="OnType('AadharPhoto')" />
+                            <input type="file" placeholder="Aadhar Photo" class="px-4 py-2 bg-gray-50 rounded-lg w-full"
+                                id="AadharPhoto" oninput="OnType('AadharPhoto')" />
                         </div>
                         <div class="w-full" id="DivPANNumber">
                             <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="PANNumber">PAN
                                 Number</label>
-                            <input type="text" placeholder="PAN Number" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="PANNumber" oninput="OnType('PANNumber')" />
+                            <input type="text" placeholder="PAN Number" class="px-4 py-2 bg-gray-50 rounded-lg w-full"
+                                id="PANNumber" oninput="OnType('PANNumber')" />
                         </div>
                         <div class="w-full" id="DivPANPhoto">
                             <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="PANPhoto">PAN
                                 Photo</label>
-                            <input type="file" placeholder="PAN Photo" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="PANPhoto" oninput="OnType('PANPhoto')" />
+                            <input type="file" placeholder="PAN Photo" class="px-4 py-2 bg-gray-50 rounded-lg w-full"
+                                id="PANPhoto" oninput="OnType('PANPhoto')" />
                         </div>
-
                         <div class="w-full" id="DivPermanantAddress">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="PermanantAddress">Permanent Address</label>
-                            <input type="text" placeholder="Permanent Address" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="PermanantAddress" oninput="OnType('PermanantAddress')" />
+                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                                for="PermanantAddress">Permanent Address</label>
+                            <input type="text" placeholder="Permanent Address"
+                                class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="PermanantAddress"
+                                oninput="OnType('PermanantAddress')" />
                         </div>
                         <div class="w-full" id="DivCurrentAddress">
-                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left " for="CurrentAddress">Current
+                            <label class="block text-gray-700 text-sm font-bold mb-2 text-left "
+                                for="CurrentAddress">Current
                                 Address</label>
-                            <input type="text" placeholder="Current Address" class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="CurrentAddress" oninput="OnType('CurrentAddress')" />
+                            <input type="text" placeholder="Current Address"
+                                class="px-4 py-2 bg-gray-50 rounded-lg w-full" id="CurrentAddress"
+                                oninput="OnType('CurrentAddress')" />
                         </div>
                     </div>
                     <div id="DivButton">
-                        <button class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="register();">Register</button>
-                        <button class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="window.location.href='/alreadyonboardedworkers'">Onboarded Worker List</button>
-                        <button class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="window.history.go(-1)">Go Back</button>
+                        <button
+                            class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+                            type="button" onclick="register()">Register</button>
                     </div>
                 </form>
             </div>
+            <button class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+                type="button" onclick="window.location.href='/alreadyonboardedworkers'">Onboarded Worker
+                List</button>
+            <button class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+                type="button" onclick="window.history.go(-1)">Go Back</button>
         </div>
+        <section>
+            {{ modal("New Worker Onboarded.") }}
+        </section>
     </div>
+    <script type="text/javascript">
+        function toggleModal(modalID) {
+            document.getElementById(modalID).classList.toggle("hidden");
+            document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+            document.getElementById(modalID).classList.toggle("flex");
+            document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+            console.log("modal toggled");
+        }
+    </script>
     <section>
         {{ footer() }}
     </section>

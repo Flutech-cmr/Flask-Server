@@ -9,6 +9,7 @@
     <!-- tailwind css cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
     <link rel="stylesheet" href="static/css/flutech.css">
+    <script src="static/js/loginutils.js" type="application/javascript"></script>
     <title>Choose Functionality</title>
 </head>
 
@@ -17,16 +18,20 @@
         {{ navbar() }}
     </section>
     <div class="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
-        <div class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs min-width-phone min-height-phone">
+        <div
+            class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs min-width-phone min-height-phone">
             <h1 class="text-lg text-gray-700"> Flutech ERP </h1>
             <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
             <p class="text-xs text-gray-600 mt-4"> Choose Functionality </p>
             <form>
-                <button class="w-full mt-16 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="addproject();">Project Tracker</button>
-                <button class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="toggleModal('modal-id')">Complaint Tracker</button>
-                <button class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="toggleModal('modal-id')">Logout</button>
+                <button class="w-full mt-16 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+                    type="button" onclick="addproject();">Project Tracker</button>
+                <button class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+                    type="button" onclick="toggleModal('modal-id')">Complaint Tracker</button>
+                <button class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+                    type="button" onclick="logout()">Logout</button>
                 <section>
-                    {{ modal() }}
+                    {{ modal("This Functionality is still under development. Please check back later.") }}
                 </section>
                 <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
                 <script type="text/javascript">

@@ -113,11 +113,11 @@ var PostEmployeeDetails = function (data) {
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.send(payload)
-    console.log(payload)
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(xhr.responseText)
             ClearFields();
+            toggleModal('modal-id')
         }
     }
 }

@@ -192,6 +192,10 @@ def screen_sizes():
 def recieveworkerdata():
     return add_workers_to_db(request.data)
 
+@app.route('/workerattendance', methods=['POST', 'GET'])
+@cross_origin()
+def workerattendance():
+    return worker_attendance(request.data)
 
 @app.route('/getallemployees', methods=['POST', 'GET'])
 @cross_origin()

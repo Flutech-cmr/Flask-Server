@@ -160,3 +160,8 @@ var login = function () {
     const credentials = GetInputFields(GlobalFieldnames)
     CheckLoginFromDB(credentials)
 }
+
+var logout = function () {
+    localStorage.clear()
+    window.location.href = "/"
+}

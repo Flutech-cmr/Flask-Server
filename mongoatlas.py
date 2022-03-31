@@ -1,5 +1,7 @@
 import os
 import sys
+import time
+from datetime import datetime
 print("[INFO] Loading Mongo Atlas Modules")
 try:
     from pymongo import MongoClient
@@ -188,6 +190,7 @@ def add_workers_to_db(data):
     results = collection.insert_one(data)
     return str(results.inserted_id)
 
+
 def get_workers_from_db(data):
     print("retriving all workers")
     cluster = return_cluster()
@@ -204,7 +207,16 @@ def get_workers_from_db(data):
     return all_workers
 
 
+def worker_attendance(data):
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    data = data.decode('utf-8')
+    data = json.loads(data)
+    returnpayload={"time": current_time, "status": "success","type":data["type"]}
+    print(returnpayload)
+    return returnpayload
+
 if __name__ == "__main__":
     print("[INFO] This script is being loaded on Python Version {}".format(sys.version))
     print(post_to_mongo({"Employee ID": "123",
-          "Password": "123"}, "test connection", "testing"))
+                         "Password": "123"}, "test connection", "testing"))
