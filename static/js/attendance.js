@@ -12,7 +12,7 @@ var postattendance = function (payload) {
                     if (response["type"] == "intime") {
                         document.getElementsByClassName("intime")[payload["id"]].innerHTML = response["time"]
                         document.getElementsByClassName("outtime")[payload["id"]].disabled = false
-                        document.getElementsByClassName("outtime")[payload["id"]].style.backgroundColor = rgb(219,39,119);
+                        document.getElementsByClassName("outtime")[payload["id"]].style.backgroundColor = rgb(219, 39, 119);
                     }
                     else if (response["type"] == "outtime") {
                         document.getElementsByClassName("outtime")[payload["id"]].innerHTML = response["time"]
@@ -28,14 +28,14 @@ var postattendance = function (payload) {
                 const response = JSON.parse(xhr.responseText)
                 if (response["status"] == "success") {
                     if (response["type"] == "intime") {
-                        const buttonin=document.getElementsByClassName("intime")[payload["id"]]
+                        const buttonin = document.getElementsByClassName("intime")[payload["id"]]
                         buttonin.innerHTML = response["time"]
                         buttonin.style.backgroundColor = "grey"
                         buttonin.disabled = true
-                        
+
                     }
                     else if (response["type"] == "outtime") {
-                        const buttonout=document.getElementsByClassName("outtime")[payload["id"]]
+                        const buttonout = document.getElementsByClassName("outtime")[payload["id"]]
                         buttonout.innerHTML = response["time"]
                         buttonout.style.backgroundColor = "grey"
                         buttonout.disabled = true
@@ -76,12 +76,19 @@ var CheckPreviousAttendance = function (id, workername, contractor, labourtype) 
         "ContractorID": contractor,
         "LabourType": labourtype,
         "id": id,
-        "type": "outtime",
+        "type": "intime",
         "function": "checkprevious"
     }
     postattendance(payload)
-    payload["type"] = "intime"
+    payload["type"] = "outtime"
     postattendance(payload)
+    const buttonout = document.getElementsByClassName("outtime")[payload["id"]]
+    const buttonin = document.getElementsByClassName("intime")[payload["id"]]
+    if (buttonout.innerHTML == "Mark In-Time") {
+        buttonout.disabled = true
+    }
+
+
 
 }
 
@@ -101,11 +108,11 @@ var PopulateWorkeronPage = function (workername, contractor, labourtype, key) {
         MarkInTime(intkey, workername, contractor, labourtype)
     }
     const outtimebutton = document.getElementsByClassName("outtime")[intkey]
-    outtimebutton.disabled = true
     outtimebutton.onclick = function () {
         MarkOutTime(intkey, workername, contractor, labourtype)
     }
     CheckPreviousAttendance(intkey, workername, contractor, labourtype)
+
 }
 
 var GetAllEmployees = function () {
