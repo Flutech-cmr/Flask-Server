@@ -1,7 +1,6 @@
 {% from "components.html" import footer, navbar,modal %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +12,6 @@
     <script src="static/js/onboarding.js" type="application/javascript" defer></script>
     <title>Worker Onboarding</title>
 </head>
-
 <body
     onload="SetGlobalFieldnames(['Workername','CompanyID','SiteID','ContractorID','LabourType','DOB','BloodGroup','Gender','MobileNumber','AltMobileNumber','EmergencyMobileNumber','EmergencyMobileNumber2','NameFather','NameMother','AadharNumber','AadharPhoto','PANNumber','PANPhoto','PermanantAddress','CurrentAddress']);ClearFields();"
     ;>
@@ -213,5 +211,4 @@
         {{ footer() }}
     </section>
 </body>
-
 </html>

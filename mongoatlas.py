@@ -1,7 +1,8 @@
 import os
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
+from unittest import result
 print("[INFO] Loading Mongo Atlas Modules")
 try:
     from pymongo import MongoClient
@@ -208,13 +209,35 @@ def get_workers_from_db(data):
 
 
 def worker_attendance(data):
-    now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
     data = data.decode('utf-8')
     data = json.loads(data)
-    returnpayload={"time": current_time, "status": "success","type":data["type"]}
-    print(returnpayload)
-    return returnpayload
+    now = datetime.utcnow()
+    now = now+timedelta(hours=5, minutes=30)
+    current_time = now.strftime("%H:%M:%S")
+    today = now.strftime("%d-%m-%Y")
+    if(data["function"] != "marknew"):
+        return get_worker_attendance(data, today)
+    else:
+        returnpayload = {"time": current_time,
+                         "status": "success", "type": data["type"]}
+        del data["function"]
+        data["time"] = current_time
+        data["date"] = today
+        returnid = post_to_mongo(data, "WorkerAttendance", "FlutechERP")
+        returnpayload["returnid"] = str(returnid)
+        return returnpayload
+
+
+def get_worker_attendance(data, today):
+    del data["function"]
+    data["date"] = today
+    results = find_in_mongo(data, "WorkerAttendance", "FlutechERP")
+    for x in results:
+        del x["_id"]
+        print(x,"fetch")
+        return {"time": x["time"], "status": "success", "type": data["type"]}
+    return{"status":"failed"}
+
 
 if __name__ == "__main__":
     print("[INFO] This script is being loaded on Python Version {}".format(sys.version))

@@ -19,7 +19,8 @@
         {{ navbar() }}
     </section>
     <div class="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
-        <div class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs  min-width-phone min-height-phone">
+        <div
+            class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs  min-width-phone min-height-phone">
             <!-- <img class="mb-3 w-32 h-32 rounded-full shadow-lg mx-auto" src="/static/img/flutech-logo.jpg" alt="logo"> -->
             <h1 class="text-lg text-gray-700">Take Worker Attendance</h1>
             <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
@@ -35,17 +36,23 @@
                     <div class="flex justify-between items-center mt-4 workertemplate">
                         <div class="flex ">
                             <div class="mr-4 w-12 h-12 rounded shadow">
-                                <img class="w-full h-full overflow-hidden object-cover object-center rounded" src="/static/img/profilepicture.webp" alt="avatar" />
+                                <img class="w-full h-full overflow-hidden object-cover object-center rounded"
+                                    src="/static/img/profilepicture.webp" alt="avatar" />
                             </div>
                             <div>
-                                <h3 class="mb-2 sm:mb-2 text-gray-800 text-base font-semibold leading-4">Worker Name</h3>
+                                <h3 class="mb-2 sm:mb-2 text-gray-800 text-base font-semibold leading-4">Worker Name
+                                </h3>
                                 <p class="text-pink-600 text-xs leading-3 mt-2 workername">Worker Name</p>
                                 <p class="text-gray-700 text-xs leading-3 mt-2 font-semibold ">Contractor Name</p>
                                 <p class="text-pink-600 text-xs leading-3 mt-2 contractorname">Contractor Name</p>
                                 <p class="text-gray-700 text-xs leading-3 mt-2 font-semibold">Labour Type</p>
                                 <p class="text-pink-600 text-xs leading-3 mt-2 LabourType">Labour Type</p>
-                                <button class=" mt-4 bg-pink-600 text-white p-1 rounded-md font-medium tracking-tight intime" onclick="MarkInTime('1')">Mark In-Time</button>
-                                <button class=" mt-4 bg-pink-600 text-white p-1 rounded-md font-medium tracking-tight outtime" onclick="MarkOutTime('2')">Mark Out-Time</button>
+                                <button
+                                    class=" mt-4 bg-pink-600 text-white p-1 rounded-md font-medium tracking-tight intime"
+                                    onclick="MarkInTime('1')">Mark In-Time</button>
+                                <button
+                                    class=" mt-4 bg-pink-600 text-white p-1 rounded-md font-medium tracking-tight outtime"
+                                    onclick="MarkOutTime('2')">Mark Out-Time</button>
                             </div>
                         </div>
                     </div>
@@ -57,7 +64,8 @@
             </div>
             <div class="mt-6">
                 <h1 class="text-lg text-gray-700"></h1>
-                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" type="button" onclick="window.history.go(-1)">Go Back</button>
+                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+                    type="button" onclick="window.history.go(-1)">Go Back</button>
             </div>
         </div>
     </div>
