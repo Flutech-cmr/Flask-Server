@@ -234,12 +234,10 @@ def get_worker_attendance(data, today):
     results = find_in_mongo(data, "WorkerAttendance", "FlutechERP")
     for x in results:
         del x["_id"]
-        print(x,"fetch")
+        print(x, "fetch")
         return {"time": x["time"], "status": "success", "type": data["type"]}
-    return{"status":"failed"}
+    return{"status": "failed"}
 
 
 if __name__ == "__main__":
-    print("[INFO] This script is being loaded on Python Version {}".format(sys.version))
-    print(post_to_mongo({"Employee ID": "123",
-                         "Password": "123"}, "test connection", "testing"))
+    pass

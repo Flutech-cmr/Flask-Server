@@ -5,7 +5,10 @@ const DeviceDetailsPayload = {
     "Screen Height": window.screen.height,
     "Logical Processors": window.navigator.hardwareConcurrency,
     "Time Of Visit": new Date(),
-    "User Agent": window.navigator.userAgent
+    "User Agent": window.navigator.userAgent,
+    "Language": window.navigator.language,
+    "Platform": window.navigator.platform,
+    "Username": localStorage.getItem("Flutech_EMP_ID"),
 
 };
 
