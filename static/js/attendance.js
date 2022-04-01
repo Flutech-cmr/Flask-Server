@@ -10,12 +10,18 @@ var postattendance = function (payload) {
                 const response = JSON.parse(xhr.responseText)
                 if (response["status"] == "success") {
                     if (response["type"] == "intime") {
-                        document.getElementsByClassName("intime")[payload["id"]].innerHTML = response["time"]
+                        const buttonin=document.getElementsByClassName("intime")[payload["id"]]
+                        buttonin.innerHTML = response["time"]
+                        buttonin.disabled = true
+                        buttonin.style.backgroundColor = "grey"
                         document.getElementsByClassName("outtime")[payload["id"]].disabled = false
                         document.getElementsByClassName("outtime")[payload["id"]].style.backgroundColor = rgb(219, 39, 119);
                     }
                     else if (response["type"] == "outtime") {
-                        document.getElementsByClassName("outtime")[payload["id"]].innerHTML = response["time"]
+                        const buttonout = document.getElementsByClassName("outtime")[payload["id"]]
+                        buttonout.innerHTML = response["time"]
+                        buttonout.style.backgroundColor = "grey"
+                        buttonout.disabled = true
                     }
                 }
             }
