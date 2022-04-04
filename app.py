@@ -6,8 +6,9 @@ try:
     from bot import *
     from mongoatlas import *
     from flask_cors import CORS, cross_origin
-except ImportError:
+except ImportError as e:
     print("\n[INFO] One or more modules are missing.\n")
+    print("Thw following error occured \n",e)
     os.system("pip install -r requirements.txt")
 app = Flask(__name__, static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = 'static/uploads'

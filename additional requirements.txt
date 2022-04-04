@@ -1,0 +1,5 @@
+flask-restful
+flask-sqlalchemy
+numpy
+dnspython
+itsdangerous==2.0.1

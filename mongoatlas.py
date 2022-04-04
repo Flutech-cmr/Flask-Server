@@ -240,4 +240,21 @@ def get_worker_attendance(data, today):
 
 
 if __name__ == "__main__":
-    pass
+    f=open("Sheet1-Table 1.csv","r")
+    lines=f.readlines()
+    del lines[0]
+    for line in lines:
+        line=line.split(',')
+        payload={
+            "Employee ID":line[0],
+"Employee Name":line[1],
+"Employee Dept":line[2],
+"Employee Company":line[3],
+"Employee Date Of Joining":line[4],
+"Employee Role":line[5],
+"App Privileges":"0",
+"Password":line[0]+"pass",
+"Mobile Number":line[6].replace('\n','')
+        }
+        print(payload)
+        print(add_employee(payload))
