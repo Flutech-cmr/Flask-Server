@@ -118,6 +118,8 @@ def validate_user(data):
             return {"message": "received", "status": "failed"}
         for x in results_of_find:
             access_level = x["App Privileges"]
+            if(type(access_level) != int):
+                return {"message": "received", "status":"failed","error":"Invalid Access Level in database"}
             if(login_requesting_page == "login" and access_level >= 0):
                 print("[INFO] User Validated for login page")
                 return {"message": "received", "status": "success", "redirect": "choose-function", "access_level": access_level}
@@ -240,21 +242,4 @@ def get_worker_attendance(data, today):
 
 
 if __name__ == "__main__":
-    f=open("Sheet1-Table 1.csv","r")
-    lines=f.readlines()
-    del lines[0]
-    for line in lines:
-        line=line.split(',')
-        payload={
-            "Employee ID":line[0],
-"Employee Name":line[1],
-"Employee Dept":line[2],
-"Employee Company":line[3],
-"Employee Date Of Joining":line[4],
-"Employee Role":line[5],
-"App Privileges":"0",
-"Password":line[0]+"pass",
-"Mobile Number":line[6].replace('\n','')
-        }
-        print(payload)
-        print(add_employee(payload))
+    pass
