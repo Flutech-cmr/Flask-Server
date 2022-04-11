@@ -10,7 +10,7 @@ var postattendance = function (payload) {
                 const response = JSON.parse(xhr.responseText)
                 if (response["status"] == "success") {
                     if (response["type"] == "intime") {
-                        const buttonin=document.getElementsByClassName("intime")[payload["id"]]
+                        const buttonin = document.getElementsByClassName("intime")[payload["id"]]
                         buttonin.innerHTML = response["time"]
                         buttonin.disabled = true
                         buttonin.style.backgroundColor = "grey"
@@ -89,18 +89,16 @@ var CheckPreviousAttendance = function (id, workername, contractor, labourtype) 
     payload["type"] = "outtime"
     postattendance(payload)
     const buttonout = document.getElementsByClassName("outtime")[payload["id"]]
+    console.log(buttonout.innerHTML)
     const buttonin = document.getElementsByClassName("intime")[payload["id"]]
-    if (buttonout.innerHTML == "Mark In-Time") {
+    if (buttonin.innerHTML.includes("Mark In-Time")) {
         buttonout.disabled = true
     }
-
-
-
 }
 
 var PopulateWorkeronPage = function (workername, contractor, labourtype, key) {
-    const template = document.getElementsByTagName("template")[0]
     const allworkers = document.getElementById("all_workers")
+    const template = document.getElementsByTagName("template")[0]
     let clone = template.content.cloneNode(true)
     // set clone id
     clone.firstChild.id = "worker " + key
@@ -121,6 +119,7 @@ var PopulateWorkeronPage = function (workername, contractor, labourtype, key) {
 
 }
 
+// this function is the entrypoint for the page
 var GetAllEmployees = function () {
     const xhr = new XMLHttpRequest()
     xhr.open("GET", "/getallemployees", true)

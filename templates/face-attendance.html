@@ -1,8 +1,9 @@
 {% from "components.html" import footer, navbar %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
     <script src="static/js/webcam.js"></script>
     <title>Attendance</title>
 </head>
+
 <body>
     <section>
         {{ navbar() }}
@@ -25,18 +27,18 @@
             <p class="text-xs text-gray-400 mt-4"> Capture image to take Attendance </p>
             <!-- end of section -->
             <div id="my_camera" class="py-2" style="width: 238px; height: 238px;"></div>
-            <div id="my_result" class="py-2" ></div>
+            <div id="my_result" class="py-2"></div>
             <script language="JavaScript">
                 // set webcam camera to face the environment
                 Webcam.set('constraints', {
                     facingMode: "environment",
-                    width:1920,
-                    height:1080,
-                    dest_width:1920,
-                    dest_height:1080
+                    width: 1920,
+                    height: 1080,
+                    dest_width: 1920,
+                    dest_height: 1080
 
                 });
-                
+
                 Webcam.attach('#my_camera');
                 // function to post the captured image
                 function PostBase64Image(data_uri) {
@@ -50,8 +52,8 @@
                     xhr.send(JSON.stringify(payload));
                 }
                 // function to play camera capture sound
-                function PlayShutterSound(){
-                    var audio=document.getElementById("audio");
+                function PlayShutterSound() {
+                    var audio = document.getElementById("audio");
                     audio.play();
                 }
                 function take_snapshot() {
@@ -62,13 +64,11 @@
                     });
                 }
             </script>
-            <a href="javascript:void(take_snapshot())"
-                class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full">Take
-                Snapshot</a>
+
+            <form >
+                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" onclick="take_snapshot()">Take Snapshot</button>
                 <audio id="audio" src="static/audio/Shutter.mp3"></audio>
-            <form action="/choose-function">
-                <button
-                    class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide w-full">Continue</button>
+                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight">Continue</button>
             </form>
         </div>
     </div>
@@ -76,4 +76,5 @@
         {{ footer() }}
     </section>
 </body>
+
 </html>
