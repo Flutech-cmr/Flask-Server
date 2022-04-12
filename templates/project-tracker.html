@@ -50,16 +50,14 @@
                         </div>
                     </div>
                 </template>
-            </div>
-            <form action="/add-project" id="add-project">
-                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
-                    type="button" onclick="toggleModal('modal-id')">Add
-                    Project</button>
-                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
-                    type="button" onclick="window.history.go(-1)">Go Back</button>
                 <section>
                     {{ modal() }}
                 </section>
+            </div>
+            <form id="add-project">
+                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
+                    type="button" onclick="window.history.go(-1)">Go Back</button>
+                
             </form>
         </div>
     </div>
