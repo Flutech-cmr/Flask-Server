@@ -154,14 +154,12 @@ def home_index():
 @cross_origin()
 def recieve_face():
     get_base64_from_request(request)
-    print("recieved")
     return {'success': True}
 # This route recieves the face data captured by the webcam and sends it to the backend
 
 
 @app.route('/botmessage', methods=['POST'])
 def botmessage():
-    print(request.data)
     sendtelegrammessage(request.data)
     return {'success': True}
 # This route recieves the screen size data from the client and stores it in a csv file
@@ -170,7 +168,6 @@ def botmessage():
 @app.route('/screen-sizes', methods=['POST', 'GET'])
 def screen_sizes():
     atlas_id = screensizelogger(request.data)
-    print(atlas_id, "atlas_id")
     return {'Success': True, 'atlas_id': str(atlas_id)}
 
 
@@ -206,7 +203,6 @@ def pull():
 @app.route('/addsite', methods=['GET', 'POST'])
 @cross_origin()
 def addsite():
-    print("request to add site")
     response = add_project_site(request.data)
     return response
 
@@ -214,7 +210,6 @@ def addsite():
 @app.route('/loadprojects', methods=['GET'])
 @cross_origin()
 def loadprojects():
-    print("here")
     response = load_projects()
     return response
 
@@ -235,6 +230,9 @@ def uploadcredentials():
     response = createcredentials(request.data)
     return response
 
+@app.route('/hello/<name>')
+def hello_name(name):
+   return 'Hello %s!' % name
 
 @app.route('/uploader', methods=['GET', 'POST'])
 def upload_file():
