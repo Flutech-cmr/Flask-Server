@@ -2,16 +2,6 @@
 {% macro navbar() %}
 <!-- Navbar goes here -->
 <nav class="bg-yellow-400 shadow-lg sticky top-0">
-    <script type="application/javascript">
-        (function (h, o, t, j, a, r) {
-            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
-            h._hjSettings = { hjid: 2875800, hjsv: 6 };
-            a = o.getElementsByTagName('head')[0];
-            r = o.createElement('script'); r.async = 1;
-            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-    </script>
     <div class="max-w-6xl mx-auto px-4">
         <div class="flex justify-between">
             <div class="flex space-x-7">
@@ -24,11 +14,7 @@
                 </div>
                 <!-- Primary Navbar items -->
                 <div class="hidden md:flex items-center space-x-1">
-                    
-            
-                    <a href="/feedback"
-                        class="py-4 px-2  font-bold hover:text-gray-800 transition duration-300">Feedback and
-                        Complaints</a>
+                    <a href="/feedback" class="py-4 px-2 font-bold hover:text-gray-800 transition duration-300">Feedback and Complaints</a>
                 </div>
             </div>
             <div class="md:hidden flex items-center">
@@ -45,8 +31,6 @@
     <!-- mobile menu -->
     <div class="hidden mobile-menu">
         <ul class="">
-            
-            
             <li><a href="/feedback"
                     class="block text-base px-2 py-4 hover:bg-yellow-600 transition duration-300">Feedback and
                     Complaints</a></li>
@@ -68,11 +52,11 @@
 <link rel="stylesheet" href="https://cdn.materialdesignicons.com/6.5.95/css/materialdesignicons.min.css">
 <!-- <div class="w-full max-w-md px-7 py-10 mx-auto bg-white rounded-2xl shadow-xl"> -->
 <!-- Navigation Bar -->
-<div class="px-5 pt-3 bg-white shadow-lg rounded-t-lg items-center  w-full  bottom-0 fixed inset-x-0">
+<div class="px-5 pt-2 bg-white shadow-lg rounded-t-lg items-center w-full bottom-0 fixed inset-x-0">
     <div class="flex flex-row justify-between">
         <!-- Item #1 -->
         <div class="flex group">
-            <a href="/" class="p-3 text-gray-400 hover:text-yellow-500">
+            <a href="/" class=" p-2 text-gray-400 hover:text-yellow-500">
                 <span class="flex flex-col items-center">
                     <!-- Icon -->
                     <i class="mdi mdi-home-outline mdi-24px mx-1 text-gray-500 group-hover:text-gray-700
@@ -89,7 +73,7 @@
         </div>
         <!-- Item #2 -->
         <div class="flex group">
-            <a href="/explore" class="p-3 text-gray-400 hover:text-yellow-500">
+            <a href="/explore" class=" p-2 text-gray-400 hover:text-yellow-500">
                 <span class="flex flex-col items-center">
                     <!-- Icon -->
                     <i class="mdi mdi-compass-outline mdi-24px mx-1 text-gray-500 group-hover:text-gray-700
@@ -123,21 +107,21 @@
         </div>
         <!-- Item #4 -->
         <!-- <div class="flex group">
-            <a href="#" class="p-3 text-gray-400 hover:text-yellow-500">
-                <span class="flex flex-col items-center">
-                    <i class="mdi mdi-basket-plus-outline mdi-24px mx-1 text-gray-500 group-hover:text-gray-700
+      <a href="#" class=" p-2 text-gray-400 hover:text-yellow-500">
+        <span class="flex flex-col items-center">
+          <i class="mdi mdi-basket-plus-outline mdi-24px mx-1 text-gray-500 group-hover:text-gray-700
 									transition-color duration-200"></i>
-                    <span class="text-xs mb-2 transition-all duration-200">
-                        Cart
-                    </span>
-                    <span class="h-2 w-2 rounded-full group-hover:bg-yellow-500
+          <span class="text-xs mb-2 transition-all duration-200">
+            Cart
+          </span>
+          <span class="h-2 w-2 rounded-full group-hover:bg-yellow-500
 									transition-all duration-150 delay-100"></span>
-                </span>
-            </a>
-        </div> -->
+        </span>
+      </a>
+    </div> -->
         <!-- Item #5 -->
         <div class="flex group">
-            <a href="/master" class="p-3 text-gray-400 hover:text-yellow-500">
+            <a href="/master" class=" p-2 text-gray-400 hover:text-yellow-500">
                 <span class="flex flex-col items-center">
                     <!-- Icon -->
                     <i class="mdi mdi-account-circle-outline mdi-24px mx-1 text-gray-500 group-hover:text-gray-700
@@ -158,17 +142,22 @@
 {% endmacro %}
 <!-- this contains the modal popup -->
 {% macro modal(text_to_show) %}
-<div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center" id="modal-id">
+<div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+    id="modal-id">
     <div class="relative w-auto my-6 mx-auto max-w-3xl">
         <!--content-->
-        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <div
+            class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             <!--header-->
             <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                 <h3 class="text-3xl font-semibold">
                     Coming Soon
                 </h3>
-                <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('modal-id')">
-                    <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                <button
+                    class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onclick="toggleModal('modal-id')">
+                    <span
+                        class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
                         ×
                     </span>
                 </button>
@@ -181,7 +170,9 @@
             </div>
             <!--footer-->
             <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
+                <button
+                    class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button" onclick="toggleModal('modal-id')">
                     Close
                 </button>
             </div>
