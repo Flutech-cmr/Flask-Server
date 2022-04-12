@@ -142,8 +142,8 @@ var AutoLoginOnPageLoad = function () {
     const FetchedCredentials = FetchCredentials()
     if (FetchedCredentials[0] == "null" || FetchedCredentials[1] == "null" || FetchedCredentials[0] == null || FetchedCredentials[1] == null) {
         console.log("No previous login found")
-        const credentials = GetInputFields(GlobalFieldnames)
-        CheckLoginFromDB(credentials)
+        // const credentials = GetInputFields(GlobalFieldnames)
+        // CheckLoginFromDB(credentials)
     } else {
         console.log("Previous login found")
         const payload = {
