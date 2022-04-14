@@ -71,6 +71,15 @@ var postattendance = function (payload) {
         }
     }
 }
+var GetAttendanceMarkerID=function(){
+    const EMP_Id=localStorage.getItem("Flutech_EMP_ID")
+    if(EMP_Id==null){
+        return "0"
+    }
+    else{
+        return EMP_Id
+    }
+}
 
 var MarkInTime = function (id, workername, contractor, labourtype) {
     payload = {
@@ -79,8 +88,10 @@ var MarkInTime = function (id, workername, contractor, labourtype) {
         "LabourType": labourtype,
         "id": id,
         "type": "intime",
-        "function": "marknew"
+        "function": "marknew",
+        "Attendance-Marked-By":""
     }
+    payload["Attendance-Marked-By"]=GetAttendanceMarkerID()
     postattendance(payload)
 }
 
@@ -91,8 +102,10 @@ var MarkOutTime = function (id, workername, contractor, labourtype) {
         "LabourType": labourtype,
         "id": id,
         "type": "outtime",
-        "function": "marknew"
+        "function": "marknew",
+        "Attendance-Marked-By":""
     }
+    payload["Attendance-Marked-By"]=GetAttendanceMarkerID()
     postattendance(payload)
 }
 
