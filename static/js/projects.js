@@ -16,9 +16,17 @@ var GetProjectTemplates = function () {
     const TemplateHTML = Template.innerHTML;
     const projectdiv = document.getElementById("ProjectLists")
     return [TemplateHTML, projectdiv];
-
-
 }
+
+var Workeraction = function (id,button,projectname) {
+    if(button=="AddWorkerButton"){
+        window.location = "/workeronboarding/"+projectname;
+    }
+    else if(button=="TakeAttendanceButton"){
+        window.location = "/takeattendance/"+projectname;
+    }
+}
+
 var PopulateProjects = function () {
     let ProjectTemplates = GetProjectTemplates();
     let TemplateHTML = ProjectTemplates[0];
@@ -32,15 +40,20 @@ var PopulateProjects = function () {
             let ProjectLocation = document.getElementsByClassName("template-sitelocation")[iter];
             let ProjectCity = document.getElementsByClassName("template-city")[iter];
             let templateparent = document.getElementsByClassName("template-parent")[iter];
+            let AddWorkerButton = document.getElementsByClassName("onboardworkers")[iter];
+            let TakeAttendanceButton = document.getElementsByClassName("takeattendance")[iter];
             Projectname.innerHTML = project["Project Name"];
             ProjectLocation.innerHTML = project["Site Location"];
             ProjectCity.innerHTML = project["City"];
             templateparent.id = project._id;
+            AddWorkerButton.onclick = function () {Workeraction(iter,"AddWorkerButton",project["Project Name"])};
+            TakeAttendanceButton.onclick = function () {Workeraction(iter,"TakeAttendanceButton",project["Project Name"])};
             iter++;
 
         }
     }
 }
+// entry point for this script
 var LoadProjects = function () {
     GetProjectTemplates();
     const xhr = new XMLHttpRequest();

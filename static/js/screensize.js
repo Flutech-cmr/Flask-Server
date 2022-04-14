@@ -25,6 +25,9 @@ let DeviceDetailsPayload = {
     "Language": window.navigator.language,
     "Platform": window.navigator.platform,
     "Username": localStorage.getItem("Flutech_EMP_ID"),
+    "GeoLocation": window.navigator.geolocation.getCurrentPosition(function (position) {
+        return position.coords.latitude + "," + position.coords.longitude;
+    }),
     "IP": "ip"
 
 };
@@ -35,6 +38,7 @@ function post_screen_size() {
         DeviceDetailsPayload["IP"] = value;
     }
     )
+    console.log(DeviceDetailsPayload);
     const url = "/screen-sizes";
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);

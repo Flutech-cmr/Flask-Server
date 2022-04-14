@@ -87,8 +87,8 @@ def masterpanel():
     return render_template('masterpanel.html')
 
 
-@app.route('/workeronboarding')
-def onboardworker():
+@app.route('/workeronboarding/<projectname>')
+def onboardworker(projectname):
     return render_template('workeronboarding.html')
 
 
@@ -97,8 +97,8 @@ def alreadyonboardedworkers():
     return render_template('alreadyonboardedworkers.html')
 
 
-@app.route('/takeattendance')
-def takeattendance():
+@app.route('/takeattendance/<projectname>')
+def takeattendance(projectname):
     return render_template('takeattendance.html')
 # This route opens the Feedback page
 
