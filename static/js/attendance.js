@@ -1,3 +1,9 @@
+var GetProjectName = function () {
+    let currentURL = window.location.href
+    let projectName = currentURL.split("/").pop()
+    return projectName
+}
+
 var EnableDisableButtons = function (id) {
     const intimebuttons = document.getElementsByClassName("intime")[id]
     const outtimebuttons = document.getElementsByClassName("outtime")[id]
@@ -128,15 +134,19 @@ var PopulateWorkeronPage = function (workername, contractor, labourtype, key) {
 
 }
 
+
+
 // this function is the entrypoint for the page
 var GetAllEmployees = function () {
     const xhr = new XMLHttpRequest()
-    xhr.open("GET", "/getallemployees", true)
+    const currentpage=GetProjectName()
+    xhr.open("GET", "/getallworkers/"+currentpage, true)
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.send()
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            console.log(xhr.responseText)
             const ResponseTextAllWorkers = JSON.parse(xhr.responseText)
             let maxkey = 0
             for (const [key, value] of Object.entries(ResponseTextAllWorkers)) {

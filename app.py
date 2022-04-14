@@ -92,8 +92,8 @@ def onboardworker(projectname):
     return render_template('workeronboarding.html')
 
 
-@app.route('/alreadyonboardedworkers')
-def alreadyonboardedworkers():
+@app.route('/alreadyonboardedworkers/<projectname>')
+def alreadyonboardedworkers(projectname):
     return render_template('alreadyonboardedworkers.html')
 
 
@@ -171,10 +171,10 @@ def screen_sizes():
     return {'Success': True, 'atlas_id': str(atlas_id)}
 
 
-@app.route('/recieveworkerdata', methods=['POST', 'GET'])
+@app.route('/recieveworkerdata/<projectname>', methods=['POST', 'GET'])
 @cross_origin()
-def recieveworkerdata():
-    return add_workers_to_db(request.data)
+def recieveworkerdata(projectname):
+    return add_workers_to_db(request.data,projectname)
 
 
 @app.route('/workerattendance', methods=['POST', 'GET'])
@@ -183,10 +183,11 @@ def workerattendance():
     return worker_attendance(request.data)
 
 
-@app.route('/getallemployees', methods=['POST', 'GET'])
+@app.route('/getallworkers/<projectname>', methods=['POST', 'GET'])
 @cross_origin()
-def getallemployees():
-    return get_workers_from_db(request.data)
+def getallworkers(projectname):
+    print(projectname,"projectname")
+    return get_workers_from_db(request.data,projectname)
 
 
 @app.route('/up', methods=['GET'])

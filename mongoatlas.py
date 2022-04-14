@@ -183,22 +183,24 @@ def add_project_site(data):
     return {"message": "received", "status": "success"}
 
 
-def add_workers_to_db(data):
+def add_workers_to_db(data,projectname):
     data = data.decode('utf-8')
     data = json.loads(data)
     print("[INFO] Adding workers to database")
     cluster = return_cluster()
     db = cluster["FlutechERP"]
-    collection = db["WorkerDetails"]
+    collectioname=projectname+"WorkerDetails"
+    collection = db[collectioname]
     results = collection.insert_one(data)
     return str(results.inserted_id)
 
 
-def get_workers_from_db(data):
-    print("retriving all workers")
+def get_workers_from_db(data,projectname):
+    print("retriving all workers for",projectname)
     cluster = return_cluster()
     db = cluster["FlutechERP"]
-    collection = db["WorkerDetails"]
+    collectioname=projectname+"WorkerDetails"
+    collection = db[collectioname]
     results = collection.find({})
     all_workers = {}
     iter = 0
