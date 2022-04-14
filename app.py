@@ -87,18 +87,18 @@ def masterpanel():
     return render_template('masterpanel.html')
 
 
-@app.route('/workeronboarding')
-def onboardworker():
+@app.route('/workeronboarding/<projectname>')
+def onboardworker(projectname):
     return render_template('workeronboarding.html')
 
 
-@app.route('/alreadyonboardedworkers')
-def alreadyonboardedworkers():
+@app.route('/alreadyonboardedworkers/<projectname>')
+def alreadyonboardedworkers(projectname):
     return render_template('alreadyonboardedworkers.html')
 
 
-@app.route('/takeattendance')
-def takeattendance():
+@app.route('/takeattendance/<projectname>')
+def takeattendance(projectname):
     return render_template('takeattendance.html')
 # This route opens the Feedback page
 
@@ -119,6 +119,15 @@ def comingsoon():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+
+
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'robots.txt', mimetype='text/plain')
+
+
 # This route is to be used by the cron job to keep checking if the flask server is running
 
 
@@ -145,14 +154,12 @@ def home_index():
 @cross_origin()
 def recieve_face():
     get_base64_from_request(request)
-    print("recieved")
     return {'success': True}
 # This route recieves the face data captured by the webcam and sends it to the backend
 
 
 @app.route('/botmessage', methods=['POST'])
 def botmessage():
-    print(request.data)
     sendtelegrammessage(request.data)
     return {'success': True}
 # This route recieves the screen size data from the client and stores it in a csv file
@@ -161,14 +168,13 @@ def botmessage():
 @app.route('/screen-sizes', methods=['POST', 'GET'])
 def screen_sizes():
     atlas_id = screensizelogger(request.data)
-    print(atlas_id, "atlas_id")
     return {'Success': True, 'atlas_id': str(atlas_id)}
 
 
-@app.route('/recieveworkerdata', methods=['POST', 'GET'])
+@app.route('/recieveworkerdata/<projectname>', methods=['POST', 'GET'])
 @cross_origin()
-def recieveworkerdata():
-    return add_workers_to_db(request.data)
+def recieveworkerdata(projectname):
+    return add_workers_to_db(request.data,projectname)
 
 
 @app.route('/workerattendance', methods=['POST', 'GET'])
@@ -177,10 +183,11 @@ def workerattendance():
     return worker_attendance(request.data)
 
 
-@app.route('/getallemployees', methods=['POST', 'GET'])
+@app.route('/getallworkers/<projectname>', methods=['POST', 'GET'])
 @cross_origin()
-def getallemployees():
-    return get_workers_from_db(request.data)
+def getallworkers(projectname):
+    print(projectname,"projectname")
+    return get_workers_from_db(request.data,projectname)
 
 
 @app.route('/up', methods=['GET'])
@@ -197,7 +204,6 @@ def pull():
 @app.route('/addsite', methods=['GET', 'POST'])
 @cross_origin()
 def addsite():
-    print("request to add site")
     response = add_project_site(request.data)
     return response
 
@@ -205,7 +211,6 @@ def addsite():
 @app.route('/loadprojects', methods=['GET'])
 @cross_origin()
 def loadprojects():
-    print("here")
     response = load_projects()
     return response
 
@@ -226,6 +231,9 @@ def uploadcredentials():
     response = createcredentials(request.data)
     return response
 
+@app.route('/hello/<name>')
+def hello_name(name):
+   return 'Hello %s!' % name
 
 @app.route('/uploader', methods=['GET', 'POST'])
 def upload_file():

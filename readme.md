@@ -25,3 +25,6 @@ This is a flask based backend for the FLutech ERP system. Documentation is comin
 * ~Refelct App version on the app on login for versioning clarity.~
 * Reduce the total number of lines used by HTML by removing repeated code
 * Log Individual Employee activity on the app
+
+## Code Quality
+![example workflow](https://github.com/Flutech-cmr/Flask-Server/actions/workflows/pylint.yml/badge.svg)

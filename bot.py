@@ -1,5 +1,6 @@
 import json
 import telebot
+import sys
 from modules import get_os_and_version
 
 # testing sending this file through wget
@@ -56,12 +57,18 @@ def getchatid(data):
 
 
 def telegramdebug():
-    data = readjsonfiles('parameters.json')
-    platformdata = get_os_and_version()
-    if(platformdata[0] != 'Windows'):
-        if(data['message'] == True):
-            sendtelegrammessage(
-                '{"message": "Flask Server was either started or restarted on the cloud"}')
+    try:
+        data = readjsonfiles('parameters.json')
+        platformdata = get_os_and_version()
+        PC_Platforms=["Windows", "MacOS","Darwin"]
+        if(platformdata[0] not in PC_Platforms):
+            if(data['message'] == True):
+                sendtelegrammessage(
+                    '{"message": "Flask Server was either started or restarted on the cloud"}')
+    except Exception as e:
+        print(e)
+        print("[ERROR] parameters.json file not found")
+        sys.exit(0)
 
 # This function has been written to find the chat id from the telegram api since the chat id can change on the basis of wether the group is a normal group or a super group
 

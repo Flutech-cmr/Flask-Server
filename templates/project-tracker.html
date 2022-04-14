@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
     <link rel="stylesheet" href="static/css/flutech.css">
     <script src="static/js/projects.js" type="application/javascript"></script>
-    <script src="static/js/CheckLocalStorage.js" type="application/javascript"></script>
     <script src="static/js/commonpageutils.js" type="application/javascript"></script>
     <title>Project Tracker</title>
 </head>
@@ -29,27 +28,32 @@
             <!-- rounded div with shadow -->
             <div class="max-h-80 overflow-auto" id="ProjectLists">
                 <!-- <p class="mt-6 bg-red-400 p-6 rounded-md text-white shadow-lg"> Sample Project 1</p> -->
-                <template> 
-                    <div class="bg-gray-100 p-3 rounded-xl shadow-xl flex items-center justify-between mt-4 template-parent">
-                        <div class="flex space-x-6 items-center text-left">
-                            <img src="data:image/png;base64,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"
-                                class="w-auto h-14 rounded-lg" />
-                            <div class="flex-col">
-                                <div>
-                                    <p class="font-semibold text-base template-projectname">Project Name</p>
-                                    <p class="font-semibold text-sm text-gray-500 template-sitelocation">Site Location
-                                    </p>
-                                    <p class="font-semibold text-sm text-gray-500 template-city">City</p>
+                <template>
+                    <div class="bg-gray-100 p-3 rounded-xl shadow-xl justify-between mt-4 template-parent">
+                        <div class="flex space-x-6 items-center ">
+                            <!-- row -->
+                            <div class="felx flex-row">
+                                <!-- col 1 -->
+                                <div class="flex">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Circle-icons-tools.svg/1024px-Circle-icons-tools.svg.png"
+                                        class="w-auto h-14 rounded-lg"/>
+                                        <div class="px-2 text-left">
+                                            <p class="font-semibold text-base template-projectname">Project Name</p>
+                                            <p class="font-semibold text-sm text-gray-500 template-sitelocation">Site Location</p>
+                                            <p class="font-semibold text-sm text-gray-500 template-city">City</p>
+                                        </div>
                                 </div>
+                                <!-- end col 1 -->
+                                <!-- buttons -->
                                 <div class="flex flex-row content-between mt-4 w-full">
-                                    <button class="font-semibold text-sm text-red-500 break-words w-1/2" onclick="window.location='/workeronboarding'">OnBoard Workers</button>
-                                    <button class="font-semibold text-sm text-red-500 break-words w-1/2"onclick="window.location='/takeattendance'">Take Attendance</button>
-                                        
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white rounded mx-1 onboardworkers" onclick="Workeraction(this.id)">OnBoard Workers</button>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white rounded mx-2 takeattendance" onclick="Workeraction(this.id)">Take Attendance</button>
                                 </div>
+                                <!-- end buttons -->
                             </div>
                         </div>
-                    </div>
                 </template>
+
                 <section>
                     {{ modal() }}
                 </section>
@@ -57,7 +61,7 @@
             <form id="add-project">
                 <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight"
                     type="button" onclick="window.history.go(-1)">Go Back</button>
-                
+
             </form>
         </div>
     </div>

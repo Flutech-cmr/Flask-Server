@@ -106,10 +106,17 @@ var GetInputFields = function () {
 
 }
 
+var GetProjectName = function () {
+    let currentURL = window.location.href
+    let projectName = currentURL.split("/").pop()
+    return projectName
+}
+
 var PostEmployeeDetails = function (data) {
     const xhr = new XMLHttpRequest()
+    const currentpage=GetProjectName()
     const payload = JSON.stringify(data)
-    xhr.open("POST", "/recieveworkerdata", true)
+    xhr.open("POST", "/recieveworkerdata/"+currentpage, true)
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.send(payload)
@@ -158,9 +165,16 @@ var PopulateWorkers = function (key, value) {
     document.getElementById("all_workers").innerHTML += output
 }
 
+var AlreadyOnboardedWorkers=function(){
+    const currentpage=GetProjectName()
+    window.location.href='/alreadyonboardedworkers/'+currentpage
+}
+
+
 var GetAllEmployees = function () {
+    const currentpage=GetProjectName()
     const xhr = new XMLHttpRequest()
-    xhr.open("GET", "/getallemployees", true)
+    xhr.open("GET", "/getallworkers/"+currentpage, true)
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.send()
@@ -173,3 +187,4 @@ var GetAllEmployees = function () {
         }
     }
 }
+

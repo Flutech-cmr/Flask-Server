@@ -16,17 +16,30 @@ var GetProjectTemplates = function () {
     const TemplateHTML = Template.innerHTML;
     const projectdiv = document.getElementById("ProjectLists")
     return [TemplateHTML, projectdiv];
-
-
 }
+
+var Workeraction = function (id) {
+    const properties = id.split("-");
+    const button = properties[0];
+    const projectname = properties[1];
+    if (button == "AddWorkerButton") {
+        window.location = "/workeronboarding/" + projectname;
+    }
+    else if (button == "TakeAttendanceButton") {
+        window.location = "/takeattendance/" + projectname;
+    }
+}
+
 var PopulateProjects = function () {
     let ProjectTemplates = GetProjectTemplates();
     let TemplateHTML = ProjectTemplates[0];
     let projectdiv = ProjectTemplates[1];
     let iter = 0;
+    console.log(GlobalProjectDetails);
     for (const [key, value] of Object.entries(GlobalProjectDetails)) {
         let project = value;
         if (project["Project Name"] != undefined && project["Site Location"] != undefined && project["City"] != undefined) {
+            console.log(project["Project Name"]);
             projectdiv.innerHTML += TemplateHTML;
             let Projectname = document.getElementsByClassName("template-projectname")[iter];
             let ProjectLocation = document.getElementsByClassName("template-sitelocation")[iter];
@@ -36,11 +49,16 @@ var PopulateProjects = function () {
             ProjectLocation.innerHTML = project["Site Location"];
             ProjectCity.innerHTML = project["City"];
             templateparent.id = project._id;
+            let AddWorkerButton = document.getElementsByClassName("onboardworkers")[iter];
+            let TakeAttendanceButton = document.getElementsByClassName("takeattendance")[iter];
+            AddWorkerButton.id = "AddWorkerButton-" + project["Project Name"];
+            TakeAttendanceButton.id = "TakeAttendanceButton-" + project["Project Name"];
             iter++;
-
         }
     }
+
 }
+// entry point for this script
 var LoadProjects = function () {
     GetProjectTemplates();
     const xhr = new XMLHttpRequest();

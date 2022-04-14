@@ -24,6 +24,12 @@ var PleaseEnter = function (field) {
         }
     }
 }
+var capitalizeFirstLetter= function(string) {
+    console.log(string)
+    const capitalized = string.charAt(0).toUpperCase() + string.slice(1);
+    console.log(capitalized)
+    return capitalized
+  }
 
 var GetInputFields = function () {
     const ProjectNameField = document.getElementById("projectname")
@@ -43,8 +49,8 @@ var GetInputFields = function () {
             PleaseEnter("city")
         }
     } else {
-        ClearFields()
-        return [ProjectName, SiteLocation, City];
+        ClearFields()        
+        return [capitalizeFirstLetter(ProjectName),capitalizeFirstLetter(SiteLocation),capitalizeFirstLetter(City)];
     }
 }
 
@@ -82,7 +88,7 @@ var PostSiteDetails = function (credentials) {
             const response = JSON.parse(xhr.responseText)
             if (response.status == "success") {
                 console.log(response.message)
-                window.location.href = "/project-tracker"
+                // window.location.href = "/project-tracker"
             }
         }
     }

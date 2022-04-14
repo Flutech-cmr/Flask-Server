@@ -77,6 +77,8 @@ var GetInputFields = function (fieldnames) {
 var StoreCredentials = function (response, EMP_ID) {
     localStorage.setItem("Flutech_Access_Level", response.access_level)
     localStorage.setItem("Flutech_EMP_ID", EMP_ID)
+    localStorage.setItem("Flutech_Password_Storage_Date",new Date().toLocaleString())
+    console.log(new Date().toLocaleString())
 }
 
 var FetchCredentials = function () {
@@ -132,7 +134,7 @@ var PreviousLoginExists = function (payload) {
             } else {
                 InvalidLogin("Invalid Credentials. Please try again.")
             }
-            ClearFields();
+                            ClearFields();
         }
     }
 }
@@ -142,8 +144,8 @@ var AutoLoginOnPageLoad = function () {
     const FetchedCredentials = FetchCredentials()
     if (FetchedCredentials[0] == "null" || FetchedCredentials[1] == "null" || FetchedCredentials[0] == null || FetchedCredentials[1] == null) {
         console.log("No previous login found")
-        const credentials = GetInputFields(GlobalFieldnames)
-        CheckLoginFromDB(credentials)
+        // const credentials = GetInputFields(GlobalFieldnames)
+        // CheckLoginFromDB(credentials)
     } else {
         console.log("Previous login found")
         const payload = {

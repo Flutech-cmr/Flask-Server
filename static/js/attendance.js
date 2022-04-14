@@ -1,3 +1,22 @@
+var GetProjectName = function () {
+    let currentURL = window.location.href
+    let projectName = currentURL.split("/").pop()
+    return projectName
+}
+
+var EnableDisableButtons = function (id) {
+    const intimebuttons = document.getElementsByClassName("intime")[id]
+    const outtimebuttons = document.getElementsByClassName("outtime")[id]
+    if (intimebuttons.innerHTML.includes("In-Time")) {
+        intimebuttons.disabled = false
+        outtimebuttons.disabled = true
+    }
+    else if (outtimebuttons.innerHTML.includes("Out-Time") && !intimebuttons.innerHTML.includes("In-Time")) {
+        intimebuttons.disabled = true
+        outtimebuttons.disabled = false
+    }
+}
+
 var postattendance = function (payload) {
     const xhr = new XMLHttpRequest()
     xhr.open("POST", "/workerattendance", true)
@@ -15,7 +34,6 @@ var postattendance = function (payload) {
                         buttonin.disabled = true
                         buttonin.style.backgroundColor = "grey"
                         document.getElementsByClassName("outtime")[payload["id"]].disabled = false
-                        document.getElementsByClassName("outtime")[payload["id"]].style.backgroundColor = rgb(219, 39, 119);
                     }
                     else if (response["type"] == "outtime") {
                         const buttonout = document.getElementsByClassName("outtime")[payload["id"]]
@@ -24,6 +42,7 @@ var postattendance = function (payload) {
                         buttonout.disabled = true
                     }
                 }
+                EnableDisableButtons(payload["id"])
             }
         }
     }
@@ -47,6 +66,7 @@ var postattendance = function (payload) {
                         buttonout.disabled = true
                     }
                 }
+                EnableDisableButtons(payload["id"])
             }
         }
     }
@@ -76,7 +96,7 @@ var MarkOutTime = function (id, workername, contractor, labourtype) {
     postattendance(payload)
 }
 
-var CheckPreviousAttendance = function (id, workername, contractor, labourtype) {
+var CheckPreviousAttendance = async function (id, workername, contractor, labourtype) {
     payload = {
         "Workername": workername,
         "ContractorID": contractor,
@@ -88,14 +108,9 @@ var CheckPreviousAttendance = function (id, workername, contractor, labourtype) 
     postattendance(payload)
     payload["type"] = "outtime"
     postattendance(payload)
-    const buttonout = document.getElementsByClassName("outtime")[payload["id"]]
-    console.log(buttonout.innerHTML)
-    const buttonin = document.getElementsByClassName("intime")[payload["id"]]
-    if (buttonin.innerHTML.includes("Mark In-Time")) {
-        buttonout.disabled = true
-    }
 }
 
+// this function is responsible to populate all the workers on the page
 var PopulateWorkeronPage = function (workername, contractor, labourtype, key) {
     const allworkers = document.getElementById("all_workers")
     const template = document.getElementsByTagName("template")[0]
@@ -119,21 +134,27 @@ var PopulateWorkeronPage = function (workername, contractor, labourtype, key) {
 
 }
 
+
+
 // this function is the entrypoint for the page
 var GetAllEmployees = function () {
     const xhr = new XMLHttpRequest()
-    xhr.open("GET", "/getallemployees", true)
+    const currentpage=GetProjectName()
+    xhr.open("GET", "/getallworkers/"+currentpage, true)
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.send()
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            console.log(xhr.responseText)
             const ResponseTextAllWorkers = JSON.parse(xhr.responseText)
+            let maxkey = 0
             for (const [key, value] of Object.entries(ResponseTextAllWorkers)) {
                 const workername = value["Workername"]
                 const contractor = value["ContractorID"]
                 const labourtype = value["LabourType"]
                 PopulateWorkeronPage(workername, contractor, labourtype, key)
+                maxkey += 1
             }
         }
     }

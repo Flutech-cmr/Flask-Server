@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="static/css/flutech.css">
     <!-- <script src="static/js/login.js"></script> -->
     <script src="static/js/loginutils.js" type="application/javascript"></script>
+    <script>AutoLoginOnPageLoad();</script>
     <title>Login</title>
 </head>
-<body onload="SetGlobalFieldnames(['Username','Password']);ClearFields();AutoLoginOnPageLoad();">
+<body onload="SetGlobalFieldnames(['Username','Password']);ClearFields();">
     <section>
         {{ navbar() }}
     </section>

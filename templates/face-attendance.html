@@ -58,7 +58,9 @@
                 }
                 function take_snapshot() {
                     Webcam.snap(function (data_uri) {
-                        document.getElementById('my_result').innerHTML = '<img src="' + data_uri + '" style="object-fit: cover;"/>';
+                        const my_result_innerhtml='<img src="' + data_uri + '" style="object-fit: cover;"/>';
+                        console.log(my_result_innerhtml);
+                        document.getElementById('my_result').innerHTML = my_result_innerhtml;
                         PlayShutterSound();
                         PostBase64Image(data_uri);
                     });
@@ -66,7 +68,7 @@
             </script>
 
             <form >
-                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" onclick="take_snapshot()">Take Snapshot</button>
+                <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" onclick="take_snapshot()" type="button">Take Snapshot</button>
                 <audio id="audio" src="static/audio/Shutter.mp3"></audio>
                 <button class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight">Continue</button>
             </form>
