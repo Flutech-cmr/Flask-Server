@@ -9,7 +9,7 @@ try:
     from flask_cors import CORS, cross_origin
 except ImportError as e:
     print("\n[INFO] One or more modules are missing.\n")
-    print("Thw following error occured \n",e)
+    print("Thw following error occured \n", e)
     os.system("pip install -r requirements.txt")
 app = Flask(__name__, static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
@@ -83,6 +83,11 @@ def master():
     return render_template('master.html')
 
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('Dashboard/index.html')
+
+
 @app.route('/masterpanel')
 def masterpanel():
     return render_template('masterpanel.html')
@@ -120,7 +125,6 @@ def comingsoon():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
 
 
 @app.route('/robots.txt')
@@ -175,7 +179,7 @@ def screen_sizes():
 @app.route('/recieveworkerdata/<projectname>', methods=['POST', 'GET'])
 @cross_origin()
 def recieveworkerdata(projectname):
-    return add_workers_to_db(request.data,projectname)
+    return add_workers_to_db(request.data, projectname)
 
 
 @app.route('/workerattendance', methods=['POST', 'GET'])
@@ -187,8 +191,8 @@ def workerattendance():
 @app.route('/getallworkers/<projectname>', methods=['POST', 'GET'])
 @cross_origin()
 def getallworkers(projectname):
-    print(projectname,"projectname")
-    return get_workers_from_db(request.data,projectname)
+    print(projectname, "projectname")
+    return get_workers_from_db(request.data, projectname)
 
 
 @app.route('/up', methods=['GET'])
@@ -232,9 +236,6 @@ def uploadcredentials():
     response = createcredentials(request.data)
     return response
 
-@app.route('/hello/<name>')
-def hello_name(name):
-   return 'Hello %s!' % name
 
 @app.route('/location')
 def location():
