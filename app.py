@@ -220,6 +220,15 @@ def loadprojects():
     return response
 
 
+@app.route('/gitpull')
+def gitpull():
+    sp = subprocess.Popen(t"git pull", shell=True, stdout=subprocess.PIPE)
+    subprocess_return = sp.stdout.read()
+    subprocess_return = subprocess_return.decode('utf-8')
+    response = {'response': subprocess_return}
+    return response
+
+
 @app.route('/explore')
 def explore():
     return render_template('explore.html')
