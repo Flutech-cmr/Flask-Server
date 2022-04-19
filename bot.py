@@ -71,8 +71,3 @@ def telegramdebug():
         sys.exit(0)
 
 # This function has been written to find the chat id from the telegram api since the chat id can change on the basis of wether the group is a normal group or a super group
-
-
-def getfromtelegram():
-    prefix = 'https://api.telegram.org/bot'
-    APIkey = ''

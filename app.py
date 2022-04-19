@@ -250,6 +250,7 @@ def uploadcredentials():
 def location():
     return render_template('locationindex.html')
 
+
 @app.route('/WebviewLocationIntercept')
 @cross_origin()
 def Intercept():
