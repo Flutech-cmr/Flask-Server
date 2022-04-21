@@ -93,6 +93,11 @@ def masterpanel():
     return render_template('masterpanel.html')
 
 
+@app.route('/DownloadAttendance/<projectname>')
+def downloadAttendance(projectname):
+    return download_attendance(projectname)
+
+
 @app.route('/workeronboarding/<projectname>')
 def onboardworker(projectname):
     return render_template('workeronboarding.html')

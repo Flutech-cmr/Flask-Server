@@ -244,5 +244,23 @@ def get_worker_attendance(data, today, projectname):
     return{"status": "failed"}
 
 
+def check_if_collection_exists(collectionname):
+    cluster = return_cluster()
+    db = cluster["FlutechERP"]
+    collection = db[collectionname]
+    results = collection.find({})
+    if(results.count() == 0):
+        return False
+    else:
+        return True
+
+def download_attendance(projectname):
+    collection_exists=check_if_collection_exists(projectname+"WorkerAttendance")
+    if(collection_exists):
+        return{"status": "success", "message": "collection exists"}
+    else:
+        return{"status": "failed", "message": "collection does not exist"}
+
+
 if __name__ == "__main__":
-    pass
+    print(check_if_collection_exists("WorkerDetails"))
