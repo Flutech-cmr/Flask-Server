@@ -260,6 +260,7 @@ def generate_csv(projectname):
         pass
     else:
         os.mkdir("generated/"+projectname)
+        
 
 
 def download_attendance(projectname):

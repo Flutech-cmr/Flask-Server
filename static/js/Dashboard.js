@@ -17,13 +17,12 @@ var fetchattendance = function (id) {
                 // download file from server
                 console.log("downloading file");
                 var a = document.createElement("a");
-                a.href = "/static/css/comingsoon.csv";
+                a.href = "/static/css/comingsoon.txt";
                 a.download = projectname + ".csv";
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
             }
-
         }
     }
 }
