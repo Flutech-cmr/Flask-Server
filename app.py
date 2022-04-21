@@ -289,6 +289,11 @@ def not_found(e):
     return render_template("404.html")
 
 
+@app.errorhandler(500)
+def internal_server_error(e):
+    return {"error": e}
+
+
 if __name__ == '__main__':
     telegramdebug()
     print("[INFO] This script is being loaded on Python Version {}".format(sys.version))
