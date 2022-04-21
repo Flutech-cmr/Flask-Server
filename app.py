@@ -291,7 +291,8 @@ def not_found(e):
 
 @app.errorhandler(500)
 def internal_server_error(e):
-    return {"error": e}
+    message = {"message": str(e)}
+    sendtelegrammessage(message)
 
 
 if __name__ == '__main__':
