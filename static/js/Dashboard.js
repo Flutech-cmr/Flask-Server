@@ -3,9 +3,10 @@
 var fetchattendance = function (id) {
     const projectname = id.split("-")[0];
     const xhr = new XMLHttpRequest();
-    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.open("GET", "/DownloadAttendance/" + projectname, true);
-    xhr.send(null);
+    xhr.setRequestHeader("Content-Type", "application/json")
+    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+    xhr.send();
     xhr.onload = function () {
         if (xhr.status == 200) {
             const allprojects = JSON.parse(xhr.responseText);
