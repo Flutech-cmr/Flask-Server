@@ -94,6 +94,7 @@ def masterpanel():
 
 
 @app.route('/DownloadAttendance/<projectname>')
+@cross_origin
 def downloadAttendance(projectname):
     return download_attendance(projectname)
 
