@@ -119,7 +119,7 @@ def validate_user(data):
         for x in results_of_find:
             access_level = x["App Privileges"]
             if(type(access_level) != int):
-                return {"message": "received", "status":"failed","error":"Invalid Access Level in database"}
+                return {"message": "received", "status": "failed", "error": "Invalid Access Level in database"}
             if(login_requesting_page == "login" and access_level >= 0):
                 print("[INFO] User Validated for login page")
                 return {"message": "received", "status": "success", "redirect": "choose-function", "access_level": access_level}
@@ -183,23 +183,23 @@ def add_project_site(data):
     return {"message": "received", "status": "success"}
 
 
-def add_workers_to_db(data,projectname):
+def add_workers_to_db(data, projectname):
     data = data.decode('utf-8')
     data = json.loads(data)
     print("[INFO] Adding workers to database")
     cluster = return_cluster()
     db = cluster["FlutechERP"]
-    collectioname=projectname+"WorkerDetails"
+    collectioname = projectname+"WorkerDetails"
     collection = db[collectioname]
     results = collection.insert_one(data)
     return str(results.inserted_id)
 
 
-def get_workers_from_db(data,projectname):
-    print("retriving all workers for",projectname)
+def get_workers_from_db(data, projectname):
+    print("retriving all workers for", projectname)
     cluster = return_cluster()
     db = cluster["FlutechERP"]
-    collectioname=projectname+"WorkerDetails"
+    collectioname = projectname+"WorkerDetails"
     collection = db[collectioname]
     results = collection.find({})
     all_workers = {}
@@ -212,7 +212,7 @@ def get_workers_from_db(data,projectname):
     return all_workers
 
 
-def worker_attendance(data):
+def worker_attendance(data, projectname):
     data = data.decode('utf-8')
     data = json.loads(data)
     now = datetime.utcnow()
@@ -220,22 +220,23 @@ def worker_attendance(data):
     current_time = now.strftime("%H:%M:%S")
     today = now.strftime("%d-%m-%Y")
     if(data["function"] != "marknew"):
-        return get_worker_attendance(data, today)
+        return get_worker_attendance(data, today, projectname)
     else:
         returnpayload = {"time": current_time,
                          "status": "success", "type": data["type"]}
         del data["function"]
         data["time"] = current_time
         data["date"] = today
-        returnid = post_to_mongo(data, "WorkerAttendance", "FlutechERP")
+        returnid = post_to_mongo(
+            data, projectname+"WorkerAttendance", "FlutechERP")
         returnpayload["returnid"] = str(returnid)
         return returnpayload
 
 
-def get_worker_attendance(data, today):
+def get_worker_attendance(data, today, projectname):
     del data["function"]
     data["date"] = today
-    results = find_in_mongo(data, "WorkerAttendance", "FlutechERP")
+    results = find_in_mongo(data, projectname+"WorkerAttendance", "FlutechERP")
     for x in results:
         del x["_id"]
         print(x, "fetch")

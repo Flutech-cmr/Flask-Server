@@ -19,7 +19,8 @@ var EnableDisableButtons = function (id) {
 
 var postattendance = function (payload) {
     const xhr = new XMLHttpRequest()
-    xhr.open("POST", "/workerattendance", true)
+    const projectname=GetProjectName()
+    xhr.open("POST", "/workerattendance/"+projectname, true)
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     if (payload["function"] == "marknew") {

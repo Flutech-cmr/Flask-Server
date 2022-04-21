@@ -182,10 +182,10 @@ def recieveworkerdata(projectname):
     return add_workers_to_db(request.data, projectname)
 
 
-@app.route('/workerattendance', methods=['POST', 'GET'])
+@app.route('/workerattendance/<projectname>', methods=['POST', 'GET'])
 @cross_origin()
-def workerattendance():
-    return worker_attendance(request.data)
+def workerattendance(projectname):
+    return worker_attendance(request.data, projectname)
 
 
 @app.route('/getallworkers/<projectname>', methods=['POST', 'GET'])
