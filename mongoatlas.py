@@ -254,10 +254,20 @@ def check_if_collection_exists(collectionname):
     else:
         return True
 
+
+def generate_csv(projectname):
+    if(os.path.exists("generated/"+projectname)):
+        pass
+    else:
+        os.mkdir("generated/"+projectname)
+
+
 def download_attendance(projectname):
-    collection_exists=check_if_collection_exists(projectname+"WorkerAttendance")
+    collection_exists = check_if_collection_exists(
+        projectname+"WorkerAttendance")
     if(collection_exists):
-        return{"status": "success", "message": "collection exists"}
+        generate_csv(projectname)
+        return{"status": "success", "message": "collection exists", "Download Path": "/generated_files/"+projectname+"WorkerAttendance.csv"}
     else:
         return{"status": "failed", "message": "collection does not exist"}
 

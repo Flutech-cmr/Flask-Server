@@ -11,6 +11,16 @@ var fetchattendance = function (id) {
             if (allprojects["status"] == "failed") {
                 toggleModal('modal-id')
             }
+            else if (allprojects["status"] == "success") {
+                // download file from server
+                console.log("downloading file");
+                var a = document.createElement("a");
+                a.href = "/static/css/comingsoon.csv";
+                a.download = projectname + ".csv";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
 
         }
     }
