@@ -4,6 +4,7 @@ var fetchattendance = function (id) {
     const projectname = id.split("-")[0];
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "/DownloadAttendance/" + projectname, true);
+    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.send(null);
     xhr.onload = function () {
         if (xhr.status == 200) {
