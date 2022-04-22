@@ -16,8 +16,12 @@ def find_in_jsondata(jsondata, name, date, type):
             return value["time"]
     return "Not Found"
 
+
 def movefile(filename):
-    os.remove("static/generated/"+filename)
+    try:
+        os.remove("static/generated/"+filename)
+    except:
+        pass
     try:
         os.rename(filename, "static/generated/"+filename)
         return True
@@ -82,7 +86,7 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
                 ws.cell(row=rownum, column=colnum).value = to_write
 
             col = 2
-        filename=projectname+"WorkerAttendance.xlsx"
+        filename = projectname+"WorkerAttendance.xlsx"
         wb.save(filename)
         movefile(filename)
 

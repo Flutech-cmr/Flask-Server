@@ -10,6 +10,7 @@ var fetchattendance = function (id) {
     xhr.onload = function () {
         if (xhr.status == 200) {
             const allprojects = JSON.parse(xhr.responseText);
+            console.log(allprojects);
             if (allprojects["status"] == "failed") {
                 toggleModal('modal-id')
             }
