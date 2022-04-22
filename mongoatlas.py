@@ -2,12 +2,13 @@ import os
 import sys
 import time
 from datetime import datetime, timedelta
-from unittest import result
+from workbookgen import *
+
 print("[INFO] Loading Mongo Atlas Modules")
 try:
-    from pymongo import MongoClient
-    from bson import ObjectId
     import json
+    from bson import ObjectId
+    from pymongo import MongoClient
 except ImportError:
     print("\n[INFO] One or more modules are missing.\n")
     os.system("pip3 install -r requirements.txt")
@@ -244,6 +245,22 @@ def get_worker_attendance(data, today, projectname):
     return{"status": "failed"}
 
 
+def get_all_attendance(projectname):
+    cluster = return_cluster()
+    db = cluster["FlutechERP"]
+    collectioname = projectname+"WorkerAttendance"
+    collection = db[collectioname]
+    results = collection.find({})
+    all_workers = {}
+    iter = 0
+    for x in results:
+        # use bson to conver objectid to string
+        x["_id"] = str(x["_id"])
+        all_workers[iter] = x
+        iter += 1
+    return all_workers
+
+
 def check_if_collection_exists(collectionname):
     cluster = return_cluster()
     db = cluster["FlutechERP"]
@@ -255,23 +272,19 @@ def check_if_collection_exists(collectionname):
         return True
 
 
-def generate_csv(projectname):
-    if(os.path.exists("generated/"+projectname)):
-        pass
-    else:
-        os.mkdir("generated/"+projectname)
-        
-
-
 def download_attendance(projectname):
     collection_exists = check_if_collection_exists(
         projectname+"WorkerAttendance")
     if(collection_exists):
-        generate_csv(projectname)
-        return{"status": "success", "message": "collection exists", "Download Path": "/generated_files/"+projectname+"WorkerAttendance.csv"}
+        workbook_generated = get_raw_data_for_workbook(
+            get_all_attendance(projectname), projectname)
+        if(workbook_generated):
+            return{"status": "success", "message": "collection exists", "DownloadURL": "/static/generated/"+projectname+"WorkerAttendance.xlsx"}
+        else:
+            return{"status": "failed", "message": "collection exists but could not generate workbook"}
     else:
         return{"status": "failed", "message": "collection does not exist"}
 
 
 if __name__ == "__main__":
-    print(check_if_collection_exists("WorkerDetails"))
+    pass
