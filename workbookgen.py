@@ -17,7 +17,7 @@ def find_in_jsondata(jsondata, name, date, type):
     return "Not Found"
 
 def movefile(filename):
-    os.remove(filename)
+    os.remove("static/generated/"+filename)
     try:
         os.rename(filename, "static/generated/"+filename)
         return True
