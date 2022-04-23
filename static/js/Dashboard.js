@@ -69,8 +69,6 @@ var GetProjectFromAPi = function () {
 }
 
 var PopulateProjects = function () {
-    console.log("populated projects");
     GetProjectFromAPi();
-    let graphdiv = document.getElementById("graphdiv");
-    let graph
+    console.log("populated projects");
 }

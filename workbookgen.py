@@ -19,10 +19,6 @@ def find_in_jsondata(jsondata, name, date, type):
 
 def movefile(filename):
     try:
-        os.remove("static/generated/"+filename)
-    except:
-        pass
-    try:
         os.rename(filename, "static/generated/"+filename)
         return True
     except Exception as e:

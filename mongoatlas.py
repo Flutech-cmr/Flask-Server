@@ -1,6 +1,5 @@
 import os
 import sys
-import time
 from datetime import datetime, timedelta
 from workbookgen import *
 
@@ -279,7 +278,7 @@ def download_attendance(projectname):
         workbook_generated = get_raw_data_for_workbook(
             get_all_attendance(projectname), projectname)
         if(workbook_generated):
-            return{"status": "success", "message": "collection exists", "DownloadURL": "/static/generated/"+projectname+"WorkerAttendance.xlsx"}
+            return{"status": "success", "message": "collection exists workbook generated", "DownloadURL": "/static/generated/"+projectname+"WorkerAttendance.xlsx"}
         else:
             return{"status": "failed", "message": "collection exists but could not generate workbook"}
     else:

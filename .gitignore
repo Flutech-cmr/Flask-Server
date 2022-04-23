@@ -6,5 +6,6 @@ Employee Details.csv
 *.cer
 *.key
 *.csv
+*xlsx
 Resources
 generated

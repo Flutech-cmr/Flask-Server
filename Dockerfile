@@ -32,6 +32,7 @@ RUN apt-get install ffmpeg -y
 RUN apt-get autoremove -y
 RUN apt-get clean -y
 
+# setup project
 
 WORKDIR /home/Flutech_ERP
 RUN git clone https://github.com/Flutech-cmr/Flask-Server.git
