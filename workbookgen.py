@@ -4,6 +4,8 @@ import os
 
 
 def makeworkbook(projectname):
+    if(os.path.exists(projectname+"WorkerAttendance.xlsx")):
+        os.remove(projectname+"WorkerAttendance.xlsx")
     wb = Workbook()
     ws = wb.active
     ws.title = projectname+"Worker Attendance"
@@ -84,7 +86,6 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
             col = 2
         filename = projectname+"WorkerAttendance.xlsx"
         wb.save(filename)
-        movefile(filename)
 
         return True
 
