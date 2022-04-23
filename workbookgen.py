@@ -4,8 +4,8 @@ import os
 
 
 def makeworkbook(projectname):
-    if(os.path.exists(projectname+"WorkerAttendance.xlsx")):
-        os.remove(projectname+"WorkerAttendance.xlsx")
+    if(os.path.exists("/static/generated/"+projectname+"WorkerAttendance.xlsx")):
+        os.remove("/static/generated/"+projectname+"WorkerAttendance.xlsx")
     wb = Workbook()
     ws = wb.active
     ws.title = projectname+"Worker Attendance"
