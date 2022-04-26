@@ -4,6 +4,8 @@ import os
 
 
 def makeworkbook(projectname):
+    if(not os.path.exists(os.path.join(os.getcwd(),"static","generated"))):
+        os.mkdir(os.path.join(os.getcwd(),"static","generated"))
     current_wd = os.getcwd()
     pathtofile = os.path.join(current_wd, "static",
                               "generated", projectname+"WorkerAttendance.xlsx")
