@@ -9,6 +9,8 @@ def makeworkbook(projectname):
                               "generated",projectname+"WorkerAttendance.xlsx")
     if(os.path.exists(pathtofile)):
         os.remove(pathtofile)
+    else:
+        print("file does not exist")
     wb = Workbook()
     ws = wb.active
     ws.title = projectname+"Worker Attendance"
@@ -22,10 +24,14 @@ def find_in_jsondata(jsondata, name, date, type):
     return "Not Found"
 
 def movefile(filename):
-    current_wd = os.getcwd()
-    pathtofile = os.path.join(current_wd, filename)
-    newpath    = os.path.join(current_wd, "static", "generated",filename)
-    os.rename(pathtofile, newpath)
+    try:
+        current_wd = os.getcwd()
+        pathtofile = os.path.join(current_wd, filename)
+        newpath    = os.path.join(current_wd, "static", "generated",filename)
+        os.rename(pathtofile, newpath)
+    except Exception as e:
+        print(e)
+        return False
     
 
 def add_data_to_workbook(data, wb, projectname, jsondata):
@@ -92,6 +98,7 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
         return True
 
     except Exception as e:
+        print(e)
         return False
 
 
