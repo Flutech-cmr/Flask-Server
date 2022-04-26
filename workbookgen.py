@@ -6,7 +6,7 @@ import os
 def makeworkbook(projectname):
     current_wd = os.getcwd()
     pathtofile = os.path.join(current_wd, "static",
-                              "generated",projectname+"WorkerAttendance.xlsx")
+                              "generated", projectname+"WorkerAttendance.xlsx")
     if(os.path.exists(pathtofile)):
         os.remove(pathtofile)
     else:
@@ -23,16 +23,17 @@ def find_in_jsondata(jsondata, name, date, type):
             return value["time"]
     return "Not Found"
 
+
 def movefile(filename):
     try:
         current_wd = os.getcwd()
         pathtofile = os.path.join(current_wd, filename)
-        newpath    = os.path.join(current_wd, "static", "generated",filename)
+        newpath = os.path.join(current_wd, "static", "generated", filename)
         os.rename(pathtofile, newpath)
     except Exception as e:
         print(e)
         return False
-    
+
 
 def add_data_to_workbook(data, wb, projectname, jsondata):
     try:
@@ -115,8 +116,9 @@ def get_raw_data_for_workbook(data, projectname):
 
     alldates.sort()
     workernames.sort()
-    if(add_data_to_workbook([alldates, workernames],
-                            makeworkbook(projectname), projectname, data)):
+    if(add_data_to_workbook([alldates, workernames], makeworkbook(projectname), projectname, data)):
+        print("added data to workbook")
         return True
     else:
+        print("failed to add data to workbook")
         return False
