@@ -171,6 +171,17 @@ def load_projects():
     return all_projects
 
 
+def find_number_of_documents_in_collection(collection_name):
+    cluster = return_cluster()
+    db = cluster["FlutechERP"]
+    collection = db[collection_name]
+    results=collection.find({})
+    length=str(results.count())
+    print(length)
+    return length
+    
+
+
 def add_project_site(data):
     data = data.decode('utf-8')
     data = json.loads(data)
@@ -269,6 +280,13 @@ def check_if_collection_exists(collectionname):
         return False
     else:
         return True
+
+def dashboard_stat(StatType,request):
+    if(request.method=="GET"):
+        if(StatType=="numberofemployees"):
+            return find_number_of_documents_in_collection("EmployeeDetails")
+        elif(StatType=="numberofprojects"):
+            return find_number_of_documents_in_collection("ProjectDetails")
 
 
 def download_attendance(projectname):

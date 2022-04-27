@@ -72,3 +72,18 @@ var PopulateProjects = function () {
     GetProjectFromAPi();
     console.log("populated projects");
 }
+
+
+
+var GetStats=function(id){
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/dashboardStats/"+id, true);
+    xhr.send(null);
+    xhr.onload = function () {
+        if (xhr.status == 200) {
+            const returnstat = JSON.parse(xhr.responseText);
+            document.getElementById(id).innerText=returnstat
+        }
+    }
+}
+

@@ -214,6 +214,11 @@ def pull():
     response = performgit(request.data)
     return response
 
+@app.route('/dashboardStats/<StatType>', methods=['GET', 'POST'])
+@cross_origin()
+def dashboardstat(StatType):
+    response = dashboard_stat(StatType,request)
+    return response
 
 @app.route('/addsite', methods=['GET', 'POST'])
 @cross_origin()
