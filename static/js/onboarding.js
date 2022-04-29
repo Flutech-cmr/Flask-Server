@@ -13,6 +13,12 @@ var ClearFields = function () {
     }
 }
 
+// returns string with firt letter capitalized
+var capitalizeFirstLetter = function (string) {
+    const capitalized = string.charAt(0).toUpperCase() + string.slice(1);
+    return capitalized
+}
+
 // removes prompt fields on type
 var OnType = function (field) {
     if (!!document.getElementById("PleaseEnter" + field) == true) {
@@ -87,7 +93,12 @@ var GetInputFields = function () {
         }
     }
     for (x in Fieldarray) {
+
         data[Fieldarray[x].id] = Fieldarray[x].value
+        console.log(Fieldarray[x].id, data[Fieldarray[x].id])
+        if (Fieldarray[x].id.toLowerCase().includes("name")) {
+            data[Fieldarray[x].id] = capitalizeFirstLetter(data[Fieldarray[x].id])
+        }
         if (data[Fieldarray[x].id] == "") {
             emptyfields = true
             PleaseEnter(Fieldarray[x].id)
@@ -114,9 +125,9 @@ var GetProjectName = function () {
 
 var PostEmployeeDetails = function (data) {
     const xhr = new XMLHttpRequest()
-    const currentpage=GetProjectName()
+    const currentpage = GetProjectName()
     const payload = JSON.stringify(data)
-    xhr.open("POST", "/recieveworkerdata/"+currentpage, true)
+    xhr.open("POST", "/recieveworkerdata/" + currentpage, true)
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.send(payload)
@@ -165,16 +176,16 @@ var PopulateWorkers = function (key, value) {
     document.getElementById("all_workers").innerHTML += output
 }
 
-var AlreadyOnboardedWorkers=function(){
-    const currentpage=GetProjectName()
-    window.location.href='/alreadyonboardedworkers/'+currentpage
+var AlreadyOnboardedWorkers = function () {
+    const currentpage = GetProjectName()
+    window.location.href = '/alreadyonboardedworkers/' + currentpage
 }
 
 
 var GetAllEmployees = function () {
-    const currentpage=GetProjectName()
+    const currentpage = GetProjectName()
     const xhr = new XMLHttpRequest()
-    xhr.open("GET", "/getallworkers/"+currentpage, true)
+    xhr.open("GET", "/getallworkers/" + currentpage, true)
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.send()

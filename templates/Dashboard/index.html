@@ -21,6 +21,10 @@
     <link rel="icon" type="image/png" href="/favicon.ico">
     <link rel="mask-icon" href="/favicon.ico" color="#5bbad5">
     <script src="static/js/Dashboard.js" type="text/javascript"></script>
+    <script src="static/js/loginutils.js" type="text/javascript"></script>
+    <script>
+        CanAccessDashboard(FetchCredentials())
+    </script>
 </head>
 
 <body class="bg-gray-50">
@@ -43,7 +47,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <a href="#" class="text-xl font-bold flex items-center lg:ml-2.5">
+                    <a href="/dashboard" class="text-xl font-bold flex items-center lg:ml-2.5">
                         <img src="/favicon.ico" class="h-6 mr-2" alt="Windster Logo">
                         <span class="self-center whitespace-nowrap">Dashboard - Flutech ERP</span>
                     </a>

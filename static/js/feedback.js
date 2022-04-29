@@ -6,7 +6,11 @@ var ClearFields = function () {
 var PleaseEnter = function (field) {
     if (field == "message") {
         if (!!document.getElementById("pleaseentermessage") == false) {
-            document.getElementById("messagediv").innerHTML += '<p class="text-red text-xs italic text-left" id="pleaseentermessage">Please Enter project name.</p>'
+            let p = document.createElement("p")
+            p.id = "pleaseentermessage"
+            p.innerHTML = "Please enter a message"
+            p.classList.add("text-red", "text-xs", "italic", "text-left")
+            document.getElementById("messagediv").appendChild(p)
             document.getElementById(field).focus()
         }
     }
@@ -52,12 +56,9 @@ var Submit = function () {
     const get = GetInputFields()
     let feedback = get[0]
     let message = get[1]
-    if (get != null) {
-        const temp = "New "+feedback + " \n" + message
+    const EmployeeInLocalStorage = localStorage.getItem("Flutech_EMP_ID")
+    if (get != null && EmployeeInLocalStorage !== null) {
+        const temp = "New " + feedback + " From Employee ID " + EmployeeInLocalStorage + " \n" + message
         posttotelegram(temp)
     }
-}
-
-var GoHome = function () {
-    window.location.href = "/"
 }

@@ -37,6 +37,11 @@ def login():
     return render_template('login.html')
 # This route is for the Login Page
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+# This route is for the Login Page
+
 
 @app.route('/checklogin', methods=['GET', 'POST'])
 @cross_origin()

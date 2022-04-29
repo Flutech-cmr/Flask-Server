@@ -75,15 +75,30 @@ var PopulateProjects = function () {
 
 
 
-var GetStats=function(id){
+var GetStats = function (id) {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "/dashboardStats/"+id, true);
+    xhr.open("GET", "/dashboardStats/" + id, true);
     xhr.send(null);
     xhr.onload = function () {
         if (xhr.status == 200) {
             const returnstat = JSON.parse(xhr.responseText);
-            document.getElementById(id).innerText=returnstat
+            document.getElementById(id).innerText = returnstat
         }
     }
 }
 
+
+var CanAccessDashboard = function (credentials) {
+    const IsAccessAvailable = credentials[0]
+    const IsEmpIDAvailable = credentials[1]
+    console.log(IsAccessAvailable, IsEmpIDAvailable);
+    if (IsAccessAvailable != null && IsEmpIDAvailable != null) {
+        if (IsAccessAvailable >= 1) {
+            return
+        }
+        else{
+            window.location.href = "/master"
+        }
+    }
+
+}
