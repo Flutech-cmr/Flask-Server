@@ -174,10 +174,9 @@ def find_number_of_documents_in_collection(collection_name):
     cluster = return_cluster()
     db = cluster["FlutechERP"]
     collection = db[collection_name]
-    results=collection.find({})
-    length=str(results.count())
+    results = collection.find({})
+    length = str(results.count())
     return length
-    
 
 
 def add_project_site(data):
@@ -268,6 +267,7 @@ def get_all_attendance(projectname):
         iter += 1
     return all_workers
 
+
 def get_entire_collection(colectionname):
     cluster = return_cluster()
     db = cluster["FlutechERP"]
@@ -286,13 +286,14 @@ def check_if_collection_exists(collectionname):
     else:
         return True
 
-def dashboard_stat(StatType,request):
-    if(request.method=="GET"):
-        if(StatType=="numberofemployees"):
+
+def dashboard_stat(StatType, request):
+    if(request.method == "GET"):
+        if(StatType == "numberofemployees"):
             return find_number_of_documents_in_collection("EmployeeDetails")
-        elif(StatType=="numberofprojects"):
+        elif(StatType == "numberofprojects"):
             return find_number_of_documents_in_collection("ProjectDetails")
-        elif(StatType=="numberofvisits"):
+        elif(StatType == "numberofvisits"):
             return find_number_of_documents_in_collection("Screen Sizes")
 
 
@@ -300,7 +301,8 @@ def download_attendance(projectname):
     collection_exists = check_if_collection_exists(
         projectname+"WorkerAttendance")
     if(collection_exists):
-        workbook_generated = get_raw_data_for_workbook(get_all_attendance(projectname), projectname)
+        workbook_generated = get_raw_data_for_workbook(
+            get_all_attendance(projectname), projectname)
         if(workbook_generated):
             return{"status": "success", "message": "collection exists workbook generated", "DownloadURL": "/static/generated/"+projectname+"WorkerAttendance.xlsx"}
         else:

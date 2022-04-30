@@ -16,4 +16,4 @@ def GetLocation(request):
     elif request.method == 'GET':
         with open('static/location.json', 'r+') as f:
             previousdata = json.load(f)
-            return json.dumps(previousdata)
+            return previousdata
