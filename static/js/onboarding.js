@@ -84,6 +84,9 @@ var GetInputFields = function () {
     let Fieldarray = new Array(GlobalFieldnames.length)
     let FileUploadFields = []
     let data = {}
+    let today = new Date().toLocaleDateString()
+    today=today.replaceAll('/','-')
+    data["Onboaded On"]=today
     let emptyfields = false
     for (x in GlobalFieldnames) {
         if (GlobalFieldnames[x].includes("Photo")) {

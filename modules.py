@@ -10,7 +10,7 @@ from mongoatlas import *
 def screensizelogger(data):
     data = data.decode('utf-8')
     data = json.loads(data)
-    atlas_id=post_to_mongo(data, "Screen SIzes", "FlutechERP")
+    atlas_id=post_to_mongo(data, "Screen Sizes", "FlutechERP")
     return atlas_id
 
 # This function recieves a base64 image from the frontend and sends it to the conversion function

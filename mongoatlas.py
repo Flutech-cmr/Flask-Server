@@ -268,6 +268,13 @@ def get_all_attendance(projectname):
         iter += 1
     return all_workers
 
+def get_entire_collection(colectionname):
+    cluster = return_cluster()
+    db = cluster["FlutechERP"]
+    collection = db[colectionname]
+    results = collection.find({})
+    return results
+
 
 def check_if_collection_exists(collectionname):
     cluster = return_cluster()
@@ -285,6 +292,8 @@ def dashboard_stat(StatType,request):
             return find_number_of_documents_in_collection("EmployeeDetails")
         elif(StatType=="numberofprojects"):
             return find_number_of_documents_in_collection("ProjectDetails")
+        elif(StatType=="numberofvisits"):
+            return find_number_of_documents_in_collection("Screen Sizes")
 
 
 def download_attendance(projectname):

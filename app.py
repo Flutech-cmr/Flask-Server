@@ -79,10 +79,6 @@ def faceattandance():
 def addemployee():
     return render_template('addemployee.html')
 
-
-@app.route('/employee-details')
-def employee_details():
-    return render_template('employeedetails.html')
 # This route opens the ERP project Tracker
 
 
