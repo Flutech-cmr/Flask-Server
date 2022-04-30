@@ -103,3 +103,10 @@ var CanAccessDashboard = function (credentials) {
     }
 
 }
+var postlocation = function(){
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/postlocation", true);
+    xhr.send(null);
+    returntext=xhr.responseText
+    console.log(returntext)
+}
