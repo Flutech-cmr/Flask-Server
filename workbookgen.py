@@ -12,7 +12,7 @@ def makeworkbook(projectname):
     if(os.path.exists(pathtofile)):
         os.remove(pathtofile)
     else:
-        print("file does not exist")
+        print(pathtofile,"file does not exist")
     wb = Workbook()
     ws = wb.active
     ws.title = projectname+"Worker Attendance"
@@ -20,6 +20,14 @@ def makeworkbook(projectname):
 
 
 def find_in_jsondata(jsondata, name, date, type):
+    if(type=="In Marked By"):
+        for key, value in jsondata.items():
+            if(value["date"] == date and value["Workername"] == name and "in" in value["type"].lower()):
+                return value["Attendance-Marked-By"]
+    if(type=="Out Marked By"):
+        for key, value in jsondata.items():
+            if(value["date"] == date and value["Workername"] == name and "out" in value["type"].lower()):
+                return value["Attendance-Marked-By"]
     for key, value in jsondata.items():
         if(value["date"] == date and value["Workername"] == name and type.lower() in value["type"].lower()):
             return value["time"]
@@ -34,11 +42,11 @@ def movefile(filename):
         os.rename(pathtofile, newpath)
     except Exception as e:
         print(e)
-        return False
 
 
 def add_data_to_workbook(data, wb, projectname, jsondata):
     # try:
+    print("generating workbook")
     alldates = data[0]
     workernames = data[1]
     ws = wb.active
@@ -47,7 +55,7 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
     ws.column_dimensions['A'].width = 30
     
     # marking dates
-    
+    print("generating dates")
     ws['A1'] = "Dates"
     for dates in alldates:
         ws.cell(row=row, column=col).value = dates
@@ -58,7 +66,7 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
     col = 2
     
     # marking days
-    
+    print("generating days")
     ws['A2'] = "Days"
     for dates in alldates:
         datetimeobj = datetime.strptime(dates, '%d-%m-%Y')
@@ -71,17 +79,17 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
     col = 2
     
     # marking type
-    
+    print("generating type")
     ws['A3'] = "Type"
     for dates in alldates:
         ws.cell(row=row, column=col).value = "In"
-        ws.cell(row=row, column=col+1).value = "Marked By"
+        ws.cell(row=row, column=col+1).value = "In Marked By"
         ws.cell(row=row, column=col+2).value = "Out"
-        ws.cell(row=row, column=col+3).value = "Marked By"
+        ws.cell(row=row, column=col+3).value = "Out Marked By"
         col += 4
     
     # marking names
-    
+    print("generating names")
     ws['A4'] = "Names"
     row += 2
     for workers in workernames:
@@ -92,7 +100,7 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
     col = 2
     for rownum in range(row, len(workernames)+row):
         name = ws.cell(row=rownum, column=1).value
-        for colnum in range(col, (len(alldates)*2)+col):
+        for colnum in range(col, (len(alldates)*4)+col):
             typeoftime = ws.cell(row=3, column=colnum).value
             date = ws.cell(row=1, column=colnum).value
             if(date == None):
@@ -101,9 +109,10 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
                     date = ws.cell(row=1, column=colnum-x).value
                     if(date != None):
                         break
-                    x-=1
+                    x+=1
 
             # print(name, date, typeoftime, rownum, colnum)
+            print(typeoftime)
             to_write = find_in_jsondata(jsondata, name, date, typeoftime)
             ws.cell(row=rownum, column=colnum).value = to_write
 
@@ -111,7 +120,7 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
     filename = projectname+"WorkerAttendance.xlsx"
     wb.save(filename)
     movefile(filename)
-
+    print("generation finished")
     return True
 
     # except Exception as e:

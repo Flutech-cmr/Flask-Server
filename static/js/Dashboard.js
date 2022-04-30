@@ -1,6 +1,7 @@
 
 
 var fetchattendance = function (id) {
+    console.log("attempting to fetch attendance")
     const projectname = id.split("-")[0];
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "/DownloadAttendance/" + projectname, true);

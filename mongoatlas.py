@@ -156,7 +156,6 @@ def previous_login_exists(data):
 
 
 def load_projects():
-    print("retriving all projects")
     cluster = return_cluster()
     db = cluster["FlutechERP"]
     collection = db["ProjectDetails"]
@@ -177,7 +176,6 @@ def find_number_of_documents_in_collection(collection_name):
     collection = db[collection_name]
     results=collection.find({})
     length=str(results.count())
-    print(length)
     return length
     
 
