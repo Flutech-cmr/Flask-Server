@@ -93,19 +93,27 @@ var CanAccessDashboard = function (credentials) {
     const IsAccessAvailable = credentials[0]
     const IsEmpIDAvailable = credentials[1]
     console.log(IsAccessAvailable, IsEmpIDAvailable);
+    const WindowHeight = window.innerHeight;
+    const WindowWidth = window.innerWidth;
+    if(WindowHeight>WindowWidth){
+        window.location.href = "/notallowed"
+        return
+    }
     if (IsAccessAvailable != null && IsEmpIDAvailable != null) {
         if (IsAccessAvailable >= 1) {
             return
         }
         else{
             window.location.href = "/master"
+            return
         }
     }
     else{
         window.location.href = "/master"
+        return
     }
-
 }
+
 var postlocation = function(){
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/postlocation", true);

@@ -92,6 +92,11 @@ def dashboard():
     return render_template('Dashboard/index.html')
 
 
+@app.route('/dashboardemployees')
+def dashboardemployees():
+    return render_template('Dashboard/dashboardemployees.html')
+
+
 @app.route('/masterpanel')
 def masterpanel():
     return render_template('masterpanel.html')
@@ -264,6 +269,10 @@ def uploadcredentials():
 @app.route('/location')
 def location():
     return render_template('locationindex.html')
+
+@app.route('/notallowed')
+def not_allowed():
+    return render_template('notallowed.html')
 
 
 @app.route('/WebviewLocationIntercept')

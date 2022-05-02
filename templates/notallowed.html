@@ -1,0 +1,35 @@
+{% from "components.html" import footer, navbar, modal %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- tailwind css cdn -->
+       <link rel="stylesheet" href="static/css/tailwind.min.css">
+    <link rel="stylesheet" href="static/css/flutech.css">
+    <title>Not Allowed</title>
+</head>
+<body>
+    <section>
+        {{ navbar() }}
+    </section>
+    <div class="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-500 to-indigo-800">
+        <div class="bg-white font-semibold text-center rounded-3xl border shadow-lg p-10 max-w-xs min-width-phone min-height-phone">
+            <img class="mb-3 w-32 h-32 rounded-full shadow-lg mx-auto" src="/static/img/flutech-logo.jpg" alt="logo">
+            <h1 class="text-lg text-gray-700"> Error! </h1>
+            <!-- <h3 class="text-sm text-gray-400 "> Creative Director </h3> -->
+            <p class="text-s text-gray-600 mt-4">You are not allowed to access this feature</p>
+            <button class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight" onclick="history.back()">Go Back</button>
+        </div>
+    </div>
+    <section>
+        {{ footer() }}
+    </section>
+</body>
+<script defer>
+    setTimeout(function () {
+        window.location.href = "/";
+    }, 10000);
+</script>
+</html>
