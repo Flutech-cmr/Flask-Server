@@ -101,6 +101,9 @@ var CanAccessDashboard = function (credentials) {
             window.location.href = "/master"
         }
     }
+    else{
+        window.location.href = "/master"
+    }
 
 }
 var postlocation = function(){
