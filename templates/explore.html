@@ -1,15 +1,17 @@
 {% from "components.html" import footer, navbar %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- tailwind css cdn -->
-       <link rel="stylesheet" href="static/css/tailwind.min.css">
+    <link rel="stylesheet" href="static/css/tailwind.min.css">
     <link rel="stylesheet" href="static/css/flutech.css">
     <title>Explore</title>
 </head>
+
 <body>
     <section>
         {{ navbar() }}
@@ -23,23 +25,29 @@
             <p class="text-s text-gray-400 mt-4">View in pages that are work in progress</p>
             <!-- rounded div with shadow -->
             <div>
-                <p class="mt-6 bg-red-400 p-6 rounded-md text-white shadow-lg" onclick="window.location='/face-attendance'">Face Attendance</p>
-                <p class="mt-6 bg-red-400 p-6 rounded-md text-white shadow-lg" onclick="postlocation" id="postlocation">Post Location</p>
+                <p class="mt-6 bg-red-400 p-6 rounded-md text-white shadow-lg"
+                    onclick="window.location='/face-attendance'">Face Attendance</p>
+                <p class="mt-6 bg-red-400 p-6 rounded-md text-white shadow-lg" onclick="postlocation" id="postlocation">
+                    Post Location</p>
                 <!-- <p class="mt-6 bg-red-400 p-6 rounded-md text-white shadow-lg" onclick="window.location='/workeronboarding'">Worker Onboarding</p> -->
             </div>
         </div>
     </div>
     <script>
-        var postlocation = function(){
+        var postlocation = function () {
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "/postlocation", true);
             xhr.send(null);
-            returntext=xhr.responseText
+            returntext = xhr.responseText
             console.log(returntext)
         }
+    </script>
+    <script type='text/javascript'>
+        Print.postMessage('Hello World being called from Javascript code');
     </script>
     <section>
         {{ footer() }}
     </section>
 </body>
+
 </html>
