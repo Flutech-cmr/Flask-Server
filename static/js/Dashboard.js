@@ -92,7 +92,6 @@ var GetStats = function (id) {
 var CanAccessDashboard = function (credentials) {
     const IsAccessAvailable = credentials[0]
     const IsEmpIDAvailable = credentials[1]
-    console.log(IsAccessAvailable, IsEmpIDAvailable);
     const WindowHeight = window.innerHeight;
     const WindowWidth = window.innerWidth;
     if(WindowHeight>WindowWidth){
