@@ -31,7 +31,7 @@ def find_in_jsondata(jsondata, name, date, type):
     for key, value in jsondata.items():
         if(value["date"] == date and value["Workername"] == name and type.lower() in value["type"].lower()):
             return value["time"]
-    return "Not Found"
+    return "Unavailable"
 
 
 def movefile(filename):
