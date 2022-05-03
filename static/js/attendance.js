@@ -17,10 +17,14 @@ var EnableDisableButtons = function (id) {
     }
 }
 
+var GetFlutterLocation = function (rand) {
+    GetLocation.postMessage('GetFlutterLocation' + '|' + rand);
+}
+
 var postattendance = function (payload) {
     const xhr = new XMLHttpRequest()
-    const projectname=GetProjectName()
-    xhr.open("POST", "/workerattendance/"+projectname, true)
+    const projectname = GetProjectName()
+    xhr.open("POST", "/workerattendance/" + projectname, true)
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     if (payload["function"] == "marknew") {
@@ -72,17 +76,18 @@ var postattendance = function (payload) {
         }
     }
 }
-var GetAttendanceMarkerID=function(){
-    const EMP_Id=localStorage.getItem("Flutech_EMP_ID")
-    if(EMP_Id==null){
+var GetAttendanceMarkerID = function () {
+    const EMP_Id = localStorage.getItem("Flutech_EMP_ID")
+    if (EMP_Id == null) {
         return "0"
     }
-    else{
+    else {
         return EMP_Id
     }
 }
 
 var MarkInTime = function (id, workername, contractor, labourtype) {
+    const rand = Math.random()
     payload = {
         "Workername": workername,
         "ContractorID": contractor,
@@ -90,13 +95,16 @@ var MarkInTime = function (id, workername, contractor, labourtype) {
         "id": id,
         "type": "intime",
         "function": "marknew",
-        "Attendance-Marked-By":""
+        "Attendance-Marked-By": ""
     }
-    payload["Attendance-Marked-By"]=GetAttendanceMarkerID()
+    payload["Attendance-Marked-By"] = GetAttendanceMarkerID()
+    payload["random"] = rand
+    GetFlutterLocation(rand)
     postattendance(payload)
 }
 
 var MarkOutTime = function (id, workername, contractor, labourtype) {
+    const rand = Math.random()
     payload = {
         "Workername": workername,
         "ContractorID": contractor,
@@ -104,9 +112,11 @@ var MarkOutTime = function (id, workername, contractor, labourtype) {
         "id": id,
         "type": "outtime",
         "function": "marknew",
-        "Attendance-Marked-By":""
+        "Attendance-Marked-By": ""
     }
-    payload["Attendance-Marked-By"]=GetAttendanceMarkerID()
+    payload["Attendance-Marked-By"] = GetAttendanceMarkerID()
+    payload["random"] = rand
+    GetFlutterLocation(rand)
     postattendance(payload)
 }
 
@@ -153,8 +163,8 @@ var PopulateWorkeronPage = function (workername, contractor, labourtype, key) {
 // this function is the entrypoint for the page
 var GetAllEmployees = function () {
     const xhr = new XMLHttpRequest()
-    const currentpage=GetProjectName()
-    xhr.open("GET", "/getallworkers/"+currentpage, true)
+    const currentpage = GetProjectName()
+    xhr.open("GET", "/getallworkers/" + currentpage, true)
     xhr.setRequestHeader("Content-Type", "application/json")
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.send()

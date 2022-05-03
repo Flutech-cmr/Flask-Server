@@ -38,7 +38,6 @@ function post_screen_size() {
         DeviceDetailsPayload["IP"] = value;
     }
     )
-    console.log(DeviceDetailsPayload);
     const url = "/screen-sizes";
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
@@ -46,9 +45,6 @@ function post_screen_size() {
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.send(JSON.stringify(DeviceDetailsPayload));
     xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(xhr.responseText);
-        }
     }
 }
 window.onload = post_screen_size();

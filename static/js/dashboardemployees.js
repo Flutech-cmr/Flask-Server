@@ -13,7 +13,7 @@ var GetAllEmployees = function () {
                 document.getElementsByClassName("EmployeeID")[key].innerText = value["Employee ID"];
                 document.getElementsByClassName("EmployeeDept")[key].innerText = value["Employee Dept"];
                 document.getElementsByClassName("EmployeeCompany")[key].innerText = value["Employee Company"];
-                document.getElementsByClassName("DateOfJoining")[key].innerText = value["Date Of Joining"];
+                document.getElementsByClassName("DateOfJoining")[key].innerText = value["Employee Date Of Joining"];
                 document.getElementsByClassName("EmployeeRole")[key].innerText = value["Employee Role"];
                 document.getElementsByClassName("MobileNumber")[key].innerText = value["Mobile Number"];
             }
