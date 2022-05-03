@@ -4,8 +4,8 @@ import os
 cwd=os.getcwd()
 repo = pygit2.Repository(cwd)
 
-print(repo.head.name)
-print(repo.head.target)
+# add all changes
+repo.stage(['testpygit.py'])
 
-# perform git pull
-repo.remotes['origin'].fetch()
+# commit changes
+repo.create_commit('HEAD', pygit2.Signature('Test Pygit'
