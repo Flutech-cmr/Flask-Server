@@ -58,8 +58,7 @@ def performgit(to_terminal):
         sp = subprocess.Popen(to_terminal, shell=True, stdout=subprocess.PIPE)
         subprocess_return = sp.stdout.read()
         subprocess_return = subprocess_return.decode('utf-8')
-        response = {'response': subprocess_return}
-        return response
+        return subprocess_return
 
 # This function is a ripoff of the previous function but without any filters. It must contain credentials in the long run
 def runonterminal(to_terminal):
