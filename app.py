@@ -270,10 +270,6 @@ def uploadcredentials():
     return response
 
 
-@app.route('/location')
-def location():
-    return render_template('locationindex.html')
-
 @app.route('/notallowed')
 def not_allowed():
     return render_template('notallowed.html')
