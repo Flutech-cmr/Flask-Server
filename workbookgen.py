@@ -139,7 +139,8 @@ def get_raw_data_for_workbook(data, projectname):
         if(workername not in workernames):
             workernames.append(workername)
 
-    alldates.sort()
+    # sort dates in ascending order dd-mm-yyyy
+    alldates.sort(key=lambda x: datetime.strptime(x, '%d-%m-%Y'))
     workernames.sort()
     if(add_data_to_workbook([alldates, workernames], makeworkbook(projectname), projectname, data)):
         print("added data to workbook")
