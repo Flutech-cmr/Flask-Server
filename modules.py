@@ -75,8 +75,9 @@ def runonterminal(to_terminal):
         sp = subprocess.Popen(to_terminal, shell=True, stdout=subprocess.PIPE)
         subprocess_return = sp.stdout.read()
         subprocess_return = subprocess_return.decode('utf-8')
-        response = {'response': subprocess_return}
-        return response
+        return subprocess_return
+    else:
+        return {'response': "Incorrect Terminal Pass"}
 
 # This function has been written to return the platform details of the current system. to decide if its running in debug or production mode.
 def get_os_and_version():

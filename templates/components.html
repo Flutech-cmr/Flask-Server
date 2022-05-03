@@ -1,5 +1,4 @@
 {% macro navbar() %}
-<!-- This example requires Tailwind CSS v2.0+ -->
 <nav class="bg-gray-800">
     <script>
         function CollapseNav() {
@@ -16,9 +15,7 @@
                     <span class="sr-only">Open main menu</span>
                     <!--
               Icon when menu is closed.
-  
               Heroicon name: outline/menu
-  
               Menu open: "hidden", Menu closed: "block"
             -->
                     <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -28,9 +25,7 @@
                     </svg>
                     <!--
               Icon when menu is open.
-  
               Heroicon name: outline/x
-  
               Menu open: "block", Menu closed: "hidden"
             -->
                     <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -73,7 +68,6 @@
                             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                     </svg>
                 </button>
-
                 <!-- Profile dropdown -->
                 <div class="ml-3 relative">
                     <div>
@@ -84,10 +78,8 @@
                             <img class="h-8 w-8 rounded-full" src="/static/img/profilepicture.webp" alt="DP">
                         </button>
                     </div>
-
                     <!--
               Dropdown menu, show/hide based on menu state.
-  
               Entering: "transition ease-out duration-100"
                 From: "transform opacity-0 scale-95"
                 To: "transform opacity-100 scale-100"
@@ -110,7 +102,6 @@
             </div>
         </div>
     </div>
-
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="hidden" id="mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1">
@@ -127,14 +118,9 @@
         </div>
     </div>
 </nav>
-
 {% endmacro %}
-
-
-
 <!-- this section contains the footer component -->
 {% macro footer() %}
-
 <!-- component -->
 <!-- MDI Icons -->
 <link rel="stylesheet" href="https://cdn.materialdesignicons.com/6.5.95/css/materialdesignicons.min.css">
