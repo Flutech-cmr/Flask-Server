@@ -276,6 +276,20 @@ def get_entire_collection(colectionname):
     return results
 
 
+def get_entire_collection_for_js(colectionname):
+    cluster = return_cluster()
+    db = cluster["FlutechERP"]
+    collection = db[colectionname]
+    results = collection.find({})
+    all_results={}
+    iter=0
+    for x in results:
+        x["_id"]=str(x["_id"])
+        all_results[iter]=x
+        iter+=1
+    print("[INFO] Returning all results for js")
+    return all_results
+
 def check_if_collection_exists(collectionname):
     cluster = return_cluster()
     db = cluster["FlutechERP"]

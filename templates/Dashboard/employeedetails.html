@@ -356,7 +356,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
+                                    <tbody class="bg-white divide-y divide-gray-200" id="employeelistparent">
                                         <template>
                                             <tr class="hover:bg-gray-100">
                                                 <td class="p-4 w-4">
@@ -372,7 +372,7 @@
                                                         src="../static/img/profilepicture.webp" alt="Profile Picture">
                                                 </td>
                                                 <td
-                                                    class="p-4 whitespace-nowrap text-base font-medium text-gray-900 employeeName">
+                                                    class="p-4 whitespace-nowrap text-base font-medium text-gray-900 EmployeeName">
                                                 </td>
                                                 <td
                                                     class="p-4 whitespace-nowrap text-base font-medium text-gray-900 EmployeeID">
@@ -704,5 +704,8 @@
         </div>
     </div>
     <script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
+    <script>
+        GetAllEmployees();
+    </script>
 </body>
 </html>

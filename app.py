@@ -220,6 +220,11 @@ def pull():
     response = performgit(request.data)
     return response
 
+@app.route('/getcollection/<collection>', methods=['GET', 'POST'])
+def getcollection(collection):
+    response = get_entire_collection_for_js(collection)
+    return response    
+
 @app.route('/dashboardStats/<StatType>', methods=['GET', 'POST'])
 @cross_origin()
 def dashboardstat(StatType):
