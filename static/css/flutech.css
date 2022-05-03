@@ -2,7 +2,7 @@
     min-width: 340px;
 }
 
-@media only screen and (max-width: 600px) and (min-width: 400px)  {
+@media only screen and (max-width: 600px) and (min-width: 300px)  {
     .min-width-phone {
         min-width: 100%;
     }
