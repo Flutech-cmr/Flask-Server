@@ -250,8 +250,7 @@ def gitpull():
     sp = subprocess.Popen("git pull", shell=True, stdout=subprocess.PIPE)
     subprocess_return = sp.stdout.read()
     subprocess_return = subprocess_return.decode('utf-8')
-    response = {'response': subprocess_return}
-    return response
+    return subprocess_return
 
 
 @app.route('/explore')
