@@ -13,7 +13,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install cmake
 RUN apt-get install -y libopenblas-dev 
 RUN apt-get install -y liblapack-dev 
 RUN apt-get install -y libjpeg-dev
-RUN apt-get install -y python-openpyxl
 
 # installing python packages
 
