@@ -1,1 +1,22 @@
-.min-width-phone {min-width: 340px;}.min-height-phone {min-height: 370px;}.no-scrollbar::-webkit-scrollbar {display: none;}.no-scrollbar {-ms-overflow-style: none;scrollbar-width: none;}
+.min-width-phone {
+    min-width: 340px;
+}
+
+@media only screen and (max-width: 600px) and (min-width: 400px)  {
+    .min-width-phone {
+        min-width: 100%;
+    }
+}
+
+.min-height-phone {
+    min-height: 370px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
