@@ -71,7 +71,6 @@ var GetProjectFromAPi = function () {
 
 var PopulateProjects = function () {
     GetProjectFromAPi();
-    console.log("populated projects");
 }
 
 
@@ -120,3 +119,4 @@ var postlocation = function(){
     returntext=xhr.responseText
     console.log(returntext)
 }
+
