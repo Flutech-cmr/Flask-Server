@@ -27,7 +27,7 @@
             <div>
                 <p class="mt-6 bg-red-400 p-6 rounded-md text-white shadow-lg"
                     onclick="window.location='/face-attendance'">Face Attendance</p>
-                <p class="mt-6 bg-red-400 p-6 rounded-md text-white shadow-lg" onclick="postlocation" id="postlocation">
+                <p class="mt-6 bg-red-400 p-6 rounded-md text-white shadow-lg" onclick="madhu()" id="postlocation">
                     Post Location</p>
                 <!-- <p class="mt-6 bg-red-400 p-6 rounded-md text-white shadow-lg" onclick="window.location='/workeronboarding'">Worker Onboarding</p> -->
             </div>
@@ -43,7 +43,10 @@
         }
     </script>
     <script type='text/javascript'>
-        Print.postMessage('Hello World being called from Javascript code');
+        function GetFlutterLocation() {
+            const rand=Math.random();
+            GetLocation.postMessage('GetFlutterLocation'+'|'+rand);
+        }
     </script>
     <section>
         {{ footer() }}
