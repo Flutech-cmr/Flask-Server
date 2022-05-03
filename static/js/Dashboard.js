@@ -120,3 +120,4 @@ var postlocation = function(){
     console.log(returntext)
 }
 
+console.log("dashboard")
