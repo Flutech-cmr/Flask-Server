@@ -244,6 +244,10 @@ def loadprojects():
     response = load_projects()
     return response
 
+@app.route('/api/<apitype>/<apiname>', methods=['GET', 'POST'])
+def api(apitype,apiname):
+    return apihandler(request,apitype,apiname)
+
 
 @app.route('/gitpull')
 def gitpull():

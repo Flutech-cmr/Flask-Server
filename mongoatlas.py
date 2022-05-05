@@ -325,5 +325,11 @@ def download_attendance(projectname):
         return{"status": "failed", "message": "collection does not exist"}
 
 
+def apihandler(request,apitype,apiname):
+    print(request)
+    return{"status": "failed", "message": "not implemented"}
+
+
+
 if __name__ == "__main__":
     pass
