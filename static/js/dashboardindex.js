@@ -42,6 +42,8 @@ var populateTable = function (projectname) {
     td1.innerHTML = projectname;
     let td2 = document.createElement("td");
     td2.classList.add("p-4", "whitespace-nowrap", "text-sm", "font-normal", "text-gray-900");
+    let td3 = document.createElement("td");
+    td3.classList.add("p-4", "whitespace-nowrap", "text-sm", "font-normal", "text-gray-900");
     let p = document.createElement("p");
     p.setAttribute("id", projectname + "-p");
     p.classList.add("hidden", "sm:inline-flex", "ml-5", "text-white", "bg-cyan-600", "hover:bg-cyan-700", "focus:ring-4", "focus:ring-cyan-200", "font-medium", "rounded-lg", "text-sm", "px-5", "py-2.5", "text-center", "items-center", "mr-3");
@@ -49,9 +51,15 @@ var populateTable = function (projectname) {
     p.onclick = function () {
         fetchattendance(this.id)
     }
+    let p2 = document.createElement("p");
+    p2.setAttribute("id", projectname + "-p");
+    // p2.classList.add("hidden", "sm:inline-flex", "ml-5", "text-white", "bg-cyan-600", "hover:bg-cyan-700", "focus:ring-4", "focus:ring-cyan-200", "font-medium", "rounded-lg", "text-sm", "px-5", "py-2.5", "text-center", "items-center", "mr-3");
+    p2.innerHTML = "Marked Today";
     td2.appendChild(p);
+    td3.appendChild(p2);
     tr.appendChild(td1);
     tr.appendChild(td2);
+    tr.appendChild(td3);
     tboady.appendChild(tr);
 }
 
