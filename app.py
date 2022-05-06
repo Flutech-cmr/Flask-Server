@@ -92,9 +92,12 @@ def dashboard():
     return render_template('Dashboard/index.html')
 
 
-@app.route('/dashboard/employees')
-def dashboardemployees():
-    return render_template('Dashboard/employeedetails.html')
+@app.route('/dashboard/<page>')
+def dashboardemployees(page):
+    if(page == 'employees'):
+        return render_template('Dashboard/employeedetails.html')
+    elif(page == 'workers'):
+        return render_template('Dashboard/workerdetails.html')
 
 
 @app.route('/masterpanel')

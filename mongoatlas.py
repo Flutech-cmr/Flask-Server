@@ -52,6 +52,7 @@ def delete_many_from_mongo(data, to_collection, to_db):
     print("{} Records Deleted".format(results.deleted_count))
     return results.deleted_count
 
+
 def delete_one_from_mongo(data, to_collection, to_db):
     cluster = return_cluster()
     db = cluster[to_db]
@@ -66,6 +67,7 @@ def find_in_mongo(data, to_collection, to_db):
     db = cluster[to_db]
     collection = db[to_collection]
     results = collection.find(data)
+    print("[INFO] Results Count {}".format(results.count()))
     return results
 
 
@@ -202,7 +204,6 @@ def add_project_site(data):
 def add_workers_to_db(data, projectname):
     data = data.decode('utf-8')
     data = json.loads(data)
-    print("[INFO] Adding workers to database")
     cluster = return_cluster()
     db = cluster["FlutechERP"]
     collectioname = projectname+"WorkerDetails"
@@ -212,7 +213,6 @@ def add_workers_to_db(data, projectname):
 
 
 def get_workers_from_db(data, projectname):
-    print("retriving all workers for", projectname)
     cluster = return_cluster()
     db = cluster["FlutechERP"]
     collectioname = projectname+"WorkerDetails"
@@ -335,17 +335,25 @@ def download_attendance(projectname):
 
 
 def apihandler(request, apitype, apiname):
-    data = request.data
-    data = data.decode('utf-8')
-    data = json.loads(data)
-    print(data)
+    data = None
+    if(request.method == "POST"):
+        data = request.data
+        data = data.decode('utf-8')
+        data = json.loads(data)
+    elif(request.method == "GET"):
+        pass
     id = None
-    print(data, apitype, apiname)
     if(apitype == "dashboard"):
         if(apiname == "addemployee"):
             id = add_employee(data)
         elif(apiname == "deleteemployee"):
             id = delete_one_from_mongo(data, "EmployeeDetails", "FlutechERP")
+        elif(apiname == "getprojects"):
+            return load_projects()
+        elif(apiname.startswith("deleteworker")):
+            projectname=apiname.split("_")[1]
+            # id = delete_one_from_mongo(data, projectname+"WorkerDetails", "FlutechERP")
+            id = find_in_mongo(data, projectname+"WorkerDetails", "FlutechERP")
     return {"id": str(id)}
 
 
