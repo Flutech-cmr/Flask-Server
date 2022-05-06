@@ -354,6 +354,8 @@ def apihandler(request, apitype, apiname):
             projectname=apiname.split("_")[1]
             # id = delete_one_from_mongo(data, projectname+"WorkerDetails", "FlutechERP")
             id = find_in_mongo(data, projectname+"WorkerDetails", "FlutechERP")
+            for x in id:
+                return x
     return {"id": str(id)}
 
 
