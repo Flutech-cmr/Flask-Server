@@ -31,6 +31,7 @@ var GetAllEmployees = function () {
                 document.getElementsByClassName("PANNumber")[key].innerText = value.NameMother;
                 document.getElementsByClassName("PermanantAddress")[key].innerText = value.NameFather;
                 document.getElementsByClassName("CurrentAddress")[key].innerText = value.NameMother;
+                document.getElementsByClassName("deleteuser")[key].id=value["_id"];
 
 
                 if (parseInt(key) >= maxchildren) {
@@ -137,22 +138,9 @@ var deleteusertogle = function () {
 }
 
 var parentget = function (element) {
-    const parentnode = element.parentNode.parentNode;
-    const allnodes = parentnode.childNodes
-    var data = {}
-    allnodes.forEach(td => {
-        const listt = td.classList;
-        if (listt !== undefined) {
-            if (listt.contains("Workername")) {
-                data["Workername"] = td.innerText;
-            }
-            else if (listt.contains("SiteID")) {
-                data["SiteID"] = td.innerText;
-            }
-        }
-    });
+    const node=element.id
+    const data={"_id":node}
     localStorage.setItem("deleteworker", JSON.stringify(data));
-    console.log(data);
 }
 
 var confirmdelete = function () {

@@ -354,14 +354,17 @@ def apihandler(request, apitype, apiname):
         if(apiname == "addemployee"):
             id = add_employee(data)
         elif(apiname == "deleteemployee"):
-            print(data)
-            id = delete_one_from_mongo(data, "EmployeeDetails", "FlutechERP")
+            objid = ObjectId(data["_id"])
+            id = delete_one_from_mongo(
+                {"_id": objid}, "EmployeeDetails", "FlutechERP")
         elif(apiname == "getprojects"):
             return load_projects()
         elif(apiname.startswith("deleteworker")):
+            objid = ObjectId(data["_id"])
             apiname = apiname.replace("deleteworker_", "")
-            id = delete_one_from_mongo(data, apiname+"WorkerDetails", "FlutechERP")
-            print(data)
+            id = delete_one_from_mongo(
+                {"_id": objid}, apiname+"WorkerDetails", "FlutechERP")
+            print(data["_id"])
 
     return {"id": str(id)}
 

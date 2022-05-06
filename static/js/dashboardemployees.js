@@ -18,6 +18,7 @@ var GetAllEmployees = function () {
                 document.getElementsByClassName("DateOfJoining")[key].innerText = value["Employee Date Of Joining"];
                 document.getElementsByClassName("EmployeeRole")[key].innerText = value["Employee Role"];
                 document.getElementsByClassName("MobileNumber")[key].innerText = value["Mobile Number"];
+                document.getElementsByClassName("deleteuser")[key].id=value["_id"];
                 if (parseInt(key) >= maxchildren) {
                     hidekey = parseInt(key) + 1;
                     document.getElementsByTagName("tr")[hidekey].classList.add("hidden");
@@ -126,30 +127,14 @@ var deleteusertogle = function () {
 }
 
 var parentget = function (element) {
-    const parentnode = element.parentNode.parentNode;
-    const allnodes = parentnode.childNodes
-    var data = {}
-    allnodes.forEach(td => {
-        const listt = td.classList;
-        if (listt !== undefined) {
-            if (listt.contains("EmployeeID")) {
-                data["Employee ID"] = td.innerText;
-            }
-            else if (listt.contains("EmployeeName")) {
-                data["Employee Name"] = td.innerText;
-            }
-            else if (listt.contains("EmployeeDept")) {
-                data["Employee Dept"] = td.innerText;
-            }
-        }
-    });
-    localStorage.setItem("deleteuser", JSON.stringify(data));
+    const node=element.id
+    const data={"_id":node}
+    localStorage.setItem("deleteemployee", JSON.stringify(data));
 }
 
-var confirmdelete=function(){
+var confirmdelete = function () {
     const xhr = new XMLHttpRequest();
-    const payload=localStorage.getItem("deleteuser")
-    console.log(payload)
+    const payload = localStorage.getItem("deleteemployee")
     xhr.open("POST", "/api/dashboard/deleteemployee", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(payload);
@@ -157,7 +142,7 @@ var confirmdelete=function(){
         if (xhr.status == 200) {
             location.reload();
             console.log("deleted");
-            localStorage.removeItem("deleteuser");
+            localStorage.removeItem("deleteemployee");
         }
     }
 }

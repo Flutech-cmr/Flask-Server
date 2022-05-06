@@ -1,7 +1,7 @@
-Flask_Cors==3.0.10
-openpyxl==3.0.9
-Flask==2.1.1
 requests==2.26.0
+Flask_Cors==3.0.10
 Werkzeug==2.1.1
+openpyxl==3.0.9
 pymongo==3.11.4
-pyTelegramBotAPI==4.4.1
+Flask==2.1.1
+pyTelegramBotAPI==4.5.0
