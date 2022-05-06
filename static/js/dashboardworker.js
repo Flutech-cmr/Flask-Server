@@ -167,6 +167,7 @@ var confirmdelete = function () {
         if (xhr.status == 200) {
             // location.reload();
             console.log("deleted worker");
+            console.log(xhr.responseText);
             localStorage.removeItem("deleteworker");
         }
     }
