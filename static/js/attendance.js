@@ -158,7 +158,12 @@ var PopulateWorkeronPage = function (workername, contractor, labourtype, key) {
 
 }
 
-
+var ProjectTitle = function () {
+    const projectname = GetProjectName()
+    let div = document.getElementById("projecttitle")
+    div.innerHTML = projectname + " Attendance";
+    console.log("here", projectname)
+}
 
 // this function is the entrypoint for the page
 var GetAllEmployees = function () {
@@ -170,7 +175,6 @@ var GetAllEmployees = function () {
     xhr.send()
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(xhr.responseText)
             const ResponseTextAllWorkers = JSON.parse(xhr.responseText)
             let maxkey = 0
             for (const [key, value] of Object.entries(ResponseTextAllWorkers)) {
