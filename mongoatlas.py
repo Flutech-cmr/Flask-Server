@@ -71,6 +71,14 @@ def find_in_mongo(data, to_collection, to_db):
     return results
 
 
+def find_one_in_mongo(data, to_collection, to_db):
+    cluster = return_cluster()
+    db = cluster[to_db]
+    collection = db[to_collection]
+    results = collection.find_one(data)
+    return results
+
+
 def update_in_mongo(data, to_collection, to_db, append_data, Flag):
     cluster = return_cluster()
     db = cluster[to_db]
@@ -149,7 +157,6 @@ def previous_login_exists(data):
     print("[INFO] Checking for previous login")
     current_page = data["currentpage"]
     del data["status"]
-    print(data)
     results_of_find = find_in_mongo(
         {"Employee ID": data["username"], "App Privileges": int(data["access_level"])}, "EmployeeDetails", "FlutechERP")
     if(results_of_find.count() == 0):
@@ -347,15 +354,15 @@ def apihandler(request, apitype, apiname):
         if(apiname == "addemployee"):
             id = add_employee(data)
         elif(apiname == "deleteemployee"):
+            print(data)
             id = delete_one_from_mongo(data, "EmployeeDetails", "FlutechERP")
         elif(apiname == "getprojects"):
             return load_projects()
         elif(apiname.startswith("deleteworker")):
-            projectname=apiname.split("_")[1]
-            # id = delete_one_from_mongo(data, projectname+"WorkerDetails", "FlutechERP")
-            id = find_in_mongo(data, projectname+"WorkerDetails", "FlutechERP")
-            for x in id:
-                return x
+            apiname = apiname.replace("deleteworker_", "")
+            id = delete_one_from_mongo(data, apiname+"WorkerDetails", "FlutechERP")
+            print(data)
+
     return {"id": str(id)}
 
 

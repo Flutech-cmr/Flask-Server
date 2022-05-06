@@ -1,6 +1,7 @@
 var GetAllEmployees = function () {
     const xhr = new XMLHttpRequest();
     const project = currentproject();
+    console.log(project)
     xhr.open("GET", "/getallworkers/" + project, true);
     xhr.send(null);
     xhr.onload = function () {
@@ -14,6 +15,7 @@ var GetAllEmployees = function () {
                 document.getElementsByClassName("SlNo")[key].innerText = parseInt(key) + 1;
                 document.getElementsByClassName("Workername")[key].innerText = value.Workername;
                 document.getElementsByClassName("CompanyID")[key].innerText = value.CompanyID;
+                document.getElementsByClassName("Onboaded On")[key].innerText = value["Onboaded On"];
                 document.getElementsByClassName("SiteID")[key].innerText = value.SiteID;
                 document.getElementsByClassName("ContractorID")[key].innerText = value.ContractorID
                 document.getElementsByClassName("LabourType")[key].innerText = value.LabourType;
@@ -144,9 +146,6 @@ var parentget = function (element) {
             if (listt.contains("Workername")) {
                 data["Workername"] = td.innerText;
             }
-            else if (listt.contains("AadharNumber")) {
-                data["AadharNumber"] = td.innerText;
-            }
             else if (listt.contains("SiteID")) {
                 data["SiteID"] = td.innerText;
             }
@@ -159,13 +158,13 @@ var parentget = function (element) {
 var confirmdelete = function () {
     const xhr = new XMLHttpRequest();
     const payload = localStorage.getItem("deleteworker")
-    const projectname=currentproject()
-    xhr.open("POST", "/api/dashboard/deleteworker_"+projectname, true);
+    const projectname = currentproject()
+    xhr.open("POST", "/api/dashboard/deleteworker_" + projectname, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(payload);
     xhr.onload = function () {
         if (xhr.status == 200) {
-            // location.reload();
+            location.reload();
             console.log("deleted worker");
             console.log(xhr.responseText);
             localStorage.removeItem("deleteworker");
@@ -177,6 +176,18 @@ var currentproject = function () {
     const selector = document.getElementById("selectproject");
     const option = selector.options[selector.selectedIndex].value;
     return option;
+
+}
+
+var EmptyTable = function () {
+    const parent = document.getElementById("workerlistparent");
+    const childcount = parent.childElementCount;
+    console.log("childcount: " + childcount);
+    for (let x = 1; x < childcount; x++) {
+        parent.removeChild(parent.lastElementChild);
+    }
+    console.log(parent.childElementCount);
+    GetAllEmployees();
 
 }
 
@@ -196,6 +207,10 @@ var getprojects = function () {
                 selector.appendChild(option);
             }
             selector.options[1].selected = true;
+            selector.onchange = function () {
+                const project = selector.options[selector.selectedIndex].value;
+                EmptyTable();
+            }
             GetAllEmployees();
         }
     }
