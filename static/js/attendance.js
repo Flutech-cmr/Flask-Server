@@ -99,7 +99,7 @@ var MarkInTime = function (id, workername, contractor, labourtype) {
     }
     payload["Attendance-Marked-By"] = GetAttendanceMarkerID()
     payload["random"] = rand
-    GetFlutterLocation(rand)
+    // GetFlutterLocation(rand)
     postattendance(payload)
 }
 
@@ -116,7 +116,7 @@ var MarkOutTime = function (id, workername, contractor, labourtype) {
     }
     payload["Attendance-Marked-By"] = GetAttendanceMarkerID()
     payload["random"] = rand
-    GetFlutterLocation(rand)
+    // GetFlutterLocation(rand)
     postattendance(payload)
 }
 

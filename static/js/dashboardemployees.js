@@ -124,3 +124,40 @@ var ShowPreviousEmployees = function () {
 var deleteusertogle = function () {
     document.getElementById("delete-user-modal").classList.toggle("hidden");
 }
+
+var parentget = function (element) {
+    const parentnode = element.parentNode.parentNode;
+    const allnodes = parentnode.childNodes
+    var data = {}
+    allnodes.forEach(td => {
+        const listt = td.classList;
+        if (listt !== undefined) {
+            if (listt.contains("EmployeeID")) {
+                data["Employee ID"] = td.innerText;
+            }
+            else if (listt.contains("EmployeeName")) {
+                data["Employee Name"] = td.innerText;
+            }
+            else if (listt.contains("EmployeeDept")) {
+                data["Employee Dept"] = td.innerText;
+            }
+        }
+    });
+    localStorage.setItem("deleteuser", JSON.stringify(data));
+}
+
+var confirmdelete=function(){
+    const xhr = new XMLHttpRequest();
+    const payload=localStorage.getItem("deleteuser")
+    console.log(payload)
+    xhr.open("POST", "/api/dashboard/deleteemployee", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(payload);
+    xhr.onload = function () {
+        if (xhr.status == 200) {
+            location.reload();
+            console.log("deleted");
+            localStorage.removeItem("deleteuser");
+        }
+    }
+}

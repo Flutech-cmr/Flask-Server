@@ -52,6 +52,14 @@ def delete_many_from_mongo(data, to_collection, to_db):
     print("{} Records Deleted".format(results.deleted_count))
     return results.deleted_count
 
+def delete_one_from_mongo(data, to_collection, to_db):
+    cluster = return_cluster()
+    db = cluster[to_db]
+    collection = db[to_collection]
+    results = collection.delete_one(data)
+    print("{} Records Deleted".format(results.deleted_count))
+    return results.deleted_count
+
 
 def find_in_mongo(data, to_collection, to_db):
     cluster = return_cluster()
@@ -330,11 +338,14 @@ def apihandler(request, apitype, apiname):
     data = request.data
     data = data.decode('utf-8')
     data = json.loads(data)
+    print(data)
     id = None
     print(data, apitype, apiname)
     if(apitype == "dashboard"):
         if(apiname == "addemployee"):
             id = add_employee(data)
+        elif(apiname == "deleteemployee"):
+            id = delete_one_from_mongo(data, "EmployeeDetails", "FlutechERP")
     return {"id": str(id)}
 
 

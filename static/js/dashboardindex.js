@@ -29,6 +29,17 @@ var fetchattendance = function (id) {
     }
 }
 
+var AttendanceMarkedToday = function (id) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/dashboard/attendancemarkedtoday", true);
+    const data = {
+        "ProjectName": id
+    }
+    xhr.send(JSON.stringify(data));
+    
+
+}
+
 var populateTable = function (projectname) {
     let tboady = document.getElementById("attendancetable");
     let childelementcount = tboady.childElementCount;
@@ -127,5 +138,3 @@ var postlocation = function(){
     returntext=xhr.responseText
     console.log(returntext)
 }
-
-console.log("dashboard")
