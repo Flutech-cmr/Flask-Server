@@ -5,7 +5,7 @@ import requests
 
 commit_message = None
 payload = {"to_terminal": "git pull"}
-server_url = "https://comfytronics.in/"
+server_url = ["https://comfytronics.in/", "http://143.244.131.26"]
 
 try:
     commit_message = sys.argv[1]
@@ -45,14 +45,18 @@ print("[INFO] sleeping for 10 seconds\n")
 time.sleep(10)
 
 # check if the server is running
-print("[INFO] Checking If Server is running\n")
-r = requests.get(server_url+"/up")
-if r.status_code == 200:
-
-    # instruct server to perform a git pull if running
-    print("[INFO] performing git pull on server\n")
-    r = requests.post(server_url+'/git', json=payload)
+for server in server_url:
+    print("[INFO] Checking If Server is running\n")
+    r = requests.get(server+"/up")
     if r.status_code == 200:
-        print("[INFO] git pull successful\n")
-else:
-    print("[INFO] Server is not running. Exiting\n")
+
+        # instruct server to perform a git pull if running
+        print("[INFO] performing git pull on server\n")
+        r = requests.post(server+'/git', json=payload)
+        if r.status_code == 200:
+            print("[INFO] git pull successful\n")
+    else:
+        print("[INFO] Server is not running. Exiting\n")
+
+    if(not sys.argv[2]):
+        break
