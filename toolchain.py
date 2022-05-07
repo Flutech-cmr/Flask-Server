@@ -60,3 +60,5 @@ for server in server_url:
 
     if(not sys.argv[2]):
         break
+    else:
+        print("[INFO] Pushing to all servers in the List\n")
