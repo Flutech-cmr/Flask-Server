@@ -46,7 +46,7 @@ time.sleep(10)
 
 # check if the server is running
 for server in server_url:
-    print("[INFO] Checking If Server is running\n")
+    print("[INFO] Checking If {} is running\n".format(server))
     r = requests.get(server+"/up")
     if r.status_code == 200:
 
