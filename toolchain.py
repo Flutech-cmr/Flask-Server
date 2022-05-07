@@ -5,7 +5,7 @@ import requests
 
 commit_message = None
 payload = {"to_terminal": "git pull"}
-server_url = ["https://comfytronics.in/", "http://143.244.131.26"]
+server_url = ["https://comfytronics.in/", "http://143.244.131.26:5050"]
 
 try:
     commit_message = sys.argv[1]
