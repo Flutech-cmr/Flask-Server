@@ -18,26 +18,20 @@ var GetAllEmployees = function () {
                 document.getElementsByClassName("DateOfJoining")[key].innerText = value["Employee Date Of Joining"];
                 document.getElementsByClassName("EmployeeRole")[key].innerText = value["Employee Role"];
                 document.getElementsByClassName("MobileNumber")[key].innerText = value["Mobile Number"];
-                document.getElementsByClassName("deleteuser")[key].id=value["_id"];
+                document.getElementsByClassName("deleteuser")[key].id = value["_id"];
                 if (parseInt(key) >= maxchildren) {
                     hidekey = parseInt(key) + 1;
                     document.getElementsByTagName("tr")[hidekey].classList.add("hidden");
                 }
             }
+            totalemployees(Object.keys(returnstat).length);
         }
     }
 }
 
-var totalemployees = function () {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", "/dashboardStats/" + "numberofemployees", true);
-    xhr.send(null);
-    xhr.onload = function () {
-        if (xhr.status == 200) {
-            const returnstat = JSON.parse(xhr.responseText);
-            document.getElementById("totalemployees").innerText = returnstat
-        }
-    }
+var totalemployees = function (totalemployees) {
+
+    document.getElementById("totalemployees").innerText = totalemployees
 };
 
 var getemployeetemplate = function () {
@@ -127,8 +121,8 @@ var deleteusertogle = function () {
 }
 
 var parentget = function (element) {
-    const node=element.id
-    const data={"_id":node}
+    const node = element.id
+    const data = { "_id": node }
     localStorage.setItem("deleteemployee", JSON.stringify(data));
 }
 
