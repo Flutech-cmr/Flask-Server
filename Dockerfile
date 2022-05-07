@@ -18,7 +18,7 @@ RUN apt-get install -y libjpeg-dev
 
 RUN pip3 install --upgrade pip
 RUN pip3 install flask-restful
-RUN pip3 install numpy
+RUN pip3 install numpy==1.19.3
 RUN pip3 install dnspython==2.2.1
 RUN pip3 install itsdangerous==2.0.1
 
