@@ -37,6 +37,7 @@ def login():
     return render_template('login.html')
 # This route is for the Login Page
 
+
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -151,12 +152,6 @@ def robots():
                                'robots.txt', mimetype='text/plain')
 
 
-# This route is to be used by the cron job to keep checking if the flask server is running
-
-
-@app.route('/status')
-def status():
-    return{'System Status': 'OK'}
 # ----------------------------------------------------------------------------------------------------------------------
 # Redirects are defined below
 # ----------------------------------------------------------------------------------------------------------------------
@@ -223,16 +218,19 @@ def pull():
     response = performgit(request.data)
     return response
 
+
 @app.route('/getcollection/<collection>', methods=['GET', 'POST'])
 def getcollection(collection):
     response = get_entire_collection_for_js(collection)
-    return response    
+    return response
+
 
 @app.route('/dashboardStats/<StatType>', methods=['GET', 'POST'])
 @cross_origin()
 def dashboardstat(StatType):
-    response = dashboard_stat(StatType,request)
+    response = dashboard_stat(StatType, request)
     return response
+
 
 @app.route('/addsite', methods=['GET', 'POST'])
 @cross_origin()
@@ -247,9 +245,10 @@ def loadprojects():
     response = load_projects()
     return response
 
+
 @app.route('/api/<apitype>/<apiname>', methods=['GET', 'POST'])
-def api(apitype,apiname):
-    return apihandler(request,apitype,apiname)
+def api(apitype, apiname):
+    return apihandler(request, apitype, apiname)
 
 
 @app.route('/gitpull')
