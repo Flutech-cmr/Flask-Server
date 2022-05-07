@@ -61,14 +61,13 @@ def telegramdebug():
     try:
         data = readjsonfiles('parameters.json')
         platformdata = get_os_and_version()
-        PC_Platforms = ["Windows", "MacOS", "Darwin"]
+        PC_Platforms=["Windows", "MacOS","Darwin"]
         if(platformdata[0] not in PC_Platforms):
-            if(data['message'] == True):
+            if(data['message'] == True):  
                 ip = get('https://api.ipify.org').text
                 print('My public IP address is: {}'.format(ip))
-                message = {"message": "Flask Server was either started or restarted on IP "+ip}
-                message=str(message)
-                sendtelegrammessage(message)
+                sendtelegrammessage(
+                    '{"message": "Flask Server was either started or restarted on the cloud at '+ip+'"}')
     except Exception as e:
         print(e)
         print("[ERROR] parameters.json file not found")
