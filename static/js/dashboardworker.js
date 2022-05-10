@@ -27,10 +27,10 @@ var GetAllEmployees = function () {
                 document.getElementsByClassName("EmergencyMobileNumber2")[key].innerText = value.EmergencyMobileNumber2;;
                 document.getElementsByClassName("NameFather")[key].innerText = value.NameFather;
                 document.getElementsByClassName("NameMother")[key].innerText = value.NameMother;
-                document.getElementsByClassName("AadharNumber")[key].innerText = value.NameFather;
-                document.getElementsByClassName("PANNumber")[key].innerText = value.NameMother;
-                document.getElementsByClassName("PermanantAddress")[key].innerText = value.NameFather;
-                document.getElementsByClassName("CurrentAddress")[key].innerText = value.NameMother;
+                document.getElementsByClassName("AadharNumber")[key].innerText = value.AadharNumber;
+                document.getElementsByClassName("PANNumber")[key].innerText = value.PANNumber;
+                document.getElementsByClassName("PermanantAddress")[key].innerText = value.PermanantAddress;
+                document.getElementsByClassName("CurrentAddress")[key].innerText = value.CurrentAddress;
                 document.getElementsByClassName("deleteuser")[key].id=value["_id"];
 
 
