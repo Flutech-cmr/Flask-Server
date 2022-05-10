@@ -365,6 +365,16 @@ def apihandler(request, apitype, apiname):
             id = delete_one_from_mongo(
                 {"_id": objid}, apiname+"WorkerDetails", "FlutechERP")
             print(data["_id"])
+        elif(apiname.startswith("attendancemarkedtoday")):
+            apiname = apiname.replace("attendancemarkedtoday-", "")
+            now = datetime.utcnow()
+            now = now+timedelta(hours=5, minutes=30)
+            today = now.strftime("%d-%m-%Y")
+            data={"date":today}
+            if find_one_in_mongo(data, apiname+"WorkerAttendance", "FlutechERP") is not None:
+                return{"status": "success", "message": "attendance marked"}
+            else:
+                return{"status": "failed", "message": "attendance not marked"}
 
     return {"id": str(id)}
 
