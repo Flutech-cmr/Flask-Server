@@ -280,6 +280,10 @@ def uploadcredentials():
 def not_allowed():
     return render_template('notallowed.html')
 
+@app.route('/progresstracker')
+def progresstracker():
+    return render_template('ProgressTracker/index.html')
+
 
 @app.route('/WebviewLocationIntercept')
 @cross_origin()
