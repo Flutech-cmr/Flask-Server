@@ -48,7 +48,8 @@ var addemployee = function () {
     const EmployeeDateOfJoining = document.getElementById("EmployeeDateOfJoining").value;
     const EmployeeRole = document.getElementById("EmployeeRole").value;
     const EmployeeMobileNumber = document.getElementById("EmployeeMobileNumber").value;
-    const AppPrivilege = document.getElementById("AppPrivilege").value;
+    let AppPrivilege = document.getElementById("AppPrivilege").value;
+    AppPrivilege=parseInt(AppPrivilege);
     if (EmployeeName == "" || EmployeeID == "" || EmployeeDept == "" || EmployeeCompany == "" || EmployeeDateOfJoining == "" || EmployeeRole == "" || EmployeeMobileNumber == "" || AppPrivilege == "") {
         alert("Please fill all the fields");
     }
