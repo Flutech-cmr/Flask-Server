@@ -64,7 +64,8 @@ var addemployee = function () {
             "Employee Date Of Joining": EmployeeDateOfJoining,
             "Employee Role": EmployeeRole,
             "Mobile Number": EmployeeMobileNumber,
-            "App Privileges": AppPrivilege
+            "App Privileges": AppPrivilege,
+            "Password":EmployeeID+"pass"
         }));
         xhr.onload = function () {
             if (xhr.status == 200) {
