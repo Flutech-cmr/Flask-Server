@@ -324,6 +324,7 @@ def internal_server_error(e):
 
 
 if __name__ == '__main__':
-    telegramdebug()
+    portnumber=5050
+    telegramdebug(portnumber)
     print("[INFO] This script is being loaded on Python Version {}".format(sys.version))
-    app.run(host='0.0.0.0', debug=True, port=5050)
+    app.run(host='0.0.0.0', debug=True, port=portnumber)
