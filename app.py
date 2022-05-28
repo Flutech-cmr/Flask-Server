@@ -99,6 +99,8 @@ def dashboardemployees(page):
         return render_template('Dashboard/employeedetails.html')
     elif(page == 'workers'):
         return render_template('Dashboard/workerdetails.html')
+    else:
+        return {"page": page}
 
 
 @app.route('/masterpanel')
