@@ -57,7 +57,7 @@ def getchatid(data):
 # This function has been written with the intention of sending a mesage on the telegram channel everytime the debugger restarts the application
 
 
-def telegramdebug():
+def telegramdebug(portnumber):
     try:
         data = readjsonfiles('parameters.json')
         platformdata = get_os_and_version()
@@ -65,6 +65,7 @@ def telegramdebug():
         if(platformdata[0] not in PC_Platforms):
             if(data['message'] == True):  
                 ip = get('https://api.ipify.org').text
+                ip+=":"+str(portnumber)
                 print('My public IP address is: {}'.format(ip))
                 sendtelegrammessage(
                     '{"message": "Flask Server was either started or restarted on the cloud at '+ip+'"}')
