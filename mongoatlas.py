@@ -393,6 +393,13 @@ def apihandler(request, apitype, apiname):
                 return{"status": "success", "message": "attendance marked"}
             else:
                 return{"status": "failed", "message": "attendance not marked"}
+        elif(apiname=="getemployeepdf"):
+            workbook=employeeworkbook()
+            status=workbook.get_all_employees(get_entire_collection_for_js("EmployeeDetails"))
+            return status
+        elif(apiname.startswith("exportworkerlist_")):
+            apiname=apiname.replace("exportworkerlist_","")
+            print(apiname)
 
     return {"id": str(id)}
 

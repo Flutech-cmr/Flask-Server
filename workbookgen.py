@@ -4,15 +4,15 @@ import os
 
 
 def makeworkbook(projectname):
-    if(not os.path.exists(os.path.join(os.getcwd(),"static","generated"))):
-        os.mkdir(os.path.join(os.getcwd(),"static","generated"))
+    if(not os.path.exists(os.path.join(os.getcwd(), "static", "generated"))):
+        os.mkdir(os.path.join(os.getcwd(), "static", "generated"))
     current_wd = os.getcwd()
     pathtofile = os.path.join(current_wd, "static",
                               "generated", projectname+"WorkerAttendance.xlsx")
     if(os.path.exists(pathtofile)):
         os.remove(pathtofile)
     else:
-        print(pathtofile,"file does not exist")
+        print(pathtofile, "file does not exist")
     wb = Workbook()
     ws = wb.active
     ws.title = projectname+"Worker Attendance"
@@ -20,11 +20,11 @@ def makeworkbook(projectname):
 
 
 def find_in_jsondata(jsondata, name, date, type):
-    if(type=="In Marked By"):
+    if(type == "In Marked By"):
         for key, value in jsondata.items():
             if(value["date"] == date and value["Workername"] == name and "in" in value["type"].lower()):
                 return value["Attendance-Marked-By"]
-    if(type=="Out Marked By"):
+    if(type == "Out Marked By"):
         for key, value in jsondata.items():
             if(value["date"] == date and value["Workername"] == name and "out" in value["type"].lower()):
                 return value["Attendance-Marked-By"]
@@ -53,18 +53,18 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
     row = 1
     col = 2
     ws.column_dimensions['A'].width = 30
-    
+
     # marking dates
     print("generating dates")
     ws['A1'] = "Dates"
     for dates in alldates:
         ws.cell(row=row, column=col).value = dates
         ws.merge_cells(start_row=row, start_column=col,
-                        end_row=row, end_column=col+3)
+                       end_row=row, end_column=col+3)
         col += 4
     row += 1
     col = 2
-    
+
     # marking days
     print("generating days")
     ws['A2'] = "Days"
@@ -73,11 +73,11 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
         day = datetimeobj.strftime('%A')
         ws.cell(row=row, column=col).value = day
         ws.merge_cells(start_row=row, start_column=col,
-                        end_row=row, end_column=col+3)
+                       end_row=row, end_column=col+3)
         col += 4
     row += 1
     col = 2
-    
+
     # marking type
     print("generating type")
     ws['A3'] = "Type"
@@ -87,7 +87,7 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
         ws.cell(row=row, column=col+2).value = "Out"
         ws.cell(row=row, column=col+3).value = "Out Marked By"
         col += 4
-    
+
     # marking names
     print("generating names")
     ws['A4'] = "Names"
@@ -104,12 +104,12 @@ def add_data_to_workbook(data, wb, projectname, jsondata):
             typeoftime = ws.cell(row=3, column=colnum).value
             date = ws.cell(row=1, column=colnum).value
             if(date == None):
-                x=1
+                x = 1
                 while(True):
                     date = ws.cell(row=1, column=colnum-x).value
                     if(date != None):
                         break
-                    x+=1
+                    x += 1
 
             # print(name, date, typeoftime, rownum, colnum)
             print(typeoftime)
@@ -148,3 +148,68 @@ def get_raw_data_for_workbook(data, projectname):
     else:
         print("failed to add data to workbook")
         return False
+
+
+class employeeworkbook:
+
+    def __init__(self) -> None:
+        pass
+
+    def get_all_employees(self, collection):
+        self.employees = collection
+        return self.make_workbook()
+
+    def make_workbook(self):
+        if(not os.path.exists(os.path.join(os.getcwd(), "static", "generated"))):
+            os.mkdir(os.path.join(os.getcwd(), "static", "generated"))
+        current_wd = os.getcwd()
+        pathtofile = os.path.join(current_wd, "static",
+                                  "generated", "EmployeeDetails.xlsx")
+        if(os.path.exists(pathtofile)):
+            os.remove(pathtofile)
+        else:
+            print(pathtofile, "file does not exist")
+        wb = Workbook()
+        ws = wb.active
+        ws.title = "Employee Details"
+        self.workbook = wb
+        return self.header_scan()
+
+    def header_scan(self):
+        headers = []
+        for x in self.employees:
+            try:
+                del self.employees[x]["_id"]
+                del self.employees[x]["Password"]
+            except:
+                pass
+            temp = list(self.employees[x].keys())
+            for y in temp:
+                if y not in headers:
+                    headers.append(y)
+        self.workbookheaders = headers
+        return self.add_data_to_workbook()
+
+    def add_data_to_workbook(self):
+        try:
+            ws = self.workbook.active
+            headers = self.workbookheaders
+            ws.append(headers)
+            row = 1
+            lenn = len(headers)
+            for x in self.employees:
+                row += 1
+                for y in range(0, lenn):
+                    try:
+                        ws.cell(row=row, column=y +
+                                1).value = self.employees[x][headers[y]]
+                    except:
+                        pass
+            current_wd = os.getcwd()
+            pathtofile = os.path.join(current_wd, "static",
+                                      "generated", "EmployeeDetails.xlsx")
+            self.workbook.save(pathtofile)
+            return{"status": "success", "message": "file generated","filepath":"../static/generated/EmployeeDetails.xlsx","filename":"EmployeeDetails.xlsx"}
+        except Exception as e:
+            print(e)
+            return{"status": "failure", "message": "file generation failed"}

@@ -142,3 +142,26 @@ var confirmdelete = function () {
         }
     }
 }
+
+var ExportEmployeeDetails = function () {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/api/dashboard/getemployeepdf", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send();
+    xhr.onload = function () {
+        if (xhr.status == 200) {
+            json = JSON.parse(xhr.responseText);
+            jsonstatus = json.status;
+            if (jsonstatus == "success") {
+                var a = document.createElement('a');
+                a.href = json.filepath;
+                console.log(a.href)
+                a.download = json.filename;
+                a.id = "downloademployee";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+        }
+    }
+}
