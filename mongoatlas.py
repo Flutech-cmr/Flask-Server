@@ -1,7 +1,7 @@
 import os
 import sys
 from datetime import datetime, timedelta
-
+import threading
 from sqlalchemy import null
 from workbookgen import *
 
@@ -82,6 +82,7 @@ def find_one_in_mongo(data, to_collection, to_db):
 
 # keep flag as true to insert new data field
 
+
 def update_in_mongo(data, to_collection, to_db, append_data, Flag):
     cluster = return_cluster()
     db = cluster[to_db]
@@ -99,7 +100,7 @@ def add_employee(data):
     cluster = return_cluster()
     db = cluster["FlutechERP"]
     collection = db["EmployeeDetails"]
-    data["App Privileges"]=int(data["App Privileges"])
+    data["App Privileges"] = int(data["App Privileges"])
     results = collection.insert_one(data)
     return results.inserted_id
 
@@ -115,6 +116,7 @@ def get_distict_values(data, to_collection, to_db):
 
 # This function is used to validate the user credentials upon entry to the application
 
+
 def update_last_login(data):
     cluster = return_cluster()
     db = cluster["FlutechERP"]
@@ -123,10 +125,10 @@ def update_last_login(data):
     now = now+timedelta(hours=5, minutes=30)
     current_time = now.strftime("%H:%M:%S")
     today = now.strftime("%d-%m-%Y")
-    update_time=current_time+" "+today
-    print(update_time)
+    update_time = current_time+" "+today
     results = collection.update_one(
         data, {"$set": {"Last Login": update_time}})
+
 
 def validate_user(data):
     print("[INFO] Requesting User Validation")
@@ -156,12 +158,16 @@ def validate_user(data):
                 return {"message": "received", "status": "failed", "error": "Invalid Access Level in database"}
             if(login_requesting_page == "login" and access_level >= 0):
                 print("[INFO] User Validated for login page")
-                update_last_login(data_to_find)
+                t1 = threading.Thread(
+                    target=update_last_login, args=(data_to_find,))
+                t1.start()
                 return {"message": "received", "status": "success", "redirect": "choose-function", "access_level": access_level}
             elif(login_requesting_page == "master"):
                 if (access_level == 1):
                     print("[INFO] User Validated for master page")
-                    update_last_login(data_to_find)
+                    t1 = threading.Thread(
+                        target=update_last_login, args=(data_to_find,))
+                    t1.start()
                     return {"message": "received", "status": "success", "redirect": "masterpanel", "access_level": access_level}
                 else:
                     print("[INFO] User not authorized for master page")
@@ -393,12 +399,13 @@ def apihandler(request, apitype, apiname):
                 return{"status": "success", "message": "attendance marked"}
             else:
                 return{"status": "failed", "message": "attendance not marked"}
-        elif(apiname=="getemployeepdf"):
-            workbook=employeeworkbook()
-            status=workbook.get_all_employees(get_entire_collection_for_js("EmployeeDetails"))
+        elif(apiname == "getemployeepdf"):
+            workbook = employeeworkbook()
+            status = workbook.get_all_employees(
+                get_entire_collection_for_js("EmployeeDetails"))
             return status
         elif(apiname.startswith("exportworkerlist_")):
-            apiname=apiname.replace("exportworkerlist_","")
+            apiname = apiname.replace("exportworkerlist_", "")
             print(apiname)
 
     return {"id": str(id)}
