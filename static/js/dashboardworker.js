@@ -31,7 +31,7 @@ var GetAllEmployees = function () {
                 document.getElementsByClassName("PANNumber")[key].innerText = value.PANNumber;
                 document.getElementsByClassName("PermanantAddress")[key].innerText = value.PermanantAddress;
                 document.getElementsByClassName("CurrentAddress")[key].innerText = value.CurrentAddress;
-                document.getElementsByClassName("deleteuser")[key].id=value["_id"];
+                document.getElementsByClassName("deleteuser")[key].id = value["_id"];
 
 
                 if (parseInt(key) >= maxchildren) {
@@ -138,8 +138,8 @@ var deleteusertogle = function () {
 }
 
 var parentget = function (element) {
-    const node=element.id
-    const data={"_id":node}
+    const node = element.id
+    const data = { "_id": node }
     localStorage.setItem("deleteworker", JSON.stringify(data));
 }
 
@@ -200,6 +200,20 @@ var getprojects = function () {
                 EmptyTable();
             }
             GetAllEmployees();
+        }
+    }
+}
+
+var exportworkerlist = function () {
+    let projectname = document.getElementById("selectproject").value;
+    console.log("clicked " + projectname);
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/api/dashboard/exportworkerlist_" + projectname, true);
+    xhr.send();
+    xhr.onload = function () {
+        if (xhr.status == 200) {
+            const data = JSON.parse(xhr.responseText);
+            console.log(data);
         }
     }
 }

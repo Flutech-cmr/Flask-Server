@@ -1,15 +1,9 @@
-class test:
-    def __init__(self) -> None:
-        print("init")
-    def one(self):
-        self.varone=1
-        self.two()
-    def two(self):
-        self.vartwo=2
-        newdict={"a":"a","b":"b"}
-        print(list(newdict.keys()))
-        print(self.varone)
-        print(self.vartwo)
+import configparser
 
-tester=test()
-tester.one()
+f=open('config.ini','w+')
+config=configparser.ConfigParser()
+config.read('config.ini')
+config['DEFAULT'] = {"name":"test","age":"18"}
+
+# write file
+config.write(f)

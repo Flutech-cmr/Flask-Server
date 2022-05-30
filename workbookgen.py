@@ -196,7 +196,6 @@ class employeeworkbook:
             headers = self.workbookheaders
             ws.append(headers)
             row = 1
-            col = 0
             lenn = len(headers)
             for x in self.employees:
                 row += 1
