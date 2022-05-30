@@ -1,6 +1,8 @@
 import os
 import sys
 from datetime import datetime, timedelta
+
+from sqlalchemy import null
 from workbookgen import *
 
 print("[INFO] Loading Mongo Atlas Modules")
@@ -78,6 +80,8 @@ def find_one_in_mongo(data, to_collection, to_db):
     results = collection.find_one(data)
     return results
 
+# keep flag as true to insert new data field
+
 
 def update_in_mongo(data, to_collection, to_db, append_data, Flag):
     cluster = return_cluster()
@@ -96,6 +100,7 @@ def add_employee(data):
     cluster = return_cluster()
     db = cluster["FlutechERP"]
     collection = db["EmployeeDetails"]
+    data["App Privileges"]=int(data["App Privileges"])
     results = collection.insert_one(data)
     return results.inserted_id
 
@@ -370,7 +375,7 @@ def apihandler(request, apitype, apiname):
             now = datetime.utcnow()
             now = now+timedelta(hours=5, minutes=30)
             today = now.strftime("%d-%m-%Y")
-            data={"date":today}
+            data = {"date": today}
             if find_one_in_mongo(data, apiname+"WorkerAttendance", "FlutechERP") is not None:
                 return{"status": "success", "message": "attendance marked"}
             else:
@@ -380,4 +385,10 @@ def apihandler(request, apitype, apiname):
 
 
 if __name__ == "__main__":
-    pass
+    allemployees = get_entire_collection("EmployeeDetails")
+    for x in allemployees:
+        id = x["_id"]
+        appprivilages = int(x["App Privileges"])
+        update_in_mongo({"_id": id}, "EmployeeDetails",
+                        "FlutechERP", {"App Privileges": appprivilages}, False)
+        print(x["_id"])
