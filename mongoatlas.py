@@ -82,7 +82,6 @@ def find_one_in_mongo(data, to_collection, to_db):
 
 # keep flag as true to insert new data field
 
-
 def update_in_mongo(data, to_collection, to_db, append_data, Flag):
     cluster = return_cluster()
     db = cluster[to_db]
@@ -116,6 +115,18 @@ def get_distict_values(data, to_collection, to_db):
 
 # This function is used to validate the user credentials upon entry to the application
 
+def update_last_login(data):
+    cluster = return_cluster()
+    db = cluster["FlutechERP"]
+    collection = db["EmployeeDetails"]
+    now = datetime.utcnow()
+    now = now+timedelta(hours=5, minutes=30)
+    current_time = now.strftime("%H:%M:%S")
+    today = now.strftime("%d-%m-%Y")
+    update_time=current_time+" "+today
+    print(update_time)
+    results = collection.update_one(
+        data, {"$set": {"Last Login": update_time}})
 
 def validate_user(data):
     print("[INFO] Requesting User Validation")
@@ -145,10 +156,12 @@ def validate_user(data):
                 return {"message": "received", "status": "failed", "error": "Invalid Access Level in database"}
             if(login_requesting_page == "login" and access_level >= 0):
                 print("[INFO] User Validated for login page")
+                update_last_login(data_to_find)
                 return {"message": "received", "status": "success", "redirect": "choose-function", "access_level": access_level}
             elif(login_requesting_page == "master"):
                 if (access_level == 1):
                     print("[INFO] User Validated for master page")
+                    update_last_login(data_to_find)
                     return {"message": "received", "status": "success", "redirect": "masterpanel", "access_level": access_level}
                 else:
                     print("[INFO] User not authorized for master page")
@@ -385,10 +398,4 @@ def apihandler(request, apitype, apiname):
 
 
 if __name__ == "__main__":
-    allemployees = get_entire_collection("EmployeeDetails")
-    for x in allemployees:
-        id = x["_id"]
-        appprivilages = int(x["App Privileges"])
-        update_in_mongo({"_id": id}, "EmployeeDetails",
-                        "FlutechERP", {"App Privileges": appprivilages}, False)
-        print(x["_id"])
+    pass
