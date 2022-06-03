@@ -213,3 +213,67 @@ class employeeworkbook:
         except Exception as e:
             print(e)
             return{"status": "failure", "message": "file generation failed"}
+
+class workerworkbook:
+
+    def __init__(self) -> None:
+        pass
+
+    def get_all_workers(self, collection):
+        self.workers = collection
+        return self.make_workbook()
+
+    def make_workbook(self):
+        if(not os.path.exists(os.path.join(os.getcwd(), "static", "generated"))):
+            os.mkdir(os.path.join(os.getcwd(), "static", "generated"))
+        current_wd = os.getcwd()
+        pathtofile = os.path.join(current_wd, "static",
+                                  "generated", "EmployeeDetails.xlsx")
+        if(os.path.exists(pathtofile)):
+            os.remove(pathtofile)
+        else:
+            print(pathtofile, "file does not exist")
+        wb = Workbook()
+        ws = wb.active
+        ws.title = "Employee Details"
+        self.workbook = wb
+        return self.header_scan()
+
+    def header_scan(self):
+        headers = []
+        for x in self.employees:
+            try:
+                del self.employees[x]["_id"]
+                del self.employees[x]["Password"]
+            except:
+                pass
+            temp = list(self.employees[x].keys())
+            for y in temp:
+                if y not in headers:
+                    headers.append(y)
+        self.workbookheaders = headers
+        return self.add_data_to_workbook()
+
+    def add_data_to_workbook(self):
+        try:
+            ws = self.workbook.active
+            headers = self.workbookheaders
+            ws.append(headers)
+            row = 1
+            lenn = len(headers)
+            for x in self.employees:
+                row += 1
+                for y in range(0, lenn):
+                    try:
+                        ws.cell(row=row, column=y +
+                                1).value = self.employees[x][headers[y]]
+                    except:
+                        pass
+            current_wd = os.getcwd()
+            pathtofile = os.path.join(current_wd, "static",
+                                      "generated", "EmployeeDetails.xlsx")
+            self.workbook.save(pathtofile)
+            return{"status": "success", "message": "file generated","filepath":"../static/generated/EmployeeDetails.xlsx","filename":"EmployeeDetails.xlsx"}
+        except Exception as e:
+            print(e)
+            return{"status": "failure", "message": "file generation failed"}
