@@ -12,8 +12,9 @@ except ImportError as e:
     print("Thw following error occured \n", e)
     try:
         os.system("pip install -r requirements.txt")
-    except:
         os.system("pip3 install -r requirements.txt")
+    except:
+        pass
 app = Flask(__name__, static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
