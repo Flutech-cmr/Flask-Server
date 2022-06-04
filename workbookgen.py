@@ -209,15 +209,17 @@ class employeeworkbook:
             pathtofile = os.path.join(current_wd, "static",
                                       "generated", "EmployeeDetails.xlsx")
             self.workbook.save(pathtofile)
-            return{"status": "success", "message": "file generated","filepath":"../static/generated/EmployeeDetails.xlsx","filename":"EmployeeDetails.xlsx"}
+            return{"status": "success", "message": "file generated", "filepath": "../static/generated/EmployeeDetails.xlsx", "filename": "EmployeeDetails.xlsx"}
         except Exception as e:
             print(e)
             return{"status": "failure", "message": "file generation failed"}
 
+
 class workerworkbook:
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, projectname) -> None:
+        print("workerworkbook")
+        self.projectname = projectname
 
     def get_all_workers(self, collection):
         self.workers = collection
@@ -228,29 +230,30 @@ class workerworkbook:
             os.mkdir(os.path.join(os.getcwd(), "static", "generated"))
         current_wd = os.getcwd()
         pathtofile = os.path.join(current_wd, "static",
-                                  "generated", "EmployeeDetails.xlsx")
+                                  "generated", self.projectname+"WorkerDetails.xlsx")
         if(os.path.exists(pathtofile)):
             os.remove(pathtofile)
         else:
             print(pathtofile, "file does not exist")
         wb = Workbook()
         ws = wb.active
-        ws.title = "Employee Details"
+        ws.title = self.projectname+"Worker Details"
         self.workbook = wb
         return self.header_scan()
 
     def header_scan(self):
         headers = []
-        for x in self.employees:
+        for x in self.workers:
             try:
-                del self.employees[x]["_id"]
-                del self.employees[x]["Password"]
+                del self.workers[x]["_id"]
+                del self.workers[x]["Password"]
             except:
                 pass
-            temp = list(self.employees[x].keys())
+            temp = list(self.workers[x].keys())
             for y in temp:
                 if y not in headers:
                     headers.append(y)
+        print(headers)
         self.workbookheaders = headers
         return self.add_data_to_workbook()
 
@@ -261,19 +264,18 @@ class workerworkbook:
             ws.append(headers)
             row = 1
             lenn = len(headers)
-            for x in self.employees:
+            for x in self.workers:
                 row += 1
                 for y in range(0, lenn):
                     try:
                         ws.cell(row=row, column=y +
-                                1).value = self.employees[x][headers[y]]
+                                1).value = self.workers[x][headers[y]]
                     except:
                         pass
             current_wd = os.getcwd()
-            pathtofile = os.path.join(current_wd, "static",
-                                      "generated", "EmployeeDetails.xlsx")
+            pathtofile = os.path.join(current_wd, "static","generated", self.projectname+"WorkerDetails.xlsx")
             self.workbook.save(pathtofile)
-            return{"status": "success", "message": "file generated","filepath":"../static/generated/EmployeeDetails.xlsx","filename":"EmployeeDetails.xlsx"}
+            return{"status": "success", "message": "file generated", "filepath": "../static/generated/"+self.projectname+"WorkerDetails.xlsx", "filename": self.projectname+"WorkerDetails.xlsx"}
         except Exception as e:
             print(e)
             return{"status": "failure", "message": "file generation failed"}

@@ -212,8 +212,18 @@ var exportworkerlist = function () {
     xhr.send();
     xhr.onload = function () {
         if (xhr.status == 200) {
-            const data = JSON.parse(xhr.responseText);
-            console.log(data);
+            json = JSON.parse(xhr.responseText);
+            jsonstatus = json.status;
+            if (jsonstatus == "success") {
+                var a = document.createElement('a');
+                a.href = json.filepath;
+                console.log(a.href)
+                a.download = json.filename;
+                a.id = "downloadworker";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
         }
     }
 }

@@ -405,7 +405,10 @@ def apihandler(request, apitype, apiname):
             return status
         elif(apiname.startswith("exportworkerlist_")):
             apiname = apiname.replace("exportworkerlist_", "")
-            
+            workbook = workerworkbook(apiname)
+            status = workbook.get_all_workers(
+                get_entire_collection_for_js(apiname+"WorkerDetails"))
+            return status
 
     return {"id": str(id)}
 
